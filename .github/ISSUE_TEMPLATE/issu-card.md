@@ -1,7 +1,7 @@
 ---
-name: Issu Card
-about: Issu Card
-title: "[Task] Isssue name"
+name: Issue Card
+about: Issue Card
+title: "[Task] Issue name"
 labels: ''
 assignees: ''
 
