@@ -1,0 +1,9 @@
+/* @value inputColor from "../common/colors.css"; */
+
+.input {
+	border-radius: 20px;
+	width: 20rem;
+	height: 2rem;
+	background-color: #f8e0e1;
+	/* background-color: inputColor; */
+}
