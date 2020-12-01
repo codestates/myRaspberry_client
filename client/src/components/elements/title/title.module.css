@@ -1,0 +1,10 @@
+@value mainColor from "../../../common/colors.css";
+
+.title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 4rem;
+	background-color: mainColor;
+	color: white;
+}
