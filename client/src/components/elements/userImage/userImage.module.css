@@ -1,0 +1,14 @@
+@value userColor from "../../../common/colors.css";
+
+.user_img_box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: userColor;
+	width: 15rem;
+	height: 20rem;
+}
+
+.user_img {
+	height: 70%;
+}
