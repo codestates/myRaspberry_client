@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/codestates/myRaspberry_client/issues"
   },
-  "homepage": "https://github.com/codestates/myRaspberry_client#readme"
+  "homepage": "https://github.com/codestates/myRaspberry_client#readme",
+  "dependencies": {
+    "styled-components": "^5.2.1"
+  }
 }
