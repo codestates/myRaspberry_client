@@ -30,6 +30,7 @@ const Header = () => {
 
 const Container = styled.div`
 	display: flex;
+	height: 7.5rem;
 	justify-content: center;
 	background-color: ${mainColor};
 `;
