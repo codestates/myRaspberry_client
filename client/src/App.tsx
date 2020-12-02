@@ -9,7 +9,7 @@ import Sign from "./page/sign/Sign";
 const App = () => (
 	<BrowserRouter>
 		<Switch>
-			<Route path="/intro" exact component={Introduction} />
+			<Route path="/" exact component={Introduction} />
 			<Route path="/main" component={Main} />
 			<Route path="/mypage" component={Mypage} />
 			<Route path="/user" component={Sign} />
