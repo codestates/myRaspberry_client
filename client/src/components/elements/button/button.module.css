@@ -1,4 +1,4 @@
-@value buttonColor from "../../../common/colors.css";
+/* @value buttonColor from "../../../common/colors.css"; */
 
 .btn {
 	width: 10rem;
@@ -7,5 +7,15 @@
 	color: white;
 	font-size: 1.5rem;
 	border: none;
-	background-color: buttonColor;
+	background-color: #ec4040;
+}
+
+.GoBtn {
+	width: 70%;
+	height: 3rem;
+	border-radius: 30px;
+	color: white;
+	font-size: 1.5rem;
+	border: none;
+	background-color: #ec4040;
 }
