@@ -10,6 +10,8 @@ import {
 	buttonColor,
 	userColor,
 } from "../../common/colors";
+import IntroBanner from "../../components/introBanner/IntroBanner";
+import GoButton from "../../components/goButton/GoButton";
 
 const Introduction = (): JSX.Element => {
 	return (
@@ -17,7 +19,10 @@ const Introduction = (): JSX.Element => {
 			<HeaderContainer>
 				<Header />
 			</HeaderContainer>
-			<MainContainer />
+			<MainContainer>
+				<IntroBanner />
+				<GoButton />
+			</MainContainer>
 			<FooterContainer>
 				<Footer />
 			</FooterContainer>
