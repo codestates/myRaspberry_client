@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { BiMovie } from "react-icons/bi";
 
@@ -9,8 +9,21 @@ import {
 	buttonColor,
 	userColor,
 } from "../../common/colors";
+import NavSideBar from "../navSideBar/NavSideBar";
 
-const Header = () => {
+// type HeaderProps = {
+// 	navBarOpen: boolean;
+// 	handleClose: (navBarOpen: boolean) => void;
+// };
+
+const Header = (): JSX.Element => {
+	const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
+
+	const handleNavBarClick = () => {
+		setNavBarOpen(!navBarOpen);
+		console.log(navBarOpen);
+	};
+
 	return (
 		<Container>
 			<LeftSide />
@@ -20,8 +33,8 @@ const Header = () => {
 				<HeaderTitle>Raspberry</HeaderTitle>
 			</LogoWrap>
 			<SignArea>
-				{/* <FontAwesomeIcon icon="user-circle" size="2x" color="#CF3535" /> */}
-				<MovieIcon />
+				<MovieIcon onClick={handleNavBarClick} />
+				<NavSideBar navBarOpen={navBarOpen} handleClose={handleNavBarClick} />
 			</SignArea>
 		</Container>
 	);

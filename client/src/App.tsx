@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./components/footer/Footer";
@@ -16,26 +16,28 @@ import {
 	userColor,
 } from "./common/colors";
 
-const App = (): JSX.Element => (
-	<BrowserRouter>
-		<Container>
-			<HeaderContainer>
-				<Header />
-			</HeaderContainer>
-			<MainContainer>
-				<Switch>
-					<Route path={["/", "/intro"]} exact component={Introduction} />
-					<Route path="/main" component={Main} />
-					<Route path="/mypage" component={Mypage} />
-					<Route path="/user" component={Sign} />
-				</Switch>
-			</MainContainer>
-			<FooterContainer>
-				<Footer />
-			</FooterContainer>
-		</Container>
-	</BrowserRouter>
-);
+const App = (): JSX.Element => {
+	return (
+		<BrowserRouter>
+			<Container>
+				<HeaderContainer>
+					<Header />
+				</HeaderContainer>
+				<MainContainer>
+					<Switch>
+						<Route path={["/", "/intro"]} exact component={Introduction} />
+						<Route path="/main" component={Main} />
+						<Route path="/mypage" component={Mypage} />
+						<Route path="/user" component={Sign} />
+					</Switch>
+				</MainContainer>
+				<FooterContainer>
+					<Footer />
+				</FooterContainer>
+			</Container>
+		</BrowserRouter>
+	);
+};
 
 const Container = styled.div`
 	display: grid;

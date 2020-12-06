@@ -6,6 +6,6 @@ export default {
 	component: Header,
 };
 
-export const Template = () => <Header />;
+// export const Template = () => <Header/>;
 
 // export const Primary = Template.bind({});

@@ -1,0 +1,200 @@
+.mdl {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow-x: hidden;
+	visibility: hidden;
+	transition: all 0.5s;
+}
+
+.mdl.show {
+	visibility: visible;
+}
+
+.mdl-mask {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.mdl .sidebar {
+	position: absolute;
+	background-color: #e89e9e;
+	border-left: 1px solid #e89e9e;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 350px;
+	transform: translateX(350px);
+	padding: 20px;
+	transition: transform 0.3s;
+	display: grid;
+	grid-template-rows: 0.7em 15rem auto auto 0.1em;
+	grid-template-columns: auto 85% auto;
+	grid-template-areas:
+		". . ."
+		". SideTop ."
+		". SideBottom ."
+		". SideBottom ."
+		". . .";
+}
+
+.mdl.show .sidebar {
+	transform: translateX(0);
+}
+
+.small-margin-right {
+	margin-right: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.linkText {
+	color: black;
+	font-size: 1.5rem;
+	font-weight: 550;
+	display: block;
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+
+.linkText.sign {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+// INTRODUCTION => 라즈베리 서비스란?
+.intro:after {
+	content: "INTRODUCTION";
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	transition: 0.2s ease-in-out;
+}
+
+.intro:before {
+	content: "라즈베리 서비스란?";
+	text-align: center;
+	opacity: 0;
+	top: 1.8rem;
+	left: 0.2rem;
+	font-weight: 600;
+	position: relative;
+	color: #cf3535;
+	transition: all 1s;
+}
+
+.intro:hover::before {
+	width: 100%;
+	opacity: 1;
+	text-align: center;
+}
+
+.intro:hover::after {
+	opacity: 0;
+	text-align: center;
+}
+
+//RASPBERRY => 영화 고르러 가기
+.main:after {
+	content: "RASPBERRY";
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	transition: 0.2s ease-in-out;
+}
+
+.main:before {
+	content: "영화 고르러 가기";
+	text-align: center;
+	opacity: 0;
+	top: 1.8rem;
+	left: -0.3rem;
+	font-weight: 600;
+	position: relative;
+	color: #cf3535;
+	transition: all 1s;
+}
+
+.main:hover::before {
+	width: 100%;
+	opacity: 1;
+	text-align: center;
+}
+
+.main:hover::after {
+	opacity: 0;
+	text-align: center;
+}
+
+//MY PAGE => 내정보 보러가기
+.mypage:after {
+	content: "MYPAGE";
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	transition: 0.2s ease-in-out;
+}
+
+.mypage:before {
+	content: "내정보 보러가기";
+	text-align: center;
+	opacity: 0;
+	top: 1.8rem;
+	left: -0.3rem;
+	font-weight: 600;
+	position: relative;
+	color: #cf3535;
+	transition: all 1s;
+}
+
+.mypage:hover::before {
+	width: 100%;
+	opacity: 1;
+	text-align: center;
+}
+
+.mypage:hover::after {
+	opacity: 0;
+	text-align: center;
+}
+
+//LOGIN => 로그인
+.sign:after {
+	content: "LOGIN/SIGNIN";
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	transition: 0.2s ease-in-out;
+}
+
+.sign:before {
+	content: "로그인 하러가기";
+	text-align: center;
+	opacity: 0;
+	top: 1.8rem;
+	left: 0.2rem;
+	font-weight: 600;
+	position: relative;
+	color: #cf3535;
+	transition: all 1s;
+}
+
+.sign:hover::before {
+	width: 100%;
+	opacity: 1;
+	text-align: center;
+}
+
+.sign:hover::after {
+	opacity: 0;
+	text-align: center;
+}
