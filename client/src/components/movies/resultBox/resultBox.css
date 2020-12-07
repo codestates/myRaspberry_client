@@ -1,0 +1,27 @@
+.swiper-container {
+	width: 92%;
+}
+
+.swiper-wrapper {
+	padding-inline-start: 0;
+	list-style: none;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+	position: absolute;
+	margin-left: -0.7rem;
+	margin-right: 0rem;
+	font-weight: 900;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+	color: #f8e0e1 !important;
+}
+
+.swiper-slide {
+	width: 13% !important;
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
