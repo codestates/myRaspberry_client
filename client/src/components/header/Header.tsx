@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BiMovie } from "react-icons/bi";
 
 import {
@@ -10,8 +9,21 @@ import {
 	buttonColor,
 	userColor,
 } from "../../common/colors";
+import NavSideBar from "../navSideBar/NavSideBar";
 
-const Header = () => {
+// type HeaderProps = {
+// 	navBarOpen: boolean;
+// 	handleClose: (navBarOpen: boolean) => void;
+// };
+
+const Header = (): JSX.Element => {
+	const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
+
+	const handleNavBarClick = () => {
+		setNavBarOpen(!navBarOpen);
+		console.log(navBarOpen);
+	};
+
 	return (
 		<Container>
 			<LeftSide />
@@ -21,8 +33,8 @@ const Header = () => {
 				<HeaderTitle>Raspberry</HeaderTitle>
 			</LogoWrap>
 			<SignArea>
-				{/* <FontAwesomeIcon icon="user-circle" size="2x" color="#CF3535" /> */}
-				<MovieIcon />
+				<MovieIcon onClick={handleNavBarClick} />
+				<NavSideBar navBarOpen={navBarOpen} handleClose={handleNavBarClick} />
 			</SignArea>
 		</Container>
 	);
@@ -47,7 +59,6 @@ const LogoWrap = styled.div`
 	align-items: center;
 	float: left;
 	width: 33%;
-
 	margin: 0 0 0 1.5em;
 	@media (max-width: 768px) {
 		margin: 0 0 0 0.8em;
@@ -62,9 +73,11 @@ const LogoWrap = styled.div`
 `;
 
 const HeaderTitle = styled.p`
-	font-size: 1.5rem;
+	font-size: 1.9rem;
 	font-weight: bold;
 	color: white;
+	font-family: "Montserrat", sans-serif;
+	border-top-style: outset;
 `;
 
 const Logo = styled.img`
@@ -84,12 +97,12 @@ const SignArea = styled.div`
 	width: 33%;
 	align-items: center;
 	place-content: flex-end;
-	margin-right: 1rem;
+	margin-right: 1.9rem;
 `;
 
 const MovieIcon = styled(BiMovie)`
-	width: 2em;
-	height: 2em;
+	width: 3em;
+	height: 2.8em;
 	color: ${userColor};
 	background-color: white;
 	border-radius: 15%;
