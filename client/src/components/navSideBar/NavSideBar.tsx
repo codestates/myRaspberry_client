@@ -22,16 +22,16 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 					<img src={raspberryUrl} alt="potter-raspberry" />
 				</SideTop>
 				<SideBottom>
-					<Link to="/intro">
+					<Link to="/intro" onClick={handleClose}>
 						<p className="linkText intro"></p>
 					</Link>
-					<Link to="/main">
+					<Link to="/main" onClick={handleClose}>
 						<p className="linkText main"></p>
 					</Link>
-					<Link to="/mypage">
+					<Link to="/mypage" onClick={handleClose}>
 						<p className="linkText mypage"></p>
 					</Link>
-					<Link to="/sign">
+					<Link to="/user" onClick={handleClose}>
 						<p className="linkText sign"></p>
 					</Link>
 				</SideBottom>
