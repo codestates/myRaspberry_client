@@ -48,6 +48,7 @@ const Container = styled.div`
 		"HeaderContainer"
 		"MainContainer"
 		"FooterContainer";
+	overflow: hidden;
 	@media (max-width: 768px) {
 		grid-template-rows: auto auto auto;
 		grid-template-columns: 100%;
@@ -70,8 +71,13 @@ const MainContainer = styled.div`
 	display: grid;
 	grid-area: MainContainer;
 	background-color: ${mainColor};
-	grid-template-columns: 15em auto;
-	min-height: 600px;
+	/* grid-template-columns: auto;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"MainTop"
+		"MainBottom"; */
+	min-height: 800px;
+	width: 100%; //100% 맞음 바꾸지 말 것
 	margin: 0 0 9em 0;
 	@media (max-width: 768px) {
 		margin: 0 0 0;

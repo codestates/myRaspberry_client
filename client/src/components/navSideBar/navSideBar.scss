@@ -20,6 +20,7 @@
 	bottom: 0;
 	left: 0;
 	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 3;
 }
 
 .mdl .sidebar {
@@ -35,6 +36,7 @@
 	padding: 20px;
 	transition: transform 0.3s;
 	display: grid;
+	z-index: 4;
 	grid-template-rows: 0.7em 15rem auto auto 0.1em;
 	grid-template-columns: auto 85% auto;
 	grid-template-areas:

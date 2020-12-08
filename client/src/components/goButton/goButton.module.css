@@ -3,6 +3,7 @@
 	width: 100%;
 	left: 14%;
 	bottom: 20vh;
+	z-index: 1;
 }
 
 /* @media (max-width: 768px) {
