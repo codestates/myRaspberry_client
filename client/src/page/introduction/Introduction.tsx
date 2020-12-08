@@ -3,7 +3,7 @@ import IntroBanner from "../../components/introBanner/IntroBanner";
 import GoButton from "../../components/goButton/GoButton";
 import MovieCard from "../../components/movies/card/Card";
 import styled from "styled-components";
-import { mainColor, textColor } from "../../common/colors";
+import { mainColor, pointColor, textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
 import ResultBox from "../../components/movies/resultBox/ResultBox";
 
@@ -14,13 +14,16 @@ const Introduction = (): JSX.Element => {
 				<CardBoxContainer>
 					<CardBox />
 				</CardBoxContainer>
+				<Title>
+					<TitleText>오늘 이 영화 어때요?</TitleText>
+				</Title>
 				<ResultBoxContainer>
 					<ResultBox />
 				</ResultBoxContainer>
 			</MainTop>
 			<MainBottom />
-			{/* <IntroBanner />
-			<GoButton /> */}
+			<IntroBanner />
+			<GoButton />
 		</>
 	);
 };
@@ -44,6 +47,29 @@ const CardBoxContainer = styled.div`
 
 const ResultBoxContainer = styled.div`
 	width: 100vw;
+`;
+
+const Title = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-left: 7%;
+`;
+
+const TitleText = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	margin: 0;
+	padding: 0;
+
+	font-family: "Lato";
+	line-height: 1.5;
+	font-weight: 900;
+	font-size: 1.3vw;
+	color: ${textColor};
+	justify-content: flex-start;
 `;
 
 const MainBottom = styled.div`
