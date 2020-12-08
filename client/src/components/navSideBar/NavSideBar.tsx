@@ -3,6 +3,8 @@ import "./navSideBar.scss";
 import styled from "styled-components";
 import {
 	mainColor,
+	headerColor,
+	textColor,
 	subColor,
 	inputColor,
 	buttonColor,
