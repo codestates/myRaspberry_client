@@ -1,18 +1,19 @@
-.moviecard-box {
+.moviecard_box {
 	position: relative;
+	margin-right: 1rem;
 }
 
 .moviecard {
-	border-radius: 10%;
-	width: 70%;
-	box-shadow: 10px 5px 5px rgb(192, 190, 190);
+	border-radius: 5%;
+	width: 100%;
+	box-shadow: 5px 3px 3px #292929;
 }
 
 .moviecard:hover {
-	opacity: 0.6;
-	transform: scale(1.2);
+	opacity: 0.7;
+	transform: scale(1.1);
 	cursor: pointer;
-	transition: 0.5s ease-in-out;
+	transition: 0.2s ease-in-out;
 }
 
 .none {

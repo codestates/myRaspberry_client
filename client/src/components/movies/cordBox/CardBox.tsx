@@ -19,9 +19,7 @@ const CardBox = () => {
 
 const Container = styled.div`
 	display: flex;
-	max-width: 45%;
-	margin-left: 2rem;
-	margin-right: 2rem;
+	max-width: 60%;
 `;
 
 export default CardBox;
