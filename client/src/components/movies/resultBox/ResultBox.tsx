@@ -7,7 +7,6 @@ import { Data } from "../../../api/moveis";
 
 SwiperCore.use([Navigation, Pagination]);
 const ResultBox: React.FC = () => {
-	const slides: any[] = [];
 	const { movies } = Data;
 
 	return (
@@ -15,7 +14,7 @@ const ResultBox: React.FC = () => {
 			tag="section"
 			wrapperTag="ul"
 			id="main"
-			navigation
+			pagination={{ clickable: true }}
 			spaceBetween={0}
 			slidesPerView={6}
 			loop={true}>
@@ -23,7 +22,7 @@ const ResultBox: React.FC = () => {
 				<SwiperSlide key={movie.id} tag="li">
 					<img
 						src={movie.medium_cover_image}
-						style={{ listStyle: "none" }}
+						style={{ listStyle: "none", width: "100%" }}
 						alt={movie.title}
 					/>
 				</SwiperSlide>

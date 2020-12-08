@@ -39,6 +39,7 @@ const CardBoxContainer = styled.div`
 	flex-direction: row;
 	-webkit-box-pack: justify;
 	justify-content: space-around;
+	margin-bottom: 1rem;
 `;
 
 const ResultBoxContainer = styled.div`

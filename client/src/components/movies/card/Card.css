@@ -6,6 +6,8 @@
 .moviecard {
 	border-radius: 5%;
 	width: 100%;
+	max-width: 13rem;
+	max-height: 18rem;
 	box-shadow: 5px 3px 3px #292929;
 }
 
