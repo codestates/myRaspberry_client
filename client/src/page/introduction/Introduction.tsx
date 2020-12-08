@@ -3,7 +3,7 @@ import IntroBanner from "../../components/introBanner/IntroBanner";
 import GoButton from "../../components/goButton/GoButton";
 import MovieCard from "../../components/movies/card/Card";
 import styled from "styled-components";
-import { mainColor } from "../../common/colors";
+import { mainColor, textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
 import ResultBox from "../../components/movies/resultBox/ResultBox";
 
@@ -19,8 +19,8 @@ const Introduction = (): JSX.Element => {
 				</ResultBoxContainer>
 			</MainTop>
 			<MainBottom />
-			<IntroBanner />
-			<GoButton />
+			{/* <IntroBanner />
+			<GoButton /> */}
 		</>
 	);
 };
@@ -29,6 +29,7 @@ const MainTop = styled.div`
 	/* grid-area: MainTop; */
 	display: flex;
 	flex-direction: column;
+	margin-top: 2rem;
 `;
 
 const CardBoxContainer = styled.div`
