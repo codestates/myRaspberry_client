@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Card.css";
-
-// import NavDetailBar from "./NavDetailBar";
+import CardDetail from "../cardDetail/CardDetail";
 
 // {year,title,summary,poster,genres, .....}  추후에 받을 props 예상....
 
@@ -29,8 +28,8 @@ const MovieCard = ({ poster }) => {
 					alt="moviecard-poster"
 				/>
 			</div>
-			{/* {showDetail ? <NavDetailBar fromMovieCard={{setHate, closeMovieDetail, hate, year, title, summary, poster, genres}}/> 
-			: null} */}
+			{showDetail ? <CardDetail poster={poster} closeMovieDetail={closeMovieDetail}/> 
+			: null}
 		</>
 	);
 };
