@@ -1,5 +1,8 @@
 .swiper-container {
-	width: 92%;
+	width: 90%;
+	height: 105%;
+	background-color: rosybrown;
+	border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 }
 
 .swiper-wrapper {
@@ -24,4 +27,21 @@
 	width: 13% !important;
 	margin-left: 2rem;
 	margin-right: 2rem;
+}
+
+/* .swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-container-horizontal > .swiper-pagination-bullets {
+	bottom: 17rem !important;
+} */
+
+.swiper-pagination-bullet {
+	background: #cf3535 !important;
+	opacity: 0.5 !important;
+}
+.swiper-pagination-bullet-active {
+	background: beige !important;
+}
+.swiper-pagination {
+	z-index: 0 !important;
 }

@@ -9,6 +9,7 @@ import {
 	inputColor,
 	buttonColor,
 	userColor,
+	pointColor,
 } from "../../common/colors";
 
 const Footer = (): JSX.Element => {
@@ -63,6 +64,9 @@ const AboutText = styled.div`
 	line-height: 1.5;
 	font-weight: 500;
 	color: ${mainColor};
+	b {
+		color: ${pointColor};
+	}
 	@media (max-width: 768px) {
 		display: none;
 	}
@@ -81,7 +85,7 @@ const CameraMovie = styled(BiCameraMovie)`
 	width: 1.3em;
 	height: 1.3em;
 	margin: -0.3em 0.2em 0 0;
-	color: ${mainColor};
+	color: ${pointColor};
 `;
 
 const CopyRight = styled(FaRegCopyright)`

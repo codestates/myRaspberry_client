@@ -25,8 +25,8 @@
 
 .mdl .sidebar {
 	position: absolute;
-	background-color: #e89e9e;
-	border-left: 1px solid #e89e9e;
+	background-color: #353535;
+	border-left: 1px solid #353535;
 	box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
 	top: 0;
 	right: 0;
@@ -59,8 +59,12 @@ a {
 	text-decoration: none;
 }
 
+p {
+	color: whitesmoke;
+}
+
 .linkText {
-	color: black;
+	color: whitesmoke;
 	font-size: 1.5rem;
 	font-weight: 550;
 	display: block;

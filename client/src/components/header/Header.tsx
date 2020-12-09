@@ -4,6 +4,8 @@ import { BiMovie } from "react-icons/bi";
 
 import {
 	mainColor,
+	headerColor,
+	textColor,
 	subColor,
 	inputColor,
 	buttonColor,
@@ -26,12 +28,11 @@ const Header = (): JSX.Element => {
 
 	return (
 		<Container>
-			<LeftSide />
-			<LogoWrap>
-				<HeaderTitle>My</HeaderTitle>
+			<LeftSide>
 				<Logo src="https://i.ibb.co/9g9J8m1/main.png" alt="myRaspberry logo" />
-				<HeaderTitle>Raspberry</HeaderTitle>
-			</LogoWrap>
+				<HeaderTitle>MY RASPBERRY</HeaderTitle>
+			</LeftSide>
+			<LogoWrap></LogoWrap>
 			<SignArea>
 				<MovieIcon onClick={handleNavBarClick} />
 				<NavSideBar navBarOpen={navBarOpen} handleClose={handleNavBarClick} />
@@ -42,9 +43,9 @@ const Header = (): JSX.Element => {
 
 const Container = styled.div`
 	display: flex;
-	height: 7.5rem;
+	height: 5.5rem;
 	justify-content: center;
-	background-color: ${mainColor};
+	background-color: ${headerColor};
 `;
 
 const LeftSide = styled.div`
@@ -73,11 +74,12 @@ const LogoWrap = styled.div`
 `;
 
 const HeaderTitle = styled.p`
-	font-size: 1.9rem;
-	font-weight: bold;
-	color: white;
+	font-size: 1.2rem;
+	font-weight: bolder;
+	color: whitesmoke;
 	font-family: "Montserrat", sans-serif;
-	border-top-style: outset;
+	letter-spacing: 3px;
+	align-self: center;
 `;
 
 const Logo = styled.img`
@@ -85,10 +87,10 @@ const Logo = styled.img`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 5rem;
-	height: 5rem;
+	width: 4rem;
+	height: 4rem;
 	object-fit: contain;
-	// margin: 0 -0.5em 0 -0.5em;
+	margin: 0.5rem 0 1rem 1.5rem;
 `;
 
 const SignArea = styled.div`
@@ -101,15 +103,13 @@ const SignArea = styled.div`
 `;
 
 const MovieIcon = styled(BiMovie)`
-	width: 3em;
+	width: 2.5em;
 	height: 2.8em;
-	color: ${userColor};
-	background-color: white;
+	color: ${textColor};
 	border-radius: 15%;
 	:hover {
 		cursor: pointer;
-		background-color: ${userColor};
-		color: white;
+		color: ${userColor};
 	}
 `;
 
