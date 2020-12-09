@@ -4,8 +4,8 @@ import CardDetail from "../cardDetail/CardDetail";
 
 // {year,title,summary,poster,genres, .....}  추후에 받을 props 예상....
 
-const poster: string =
-	"https://yts.mx/assets/images/movies/doctor_who_the_day_of_the_doctor_2013/medium-cover.jpg";
+// const poster: string =
+// 	"https://yts.mx/assets/images/movies/doctor_who_the_day_of_the_doctor_2013/medium-cover.jpg";
 const defaultPoster: string = "https://i.ibb.co/HnNxZyh/default-poster.jpg";
 
 const MovieCard = ({ poster }) => {
@@ -28,8 +28,9 @@ const MovieCard = ({ poster }) => {
 					alt="moviecard-poster"
 				/>
 			</div>
-			{showDetail ? <CardDetail poster={poster} closeMovieDetail={closeMovieDetail}/> 
-			: null}
+			{showDetail ? (
+				<CardDetail poster={poster} closeMovieDetail={closeMovieDetail} />
+			) : null}
 		</>
 	);
 };
