@@ -1,0 +1,120 @@
+/* 영역 확인용  : border : 1px solid red; / 
+border : 1px solid black;  */
+
+.nav_detailbar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	/* position: absolute; */
+	position: fixed;
+	top: 5vh;
+	right: 15vw;
+	width: 70vw;
+	height: 90vh;
+	color: white;
+	/* background-color: #f06363;
+	color: white; */
+	z-index: 2;
+}
+
+.detail_top {
+	display: flex;
+	width: 100%;
+	height: 35%;
+	justify-content: space-between;
+	background-color: rgb(30, 30, 30);
+}
+
+.title_box {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.title_box_btn {
+	font-size: 4vh;
+	color: whitesmoke;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background-color: rgb(30, 30, 30);
+}
+
+.detail_top_poster_box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+	height: 100%;
+}
+
+.detail_top_poster {
+	height: 90%;
+}
+
+.detail_top_context {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	padding: 0 5vw 0 2vw;
+	width: 70%;
+	height: 100%;
+}
+
+.detail_bottom {
+	width: 100%;
+	height: 65%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: whitesmoke;
+}
+
+.youtube_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+.one {
+	width: 60%;
+	height: 45%;
+}
+
+.two {
+	width: 60%;
+	height: 45%;
+}
+
+.like,
+.hate,
+.normal {
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background-color: #f1a3a3;
+	margin-right: 2vw;
+	font-size: 5vh;
+}
+
+.like:hover,
+.hate:hover,
+.normal:hover {
+	transform: scale(1.5);
+	transition: 0.5s ease;
+}
+
+.none {
+	display: none;
+}
+/* .back-drop {
+	background: rgba(63, 61, 61, 0.692);
+	height: 100%;
+	position: fixed;
+	transition: all 1.3s;
+	width: 100%;
+} */
