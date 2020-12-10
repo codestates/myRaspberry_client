@@ -14,7 +14,8 @@ const ResultBox: React.FC = () => {
 			tag="section"
 			wrapperTag="ul"
 			id="main"
-			pagination={{ clickable: true }}
+			// pagination={{ clickable: true }}
+			navigation
 			spaceBetween={0}
 			slidesPerView={6}
 			loop={true}>

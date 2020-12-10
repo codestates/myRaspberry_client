@@ -68,15 +68,11 @@ const HeaderContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-	display: grid;
+	display: flex;
+	flex-direction: column;
 	grid-area: MainContainer;
-	background-color: ${mainColor};
-	/* grid-template-columns: auto;
-	grid-template-rows: auto auto;
-	grid-template-areas:
-		"MainTop"
-		"MainBottom"; */
-	min-height: 800px;
+	background-color: #111;
+	/* background-color: #292929; */
 	width: 100%; //100% 맞음 바꾸지 말 것
 	margin: 0 0 9em 0;
 	@media (max-width: 768px) {
@@ -97,12 +93,3 @@ const FooterContainer = styled.div`
 `;
 
 export default App;
-
-{
-	/* <Switch>
-			<Route path="/" exact component={Introduction} />
-			<Route path="/main" component={Main} />
-			<Route path="/mypage" component={Mypage} />
-			<Route path="/user" component={Sign} />
-		</Switch> */
-}

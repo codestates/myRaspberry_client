@@ -1,8 +1,8 @@
 .goBtnBox {
 	position: absolute;
-	width: 100%;
-	left: 14%;
-	bottom: -7vh;
+	width: max-content;
+	left: 23%;
+	bottom: -39vh;
 	z-index: 1;
 }
 

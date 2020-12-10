@@ -43,7 +43,7 @@ const Header = (): JSX.Element => {
 
 const Container = styled.div`
 	display: flex;
-	height: 5.5rem;
+	height: 4rem;
 	justify-content: center;
 	background-color: ${headerColor};
 `;
@@ -87,10 +87,10 @@ const Logo = styled.img`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 4rem;
+	width: 3.3rem;
 	height: 4rem;
 	object-fit: contain;
-	margin: 0.5rem 0 1rem 1.5rem;
+	margin: 0rem 0 1rem 1.3rem;
 `;
 
 const SignArea = styled.div`
@@ -103,8 +103,8 @@ const SignArea = styled.div`
 `;
 
 const MovieIcon = styled(BiMovie)`
-	width: 2.5em;
-	height: 2.8em;
+	width: 2em;
+	height: 2.5em;
 	color: ${textColor};
 	border-radius: 15%;
 	:hover {
