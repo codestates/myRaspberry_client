@@ -16,29 +16,33 @@ const raspberryUrl = "https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png";
 
 const NavSideBar = ({ navBarOpen, handleClose }) => {
 	return (
-		<div className={navBarOpen ? "mdl show" : "mdl"}>
-			<div className="mdl-mask" onClick={handleClose}></div>
-			<div className="sidebar">
-				<SideTop>
-					<p>WELCOME!</p>
-					<img src={raspberryUrl} alt="potter-raspberry" />
-				</SideTop>
-				<SideBottom>
-					<Link to="/intro" onClick={handleClose}>
-						<p className="linkText intro"></p>
-					</Link>
-					<Link to="/main" onClick={handleClose}>
-						<p className="linkText main"></p>
-					</Link>
-					<Link to="/mypage" onClick={handleClose}>
-						<p className="linkText mypage"></p>
-					</Link>
-					<Link to="/user" onClick={handleClose}>
-						<p className="linkText sign"></p>
-					</Link>
-				</SideBottom>
+		<>
+			<div className={navBarOpen ? "mdl show" : "mdl"}>
+				<div
+					className={navBarOpen ? "mdl-mask show" : "mdl-mask"}
+					onClick={handleClose}></div>
+				<div className="sidebar">
+					<SideTop>
+						<p>WELCOME!</p>
+						<img src={raspberryUrl} alt="potter-raspberry" />
+					</SideTop>
+					<SideBottom>
+						<Link to="/intro" onClick={handleClose}>
+							<p className="linkText intro"></p>
+						</Link>
+						<Link to="/main" onClick={handleClose}>
+							<p className="linkText main"></p>
+						</Link>
+						<Link to="/mypage" onClick={handleClose}>
+							<p className="linkText mypage"></p>
+						</Link>
+						<Link to="/user" onClick={handleClose}>
+							<p className="linkText sign"></p>
+						</Link>
+					</SideBottom>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

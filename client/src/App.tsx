@@ -19,7 +19,7 @@ import {
 const App = (): JSX.Element => {
 	return (
 		<BrowserRouter>
-			<Container>
+			<div>
 				<HeaderContainer>
 					<Header />
 				</HeaderContainer>
@@ -34,62 +34,44 @@ const App = (): JSX.Element => {
 				<FooterContainer>
 					<Footer />
 				</FooterContainer>
-			</Container>
+			</div>
 		</BrowserRouter>
 	);
 };
 
-const Container = styled.div`
-	display: grid;
+const HeaderContainer = styled.header`
+	position: fixed;
 	width: 100%;
-	grid-template-rows: auto auto auto;
-	grid-template-columns: 100%;
-	grid-template-areas:
-		"HeaderContainer"
-		"MainContainer"
-		"FooterContainer";
-	overflow: hidden;
-	@media (max-width: 768px) {
-		grid-template-rows: auto auto auto;
-		grid-template-columns: 100%;
-	}
-`;
-
-const HeaderContainer = styled.div`
-	grid-area: HeaderContainer;
-	width: 100%;
-	margin: 0 0 0 0;
-	@media (max-width: 768px) {
-		margin: 0 0 0;
-	}
-	@media (max-width: 414px) {
-		margin: 0 0 0;
-	}
+	height: 60px;
+	z-index: 100;
+	top: 0;
 `;
 
 const MainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	grid-area: MainContainer;
 	background-color: #111;
-	/* background-color: #292929; */
-	width: 100%; //100% 맞음 바꾸지 말 것
+	width: 100%; //100% 바꾸지 말 것
 	margin: 0 0 9em 0;
-	@media (max-width: 768px) {
-		margin: 0 0 0;
-	}
-	@media (max-width: 414px) {
-		margin: 0;
-		min-height: 0;
-	}
 `;
 
-const FooterContainer = styled.div`
-	grid-area: FooterContainer;
-	margin: 0 0 2em 0;
-	@media (max-width: 768px) {
-		display: none;
-	}
+const FooterContainer = styled.footer`
+	overflow: auto;
+	width: 100%;
+	padding: 40px 18px 18px;
+	padding-bottom: 100px;
+	position: relative;
+	background-color: #28323c;
+	box-sizing: border-box;
 `;
 
 export default App;
+
+{
+	/* <Switch>
+<Route path={["/", "/intro"]} exact component={Introduction} />
+<Route path="/main" component={Main} />
+<Route path="/mypage" component={Mypage} />
+<Route path="/user" component={Sign} />
+</Switch> */
+}

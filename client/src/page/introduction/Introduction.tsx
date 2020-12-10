@@ -80,7 +80,7 @@ const Introduction = (): JSX.Element => {
 const MainTop = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 2rem;
+	margin-top: 6rem;
 `;
 
 const CardBoxContainer = styled.div`
@@ -102,7 +102,7 @@ const Title = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	margin-left: 7%;
-	margin-top: 2rem;
+	margin-top: 15px;
 `;
 
 const TitleText = styled.div`
