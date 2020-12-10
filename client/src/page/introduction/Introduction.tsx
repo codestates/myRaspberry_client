@@ -102,6 +102,7 @@ const Title = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	margin-left: 7%;
+	margin-top: 2rem;
 `;
 
 const TitleText = styled.div`
