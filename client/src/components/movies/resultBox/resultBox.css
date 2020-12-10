@@ -45,3 +45,9 @@
 .swiper-pagination {
 	z-index: 0 !important;
 }
+
+.cardImg:hover {
+	cursor: pointer;
+	border: solid 1px;
+	transition: linear 0.5s ease-in-out;
+}

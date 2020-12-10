@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { mainColor, pointColor, textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
 import ResultBox from "../../components/movies/resultBox/ResultBox";
+import { RiMovie2Line } from "react-icons/ri";
+import { AiFillTags } from "react-icons/ai";
 import test from "./count";
 
 const Introduction = (): JSX.Element => {
@@ -16,7 +18,7 @@ const Introduction = (): JSX.Element => {
 	useEffect(() => {
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
-			if (currentScrollY > 850) {
+			if (currentScrollY > 2000) {
 				setScrollEvent(true);
 			}
 			// if (currentScrollY < 850 && setScrollEvent) {
@@ -53,26 +55,56 @@ const Introduction = (): JSX.Element => {
 					<MainImage>
 						<BottomInner>
 							<InnerText>
-								<span>당신을 위한 확실한 영화 추천 서비스</span>
+								<span>"영화나 한 편 볼까?"</span>
+								<br />
+								<span>"고르다 시간 다 갔네!"</span>
 								<br />
 							</InnerText>
 							<InnerText2>
-								무엇을 싫어하는지 잘 알고있는 당신을 위한 서비스입니다.
+								혹시 당신도 영화보는 시간보다 고르는 시간이 더 길진 않으신가요?
 							</InnerText2>
 						</BottomInner>
 					</MainImage>
+					<MainImage2>
+						<BottomInner>
+							<InnerText>
+								<span>오늘도 고르다가 잠드실 건가요</span>
+								<br />
+							</InnerText>
+							<InnerText2>
+								호불호가 확실한 당신을 위한
+								<br />
+								'불호 맞춤' 마이 라즈베리 서비스로 시간을 절약하세요
+							</InnerText2>
+						</BottomInner>
+					</MainImage2>
+					<MainImage3>
+						<BottomInner>
+							<InnerText>
+								<Description>
+									<CountIcon1 />
+									<CountIcon2 />
+								</Description>
+								<Description>
+									<MovieCount className="counting" data-count="13875">
+										0
+									</MovieCount>
+									<TagCount className="counting" data-count="116116">
+										0
+									</TagCount>
+								</Description>
+							</InnerText>
+							<InnerText2>
+								정확한 취향 분석 시스템을 구현합니다.
+								<br />
+								지금 바로 라즈베리 서비스를 이용해보세요!
+							</InnerText2>
+						</BottomInner>
+					</MainImage3>
 				</BottomContainer>
 			</MainBottom>
-			<Description>
-				<MovieCount className="counting" data-count="13875">
-					0
-				</MovieCount>
-				<TagCount className="counting" data-count="116116">
-					0
-				</TagCount>
-			</Description>
-			<IntroBanner />
-			<GoButton />
+			{/* <IntroBanner />
+			<GoButton /> */}
 		</>
 	);
 };
@@ -132,22 +164,54 @@ const BottomContainer = styled.div`
 `;
 
 const MainImage = styled.div`
+	position: relative;
 	height: 800px;
 	display: flex;
-	position: relative;
+	z-index: 1;
 	flex-direction: column;
 	-webkit-box-pack: center;
 	justify-content: center;
-	z-index: 1;
 	background-image: url("https://c.wallhere.com/photos/59/70/movie_scenes_Joker_2019_Movie-1865461.jpg!d");
-	/* opacity: 0.63; */
+	::after {
+		top: 0;
+		left: 0;
+		/* background-size: 100%; */
+		filter: alpha(opacity=50);
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		content: "";
+		z-index: -1;
+		background: rgb(0, 0, 0);
+		opacity: 0.63 !important;
+	}
 `;
 
 const BottomInner = styled.div`
 	position: relative;
 	z-index: 1;
 	text-align: center;
-	right: 18%;
+`;
+
+const MainImage2 = styled(MainImage)`
+	z-index: 5;
+	background-image: url("https://www.evanerichards.com/wp-content/uploads/2009/10/DarkKnight283.jpeg");
+	::after {
+		z-index: 1;
+		opacity: 0.2 !important;
+	}
+`;
+
+const MainImage3 = styled(MainImage)`
+	height: 878px;
+	z-index: 0;
+	overflow: hidden;
+	background-image: url("https://wallpapercave.com/wp/i2JDlzW.jpg");
+	background-position-y: -322px;
+	::after {
+		z-index: -1;
+		background: rgb(0, 0, 0);
+	}
 `;
 
 const InnerText = styled.h3`
@@ -178,22 +242,32 @@ const InnerText2 = styled.h4`
 
 const Description = styled.div`
 	display: flex;
-	flex-direction: column;
-	background: whitesmoke;
+	flex-direction: row;
+	justify-content: center;
 `;
 
-const MovieCount = styled.p`
-	line-height: 1.4;
-	font-size: 30px;
+const MovieCount = styled.div`
+	font-size: 50px;
 	font-weight: bold;
-	color: #333;
+	letter-spacing: 5px;
+	color: #fff;
+	margin-right: 5rem;
 `;
 
 const TagCount = styled.div`
-	line-height: 1.4;
-	font-size: 30px;
+	font-size: 50px;
 	font-weight: bold;
-	color: #333;
+	letter-spacing: 5px;
+	color: #fff;
+`;
+
+const CountIcon1 = styled(RiMovie2Line)`
+	color: #fff;
+	margin-right: 12.5rem;
+`;
+
+const CountIcon2 = styled(AiFillTags)`
+	color: #fff;
 `;
 
 export default Introduction;

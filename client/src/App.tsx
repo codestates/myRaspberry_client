@@ -52,7 +52,6 @@ const MainContainer = styled.div`
 	flex-direction: column;
 	background-color: #111;
 	width: 100%; //100% 바꾸지 말 것
-	margin: 0 0 9em 0;
 `;
 
 const FooterContainer = styled.footer`
@@ -63,6 +62,8 @@ const FooterContainer = styled.footer`
 	position: relative;
 	background-color: #28323c;
 	box-sizing: border-box;
+	padding-top: 100px;
+	padding-bottom: 25px;
 `;
 
 export default App;

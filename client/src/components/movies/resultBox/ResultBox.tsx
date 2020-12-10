@@ -22,6 +22,7 @@ const ResultBox: React.FC = () => {
 			{movies.map(movie => (
 				<SwiperSlide key={movie.id} tag="li">
 					<img
+						className="cardImg"
 						src={movie.medium_cover_image}
 						style={{ listStyle: "none", width: "100%" }}
 						alt={movie.title}
