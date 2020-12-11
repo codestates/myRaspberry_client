@@ -5,14 +5,20 @@ import reportWebVitals from "./reportWebVitals";
 import { GlobalStyle } from "./styles/global-styles";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import rootReducer from './modules';
+import Thunk from 'redux-thunk';
+
+const store = createStore(rootReducer, applyMiddleware(Thunk));
 
 ReactDOM.render(
-	<React.StrictMode>
+	<ThemeProvider theme={theme}>
 		<GlobalStyle />
-		<ThemeProvider theme={theme}>
-			<App />
-		</ThemeProvider>
-	</React.StrictMode>,
+		<Provider store={store}>
+		<App />
+	</Provider>
+	</ThemeProvider>,
 	document.getElementById("root")
 );
 
