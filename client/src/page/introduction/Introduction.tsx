@@ -100,11 +100,11 @@ const Introduction = (): JSX.Element => {
 								지금 바로 라즈베리 서비스를 이용해보세요!
 							</InnerText2>
 						</BottomInner>
+						<GoButton />
 					</MainImage3>
 				</BottomContainer>
 			</MainBottom>
-			{/* <IntroBanner />
-			<GoButton /> */}
+			<IntroBanner />
 		</>
 	);
 };

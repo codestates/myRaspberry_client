@@ -1,9 +1,10 @@
 .goBtnBox {
-	position: absolute;
-	width: max-content;
-	left: 23%;
-	bottom: -39vh;
+	position: relative;
+	width: auto;
 	z-index: 1;
+	display: flex;
+	justify-content: center;
+	left: -27px;
 }
 
 /* @media (max-width: 768px) {
