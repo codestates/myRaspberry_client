@@ -1,21 +1,29 @@
 /* 영역 확인용  : border : 1px solid red; / 
 border : 1px solid black;  */
 
+.nav_backgroud {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 98;
+}
+
 .nav_detailbar {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* position: absolute; */
 	position: fixed;
-	top: 5vh;
-	right: 15vw;
-	width: 70vw;
-	height: 90vh;
+	top: 10%;
+	right: 20vw;
+	width: 60vw;
+	height: 85vh;
 	color: white;
-	/* background-color: #f06363;
-	color: white; */
-	z-index: 2;
+	z-index: 99;
+	overflow: inherit;
 }
 
 .detail_top {
