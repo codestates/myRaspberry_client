@@ -13,7 +13,7 @@
 
 .moviecard:hover {
 	opacity: 0.7;
-	transform: scale(1.1);
+	/* transform: scale(1.1); */
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
 }

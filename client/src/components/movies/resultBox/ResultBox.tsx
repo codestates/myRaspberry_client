@@ -14,13 +14,15 @@ const ResultBox: React.FC = () => {
 			tag="section"
 			wrapperTag="ul"
 			id="main"
-			pagination={{ clickable: true }}
+			// pagination={{ clickable: true }}
+			navigation
 			spaceBetween={0}
 			slidesPerView={6}
 			loop={true}>
 			{movies.map(movie => (
 				<SwiperSlide key={movie.id} tag="li">
 					<img
+						className="cardImg"
 						src={movie.medium_cover_image}
 						style={{ listStyle: "none", width: "100%" }}
 						alt={movie.title}

@@ -1,7 +1,7 @@
 .swiper-container {
 	width: 90%;
 	height: 105%;
-	background-color: rosybrown;
+	background-color: #353535;
 	border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
 }
 
@@ -20,7 +20,7 @@
 
 .swiper-button-prev:after,
 .swiper-button-next:after {
-	color: #f8e0e1 !important;
+	color: whitesmoke !important;
 }
 
 .swiper-slide {
@@ -44,4 +44,10 @@
 }
 .swiper-pagination {
 	z-index: 0 !important;
+}
+
+.cardImg:hover {
+	cursor: pointer;
+	border: solid 1px;
+	transition: linear 0.5s ease-in-out;
 }

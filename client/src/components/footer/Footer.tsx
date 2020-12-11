@@ -56,24 +56,23 @@ const AboutText = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-
 	margin: 0;
 	padding: 0;
-
 	font-family: "Lato";
 	line-height: 1.5;
 	font-weight: 500;
-	color: ${mainColor};
+	font-size: 15px;
+	color: whitesmoke;
 	b {
-		color: ${pointColor};
+		color: whitesmoke;
 	}
 	@media (max-width: 768px) {
 		display: none;
 	}
 `;
 const AboutText2 = styled(AboutText)`
-	font-size: 0.8em;
 	margin: 0.7em 0 0 0;
+	font-size: 10px;
 	@media (max-width: 768px) {
 		display: flex;
 	}
@@ -92,7 +91,7 @@ const CopyRight = styled(FaRegCopyright)`
 	width: 1.3em;
 	height: 1.3em;
 	margin: -0.3em 0.2em 0 0;
-	color: ${mainColor};
+	color: #fff;
 `;
 
 export default Footer;
