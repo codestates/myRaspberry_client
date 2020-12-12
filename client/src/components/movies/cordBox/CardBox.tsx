@@ -13,6 +13,7 @@ const CardBox = () => {
 	}, []);
 
 	const { loading, movies } = moviesState;
+	console.log(movies);
 	if (movies && movies.length > 7) {
 		movies.splice(6);
 	}

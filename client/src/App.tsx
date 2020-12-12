@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./components/footer/Footer";
@@ -8,13 +8,13 @@ import Main from "./page/main/Main";
 import Mypage from "./page/mypage/Mypage";
 import Sign from "./page/sign/Sign";
 
-import {
-	mainColor,
-	subColor,
-	inputColor,
-	buttonColor,
-	userColor,
-} from "./common/colors";
+// import {
+// 	mainColor,
+// 	subColor,
+// 	inputColor,
+// 	buttonColor,
+// 	userColor,
+// } from "./common/colors";
 
 const App = (): JSX.Element => {
 	return (
@@ -67,12 +67,3 @@ const FooterContainer = styled.footer`
 `;
 
 export default App;
-
-{
-	/* <Switch>
-<Route path={["/", "/intro"]} exact component={Introduction} />
-<Route path="/main" component={Main} />
-<Route path="/mypage" component={Mypage} />
-<Route path="/user" component={Sign} />
-</Switch> */
-}
