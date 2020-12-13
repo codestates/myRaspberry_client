@@ -72,15 +72,21 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 								<h5 className="genre">{genre}</h5>
 							</div>
 							<div className="character">
-								<p className="director">감독:&nbsp;&nbsp;{director}</p>
-								<p className="actor">출연:&nbsp;&nbsp;{actor}</p>
+								<p className="director">
+									<b>감독</b>&nbsp;&nbsp;
+									<span className="smallText">{director}</span>
+								</p>
+								<p className="actor">
+									<b>출연</b>&nbsp;&nbsp;
+									<span className="smallText">{actor}</span>
+								</p>
 							</div>
 						</div>
 					</div>
 					<div className="detail_bottom">
-						<p className="plot">{plotKr}</p>
-						<br />
-						런타임: {runtime}
+						<p className="plot">
+							{plotKr}(런타임: {runtime}분)
+						</p>
 						<div className="image_box"></div>
 						<div className="youtube_box">
 							{videos &&
