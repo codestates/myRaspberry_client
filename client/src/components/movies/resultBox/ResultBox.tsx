@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import "swiper/swiper-bundle.css";
@@ -9,20 +9,22 @@ import data from "../../../lib/introData.json";
 SwiperCore.use([Navigation, Pagination]);
 const ResultBox: React.FC = () => {
 	//const { movies } = Data;
-
+	const [showDetail, setShowDetail] = useState(false);
+	const closeMovieDetail = () => setShowDetail(false);
 	return (
 		<Swiper
 			tag="section"
 			wrapperTag="ul"
 			id="main"
-			pagination={{ clickable: true }}
+			// pagination={{ clickable: true }}
 			navigation
 			spaceBetween={0}
-			//slidesPerView={6}
+			slidesPerView={25}
 			loop={true}>
 			{data.map(movie => (
 				<SwiperSlide key={movie.id} tag="li">
 					<img
+						onClick={() => setShowDetail(true)}
 						className="cardImg"
 						src={
 							movie.image.posters[0] === "image/posters/default.jpg"
