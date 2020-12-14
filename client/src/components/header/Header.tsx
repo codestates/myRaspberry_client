@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BiMovie } from "react-icons/bi";
 
-import {
-	mainColor,
-	headerColor,
-	textColor,
-	subColor,
-	inputColor,
-	buttonColor,
-	userColor,
-} from "../../common/colors";
+import { headerColor, textColor, userColor } from "../../common/colors";
 import NavSideBar from "../navSideBar/NavSideBar";
 import { Link } from "react-router-dom";
 

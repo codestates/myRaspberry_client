@@ -3,14 +3,7 @@ import styled from "styled-components";
 import { BiCameraMovie } from "react-icons/bi";
 import { FaRegCopyright } from "react-icons/fa";
 
-import {
-	mainColor,
-	subColor,
-	inputColor,
-	buttonColor,
-	userColor,
-	pointColor,
-} from "../../common/colors";
+import { pointColor } from "../../common/colors";
 
 const Footer = (): JSX.Element => {
 	return (

@@ -1,34 +1,42 @@
-import React, {useEffect} from "react";
-import MovieCard from "../card/Card";
+import React, { useEffect } from "react";
+import MovieCard from "../card/MovieCard";
 import styled from "styled-components";
 // import { Data } from "../../../api/moveis";
-import useMovies  from "../../../hooks/useMovies"
+import useMovies from "../../../hooks/useMovies";
 import LoadingAnimation from "../../../page/LoadingAnimation";
 
 const CardBox = () => {
-	const {moviesState, getmovieData} = useMovies();
-  
-	useEffect(() => {
-		getmovieData()
-	}, [])
+	const { moviesState, getmovieData } = useMovies();
 
-	const {loading, movies} = moviesState
-	if(movies && movies.length > 7) {
+	useEffect(() => {
+		getmovieData();
+	}, []);
+
+	const { loading, movies } = moviesState;
+	console.log(movies);
+	if (movies && movies.length > 7) {
 		movies.splice(6);
 	}
-	if(loading === true) {
-		return (
-			<LoadingAnimation />
-		)
+	if (loading === true) {
+		return <LoadingAnimation />;
 	} else {
-
-	return (
-		<Container>
-			{movies? movies.map(movie => (
-				<MovieCard key={movie.id} poster={movie.image.posters[0] === "image/posters/default.jpg" ?  "https://i.ibb.co/HnNxZyh/default-poster.jpg" : `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`} />
-			)) : null}
-		</Container>
-	);
+		return (
+			<Container>
+				{movies
+					? movies.map(movie => (
+							<MovieCard
+								key={movie.id}
+								movie={movie}
+								poster={
+									movie.image.posters[0] === "image/posters/default.jpg"
+										? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
+										: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
+								}
+							/>
+					  ))
+					: null}
+			</Container>
+		);
 	}
 };
 

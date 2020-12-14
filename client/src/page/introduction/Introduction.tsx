@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import IntroBanner from "../../components/introBanner/IntroBanner";
 import GoButton from "../../components/goButton/GoButton";
-import MovieCard from "../../components/movies/card/Card";
+import MovieCard from "../../components/movies/card/MovieCard";
 import styled from "styled-components";
 import { mainColor, pointColor, textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
@@ -126,6 +126,7 @@ const CardBoxContainer = styled.div`
 `;
 
 const ResultBoxContainer = styled.div`
+	background-color: #353535;
 	margin-bottom: 4rem;
 `;
 
@@ -133,7 +134,7 @@ const Title = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	margin-left: 7%;
+	margin-left: 5%;
 	margin-top: 15px;
 `;
 

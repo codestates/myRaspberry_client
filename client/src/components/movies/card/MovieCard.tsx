@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import "./Card.css";
 import CardDetail from "../cardDetail/CardDetail";
 
-// {year,title,summary,poster,genres, .....}  추후에 받을 props 예상....
+//const defaultPoster: string = "https://i.ibb.co/HnNxZyh/default-poster.jpg";
 
-// const poster: string =
-// 	"https://yts.mx/assets/images/movies/doctor_who_the_day_of_the_doctor_2013/medium-cover.jpg";
-const defaultPoster: string = "https://i.ibb.co/HnNxZyh/default-poster.jpg";
-
-const MovieCard = ({ poster }) => {
+const MovieCard = ({ poster, movie }) => {
 	const [showDetail, setShowDetail] = useState(false);
 	const [onMouse, setOnMouse] = useState(false);
 	// -1 = hate / 0 = 보통 상태 / 1 = like
@@ -16,7 +12,7 @@ const MovieCard = ({ poster }) => {
 	const handleOnMouse = () => setOnMouse(true);
 	const handleOnMouseOut = () => setOnMouse(false);
 	const closeMovieDetail = () => setShowDetail(false);
-
+	// console.log(onMouse);
 	return (
 		<>
 			<div onClick={() => setShowDetail(true)} className="moviecard_box">
@@ -29,7 +25,11 @@ const MovieCard = ({ poster }) => {
 				/>
 			</div>
 			{showDetail ? (
-				<CardDetail poster={poster} closeMovieDetail={closeMovieDetail} />
+				<CardDetail
+					poster={poster}
+					movie={movie}
+					closeMovieDetail={closeMovieDetail}
+				/>
 			) : null}
 		</>
 	);

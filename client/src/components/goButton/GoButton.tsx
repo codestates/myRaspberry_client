@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Button from "../elements/button/Button";
 import styles from "./goButton.module.css";
 
