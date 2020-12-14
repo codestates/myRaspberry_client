@@ -9,6 +9,7 @@ import ResultBox from "../../components/movies/resultBox/ResultBox";
 import { RiMovie2Line } from "react-icons/ri";
 import { AiFillTags } from "react-icons/ai";
 import test from "./count";
+import { Link } from "react-router-dom";
 
 const Introduction = (): JSX.Element => {
 	const prevScrollY = useRef(0);
@@ -100,7 +101,9 @@ const Introduction = (): JSX.Element => {
 								지금 바로 라즈베리 서비스를 이용해보세요!
 							</InnerText2>
 						</BottomInner>
-						<GoButton />
+						<Link to="main">
+							<GoButton />
+						</Link>
 					</MainImage3>
 				</BottomContainer>
 			</MainBottom>

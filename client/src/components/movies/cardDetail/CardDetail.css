@@ -127,8 +127,8 @@ border : 1px solid black;  */
 .youtube_box {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
-	align-items: initial;
+	justify-content: center;
+	align-items: stretch;
 	width: 100%;
 	height: 50%;
 }

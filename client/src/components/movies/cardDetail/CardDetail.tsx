@@ -16,6 +16,16 @@ type FromCard = {
 	movie: MoviesType;
 	closeMovieDetail: () => void;
 };
+
+const fixRuntime = runtime => {
+	let time = 0;
+	while (runtime > 60) {
+		runtime = runtime - 60;
+		time++;
+	}
+	return time === 0 ? `${runtime}분` : `${time}시간 ${runtime}분`;
+};
+
 //const defaultUrl = "https://i.ibb.co/HnNxZyh/default-poster.jpg";
 const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	const { videoState, getVideoData } = useYoutube();
@@ -35,8 +45,10 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 		date,
 	} = movie;
 
+	//상연년도만 표출
 	const year = date.slice(0, 4);
-
+	//runtime => 시간단위로
+	const runtimeKor = fixRuntime(runtime);
 	useEffect(() => {
 		getVideoData(title);
 	}, []);
@@ -74,7 +86,9 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 								</button>
 							</div>
 							<div className="genre_box">
-								<h5 className="genre">{genre}</h5>
+								<h5 className="genre">
+									{genre}&nbsp; | &nbsp;{runtimeKor}
+								</h5>
 							</div>
 							<div className="character">
 								<p className="director">
@@ -89,9 +103,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 						</div>
 					</div>
 					<div className="detail_bottom">
-						<p className="plot">
-							{plotKr}(런타임: {runtime}분)
-						</p>
+						<p className="plot">{plotKr}</p>
 						<div className="image_box"></div>
 						<div className="youtube_box">
 							{videos &&

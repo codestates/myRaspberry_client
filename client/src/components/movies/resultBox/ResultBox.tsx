@@ -24,13 +24,12 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 			<Swiper
 				tag="section"
 				wrapperTag="ul"
-				id="main"
-				// pagination={{ clickable: true }}
+				className="mainResult"
 				navigation
 				spaceBetween={0}
 				slidesPerView={25}
 				loop={true}>
-				{renew.map((movie) => (
+				{renew.map(movie => (
 					<SwiperSlide key={movie.id} tag="li">
 						<img
 							className="cardImg"
@@ -53,13 +52,12 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 			<Swiper
 				tag="section"
 				wrapperTag="ul"
-				id="main"
-				// pagination={{ clickable: true }}
+				className="mainResult"
 				navigation
 				spaceBetween={0}
 				slidesPerView={25}
 				loop={true}>
-				{kor.map((movie) => (
+				{kor.map(movie => (
 					<SwiperSlide key={movie.id} tag="li">
 						<img
 							className="cardImg"
@@ -83,12 +81,11 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 				tag="section"
 				wrapperTag="ul"
 				id="main"
-				// pagination={{ clickable: true }}
 				navigation
 				spaceBetween={0}
 				slidesPerView={25}
 				loop={true}>
-				{eng.map((movie) => (
+				{eng.map(movie => (
 					<SwiperSlide key={movie.id} tag="li">
 						<img
 							className="cardImg"
@@ -111,13 +108,12 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 			<Swiper
 				tag="section"
 				wrapperTag="ul"
-				id="main"
-				// pagination={{ clickable: true }}
+				className="mainResult"
 				navigation
 				spaceBetween={0}
 				slidesPerView={25}
 				loop={true}>
-				{short.map((movie) => (
+				{short.map(movie => (
 					<SwiperSlide key={movie.id} tag="li">
 						<img
 							className="cardImg"
@@ -140,13 +136,12 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 			<Swiper
 				tag="section"
 				wrapperTag="ul"
-				id="main"
-				// pagination={{ clickable: true }}
+				className="mainResult"
 				navigation
 				spaceBetween={0}
 				slidesPerView={25}
 				loop={true}>
-				{long.map((movie) => (
+				{long.map(movie => (
 					<SwiperSlide key={movie.id} tag="li">
 						<img
 							className="cardImg"
@@ -167,13 +162,12 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 			<Swiper
 				tag="section"
 				wrapperTag="ul"
-				id="main"
-				// pagination={{ clickable: true }}
+				className="mainResult"
 				navigation
 				spaceBetween={0}
 				slidesPerView={25}
 				loop={true}>
-				{data.map((movie) => (
+				{data.map(movie => (
 					<SwiperSlide key={movie.id} tag="li">
 						<img
 							className="cardImg"
