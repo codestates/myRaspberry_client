@@ -21,7 +21,7 @@ const CardBox = () => {
 	// if (loading === true) {
 	// 	return <LoadingAnimation />;
 	// }
-	console.log(introData);
+
 	return (
 		<Container>
 			{introData

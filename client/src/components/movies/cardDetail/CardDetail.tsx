@@ -34,6 +34,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 		tag,
 		date,
 	} = movie;
+
 	const year = date.slice(0, 4);
 
 	useEffect(() => {
@@ -44,8 +45,12 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	// if (poster === defaultUrl) {
 	// 	console.log("포스터 없음");
 	// }
+
+	let actorArr = actor.split(",");
+	actorArr = actorArr.slice(0, 6);
+	let actorString = actorArr.join(",");
 	const { loading, videos } = videoState;
-	console.log(videos);
+	// console.log(videos);
 	if (loading) {
 		return <LoadingAnimation />;
 	} else {
@@ -78,7 +83,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 								</p>
 								<p className="actor">
 									<b>출연</b>&nbsp;&nbsp;
-									<span className="smallText">{actor}</span>
+									<span className="smallText">{actorString}</span>
 								</p>
 							</div>
 						</div>

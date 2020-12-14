@@ -7,6 +7,10 @@ import { mainColor, pointColor, textColor } from "../../common/colors";
 import IntroBanner from "../../components/introBanner/IntroBanner";
 import SlideMenu from "../../components/movies/slideMenu/SlideMenu";
 
+import kor from "../../lib/main/kor.json";
+import eng from "../../lib/main/eng.json";
+import renew from "../../lib/main/new.json";
+
 const Main = () => {
 	return (
 		<>
@@ -25,14 +29,6 @@ const Main = () => {
 					<ResultBox />
 					<Title>
 						<TitleText>외국영화 어때요?</TitleText>
-					</Title>
-					<ResultBox />
-					<Title>
-						<TitleText>킬링타임용 짧은 영화는 어때요?</TitleText>
-					</Title>
-					<ResultBox />
-					<Title>
-						<TitleText>여유있게 긴 영화는 어때요?</TitleText>
 					</Title>
 					<ResultBox />
 				</CardboxContainer>
