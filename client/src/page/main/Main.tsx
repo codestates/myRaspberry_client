@@ -6,12 +6,17 @@ import styled from "styled-components";
 import { mainColor, pointColor, textColor } from "../../common/colors";
 import IntroBanner from "../../components/introBanner/IntroBanner";
 import SlideMenu from "../../components/movies/slideMenu/SlideMenu";
-
-import kor from "../../lib/main/kor.json";
-import eng from "../../lib/main/eng.json";
-import renew from "../../lib/main/new.json";
+import useMovies from "../..//hooks/useMovies";
 
 const Main = () => {
+	const { moviesState, getmovieData } = useMovies();
+
+	React.useEffect(() => {
+		getmovieData();
+	}, []);
+
+	const { renew, kor, eng, long, short } = moviesState.movies;
+
 	return (
 		<>
 			<MainTop>
@@ -22,15 +27,23 @@ const Main = () => {
 					<Title>
 						<TitleText>신작영화 어때요?</TitleText>
 					</Title>
-					<ResultBox />
+					<ResultBox renew={renew} />
 					<Title>
 						<TitleText>자막없이 보는 한국영화 어때요?</TitleText>
 					</Title>
-					<ResultBox />
+					<ResultBox kor={kor} />
 					<Title>
 						<TitleText>외국영화 어때요?</TitleText>
 					</Title>
-					<ResultBox />
+					<ResultBox eng={eng} />
+					<Title>
+						<TitleText>킬링타임용 짧은 영화는 어때요?</TitleText>
+					</Title>
+					<ResultBox long={long} />
+					<Title>
+						<TitleText>여유있게 긴 영화는 어때요?</TitleText>
+					</Title>
+					<ResultBox short={short} />
 				</CardboxContainer>
 			</MainTop>
 			{/* TODO loading 이미지가 보고싶다면 주석을 풀어주세요 */}
