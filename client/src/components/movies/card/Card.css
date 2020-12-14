@@ -1,6 +1,8 @@
 .moviecard_box {
 	position: relative;
 	margin-right: 1rem;
+	display: flex;
+	flex-direction: column;
 }
 
 .moviecard {
@@ -10,12 +12,19 @@
 	max-height: 18rem;
 	box-shadow: 5px 3px 3px #292929;
 }
-
 .moviecard:hover {
 	opacity: 0.7;
-	/* transform: scale(1.1); */
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
+}
+
+.moviecard_box.hoverOff {
+	display: none;
+}
+
+.thumbs_container {
+	display: flex;
+	flex-direction: column;
 }
 
 .none {

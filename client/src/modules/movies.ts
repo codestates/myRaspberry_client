@@ -31,7 +31,7 @@ export type MoviesType = {
 	title: string;
 	titleEng: string;
 	director: string;
-	actor: string[];
+	actor: string;
 	plotKr: string;
 	plotEng: string;
 	runtime: number;
