@@ -1,9 +1,17 @@
 import { Dispatch } from "redux";
 import axios from "axios";
+import korData from "../lib/main/kor.json";
+import engData from "../lib/main/eng.json";
+import renewData from "../lib/main/new.json";
+import longData from "../lib/main/long.json";
+import shortData from "../lib/main/short.json";
 
 // MOVIES DATA 상태 관련 로직
 // 1. 영화 데이터 요청
-const moviesGetUrl = "http://localhost:8080/search/kor";
+const moviesGetUrl = "http://localhost:8080/search/";
+const newmovie = "new";
+const kormovie = "kor";
+const engmovie = "eng";
 
 // 액션 type
 const MOVIES_LOADING = "movies/MOVIES_LOADING" as const;
@@ -15,14 +23,14 @@ export const moviesLoading = () => ({
 	type: MOVIES_LOADING,
 });
 
-export const moviesSuccess = (data: MoviesType[]) => ({
+export const moviesSuccess = (data: Data) => ({
 	type: MOVIES_SUCCESS,
 	payload: data,
 });
 
-export const moviesFail = (e: string) => ({
+export const moviesFail = (err: string) => ({
 	type: MOVIES_FAIL,
-	payload: e,
+	payload: err,
 });
 
 export type MoviesType = {
@@ -45,45 +53,70 @@ export type MoviesType = {
 	score: number;
 };
 
-interface MoviesLoading {
-	type: typeof MOVIES_LOADING;
-}
+type MoviesActions =
+	| ReturnType<typeof moviesLoading>
+	| ReturnType<typeof moviesSuccess>
+	| ReturnType<typeof moviesFail>;
 
-interface MoviesSuccess {
-	type: typeof MOVIES_SUCCESS;
-	payload: MoviesType[];
-}
+// interface MoviesLoading {
+// 	type: typeof MOVIES_LOADING;
+// }
 
-interface MoviesFail {
-	type: typeof MOVIES_FAIL;
-	payload?: string;
-}
+// interface MoviesSuccess {
+// 	type: typeof MOVIES_SUCCESS;
+// 	payload: MoviesType[];
+// }
 
-type MoviesDispatchTypes = MoviesLoading | MoviesSuccess | MoviesFail;
+// interface MoviesFail {
+// 	type: typeof MOVIES_FAIL;
+// 	payload?: string;
+// }
+
+// type MoviesDispatchTypes = MoviesLoading | MoviesSuccess | MoviesFail;
 
 // 상태를 위한 타입 선언
 export type DefaultState = {
 	loading: boolean;
-	movies?: MoviesType[];
-	err: string;
+	movies:
+		| { renew: Data }
+		| { kor: Data }
+		| { eng: Data }
+		| { long: Data }
+		| { short: Data }
+		| any;
+	err: string | undefined;
+};
+
+type Data = {
+	renew: MoviesType[];
+	kor: MoviesType[];
+	eng: MoviesType[];
+	long: MoviesType[];
+	short: MoviesType[];
 };
 
 // 초깃값 설정
 const defaultState: DefaultState = {
 	loading: false,
-	movies: [],
+	movies: {
+		renew: renewData,
+		kor: korData,
+		eng: engData,
+		long: longData,
+		short: shortData,
+	},
 	err: "",
 };
 
 export function moviesreducer(
 	state: DefaultState = defaultState,
-	action: MoviesDispatchTypes
+	action: MoviesActions,
 ): DefaultState {
 	switch (action.type) {
 		case MOVIES_LOADING:
 			return {
+				...state,
 				loading: true,
-				movies: [],
 				err: "",
 			};
 		case MOVIES_SUCCESS:
@@ -96,26 +129,22 @@ export function moviesreducer(
 			return {
 				...state,
 				loading: false,
-				err: "what the XX",
+				err: action.payload,
 			};
 		default:
 			return state;
 	}
 }
 
-export const getMovies = () => async (
-	dispatch: Dispatch<MoviesDispatchTypes>
-) => {
+export const getMovies = () => async (dispatch: Dispatch<MoviesActions>) => {
 	try {
-		dispatch({
-			type: MOVIES_LOADING,
-		});
+		dispatch(moviesLoading());
 
-		const { data } = await axios.get(moviesGetUrl);
+		// const { data } = await axios.get(moviesGetUrl + kormovie);
 
-		dispatch(moviesSuccess(data));
-	} catch (e) {
-		dispatch(moviesFail(e));
+		// dispatch(moviesSuccess(data));
+	} catch (err) {
+		dispatch(moviesFail(err));
 	}
 };
 
