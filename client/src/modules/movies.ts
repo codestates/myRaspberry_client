@@ -3,7 +3,7 @@ import axios from "axios";
 
 // MOVIES DATA 상태 관련 로직
 // 1. 영화 데이터 요청
-const moviesGetUrl = "http://localhost:8080/search/new";
+const moviesGetUrl = "http://localhost:8080/search/kor";
 
 // 액션 type
 const MOVIES_LOADING = "movies/MOVIES_LOADING" as const;
