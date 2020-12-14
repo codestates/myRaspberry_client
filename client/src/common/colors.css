@@ -1,0 +1,14 @@
+@value mainColor: #353535;
+@value headerColor: #212121;
+@value subColor: #E89E9E;
+@value inputColor: #F8E0E1;
+@value buttonColor: #EC4040;
+@value userColor: #CF3535;
+
+/* 
+변경 전
+@value mainColor: #F06363;
+@value subColor: #E89E9E;
+@value inputColor: #F8E0E1;
+@value buttonColor: #EC4040;
+@value userColor: #CF3535; */

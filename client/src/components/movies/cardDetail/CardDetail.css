@@ -1,0 +1,163 @@
+/* 영역 확인용  : border : 1px solid red; / 
+border : 1px solid black;  */
+
+.nav_backgroud {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 98;
+}
+
+.nav_detailbar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	height: 90%;
+	color: white;
+	z-index: 99;
+	overflow: inherit;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -5%);
+}
+
+.detail_top {
+	display: flex;
+	width: 100%;
+	height: 35%;
+	justify-content: space-between;
+	background-color: rgb(30, 30, 30);
+}
+
+.detail_top_poster_box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+	height: 100%;
+}
+
+.detail_top_poster {
+	height: 90%;
+}
+
+.detail_top_context {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: space-between; */
+	align-items: flex-start;
+	padding: 0 2vw 0 2vw;
+	width: 70%;
+	height: 100%;
+}
+
+.title_box {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 2%;
+}
+
+.title_box_title {
+	letter-spacing: 0px;
+}
+
+.title_box_btn {
+	font-size: 25px;
+	color: whitesmoke;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background-color: rgb(30, 30, 30);
+	margin: 0 -2% 3% 0;
+}
+
+.title_box_btn:hover {
+	color: #f06363;
+}
+
+.genre_box {
+	display: flex;
+	margin-bottom: 5%;
+}
+
+.genre {
+	margin: 0;
+}
+
+.character {
+	margin-bottom: 1rem;
+}
+
+.actor {
+	letter-spacing: 0.12px;
+}
+
+.smallText {
+	font-size: 15px;
+}
+
+.detail_bottom {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	background-color: #353535;
+	position: relative;
+}
+
+.plot {
+	margin: 0;
+	display: flex;
+	width: 95%;
+	letter-spacing: 0.25px;
+	line-height: 23px;
+}
+
+.youtube_box {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: initial;
+	width: 100%;
+	height: 50%;
+}
+
+.like,
+.hate,
+.normal {
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background-color: #f1a3a3;
+	margin-right: 2vw;
+	font-size: 5vh;
+}
+
+.like:hover,
+.hate:hover,
+.normal:hover {
+	transform: scale(1.5);
+	transition: 0.5s ease;
+}
+
+.none {
+	display: none;
+}
+/* .back-drop {
+	background: rgba(63, 61, 61, 0.692);
+	height: 100%;
+	position: fixed;
+	transition: all 1.3s;
+	width: 100%;
+} */

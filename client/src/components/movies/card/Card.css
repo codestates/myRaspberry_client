@@ -1,0 +1,23 @@
+.moviecard_box {
+	position: relative;
+	margin-right: 1rem;
+}
+
+.moviecard {
+	border-radius: 5%;
+	width: 100%;
+	max-width: 13rem;
+	max-height: 18rem;
+	box-shadow: 5px 3px 3px #292929;
+}
+
+.moviecard:hover {
+	opacity: 0.7;
+	/* transform: scale(1.1); */
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+}
+
+.none {
+	display: none;
+}

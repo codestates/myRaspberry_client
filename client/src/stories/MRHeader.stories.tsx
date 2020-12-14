@@ -2,10 +2,10 @@ import React from "react";
 import Header from "../components/header/Header";
 
 export default {
-  title: "components/Header",
-  component: Header
-}
+	title: "components/Header",
+	component: Header,
+};
 
-const Template = () => <Header />;
+// export const Template = () => <Header/>;
 
-export const Primary = Template.bind({});
+// export const Primary = Template.bind({});

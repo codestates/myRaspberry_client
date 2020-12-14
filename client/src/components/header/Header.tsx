@@ -1,90 +1,81 @@
-import React from 'react';
-import styled from 'styled-components'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React, { useState } from "react";
+import styled from "styled-components";
+import { BiMovie } from "react-icons/bi";
 
-import {
-  mainColor,
-subColor,
-inputColor,
-buttonColor,
-userColor
-} from "../../common/colors";
+import { headerColor, textColor, userColor } from "../../common/colors";
+import NavSideBar from "../navSideBar/NavSideBar";
+import { Link } from "react-router-dom";
 
+// type HeaderProps = {
+// 	navBarOpen: boolean;
+// 	handleClose: (navBarOpen: boolean) => void;
+// };
 
-const Header = () => {
-  return (
-    <Container>
-      <LeftSide />
-      <LogoWrap>
-      <HeaderTitle>My</HeaderTitle>
-      <Logo 
-      src="https://i.ibb.co/9g9J8m1/main.png"
-      alt="myRaspberry logo"/>
-      <HeaderTitle>Raspberry</HeaderTitle>
-      </LogoWrap>
-      <SignArea>
-        <FontAwesomeIcon icon="user-circle" size="2x" color="#CF3535"/>
-      </SignArea>
-    </Container>
-  );
+const Header = (): JSX.Element => {
+	const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
+
+	const handleNavBarClick = () => {
+		setNavBarOpen(!navBarOpen);
+		console.log(navBarOpen);
+	};
+
+	return (
+		<Container>
+			<Link to="/">
+				<Logo src="https://i.ibb.co/9g9J8m1/main.png" alt="myRaspberry logo" />
+				<HeaderTitle>MY RASPBERRY</HeaderTitle>
+			</Link>
+
+			<MovieIcon onClick={handleNavBarClick} />
+			<NavSideBar navBarOpen={navBarOpen} handleClose={handleNavBarClick} />
+		</Container>
+	);
 };
 
 const Container = styled.div`
-  display:flex;
-  justify-content:center;
-  background-color: ${mainColor};
-`;
-
-const LeftSide = styled.div`
-  display:flex;
-  float: left;
-  width: 33%;
-`;
-
-const LogoWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  float: left;
-  width: 33%;
-
-  margin: 0 0 0 1.5em;
-  @media (max-width: 768px) {
-    margin: 0 0 0 0.8em;
-    min-width: 55px;
-    min-height: 55px;
-  }
-  @media (max-width: 414px) {
-    margin: 0 0.5em 0 0;
-    min-width: 45px;
-    min-height: 45px;
-  }
-`;
-
-const HeaderTitle = styled.p`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	left: 50%;
+	box-sizing: border-box;
+	background-color: ${headerColor};
+	transform: translate(-50%, 0%);
 `;
 
 const Logo = styled.img`
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5rem;
-  height: 5rem;
-  object-fit: contain;
-  // margin: 0 -0.5em 0 -0.5em;
+	position: absolute;
+	top: 5%;
+	z-index: 90;
+	left: 11px;
+	width: 56px;
+	/* object-fit: contain;
+	margin: 0rem 0 1rem 1.3rem; */
 `;
 
-const SignArea = styled.div`
-  display:flex;
-  float: left;
-  width: 33%;
-  align-items: center;
-  place-content: flex-end;
-  margin-right: 1rem;
+const HeaderTitle = styled.p`
+	position: absolute;
+	font-size: 1.2rem;
+	font-weight: bolder;
+	left: 67px;
+	color: whitesmoke;
+	font-family: "Montserrat", sans-serif;
+	letter-spacing: 3px;
+	align-self: center;
+`;
+
+const MovieIcon = styled(BiMovie)`
+	position: absolute;
+	z-index: 90;
+	right: 14px;
+	top: 7px;
+	width: 2em;
+	height: 2.5em;
+	color: ${textColor};
+	border-radius: 15%;
+	:hover {
+		cursor: pointer;
+		color: ${userColor};
+	}
 `;
 
 export default Header;
