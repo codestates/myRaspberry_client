@@ -111,6 +111,11 @@ p {
 	margin-bottom: 1em;
 }
 
+.linkText.signout {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 // INTRODUCTION => 라즈베리 서비스란?
 .intro:after {
 	content: "INTRODUCTION";
@@ -235,6 +240,39 @@ p {
 }
 
 .sign:hover::after {
+	opacity: 0;
+	text-align: center;
+}
+
+//signout
+
+.signout:after {
+	content: "SIGNIN";
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	transition: 0.2s ease-in-out;
+}
+
+.signout:before {
+	content: "로그인";
+	text-align: center;
+	opacity: 0;
+	top: 23px;
+	left: 0;
+	font-weight: 600;
+	position: relative;
+	color: #cf3535;
+	transition: all 1s;
+}
+
+.signout:hover::before {
+	width: 100%;
+	opacity: 1;
+	text-align: center;
+}
+
+.signout:hover::after {
 	opacity: 0;
 	text-align: center;
 }
