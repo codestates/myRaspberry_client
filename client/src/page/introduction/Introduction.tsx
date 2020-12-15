@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import IntroBanner from "../../components/introBanner/IntroBanner";
 import GoButton from "../../components/goButton/GoButton";
 import MovieCard from "../../components/movies/card/MovieCard";
+import IntroResultBox from "../../components/movies/resultBox/IntroResultBox";
 import styled from "styled-components";
 import { mainColor, pointColor, textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
@@ -48,7 +49,7 @@ const Introduction = (): JSX.Element => {
 					<TitleText>오늘 이 영화 어때요?</TitleText>
 				</Title>
 				<ResultBoxContainer>
-					<ResultBox />
+					<IntroResultBox />
 				</ResultBoxContainer>
 			</MainTop>
 			<MainBottom>
