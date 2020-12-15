@@ -51,7 +51,8 @@ const MainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	background-color: #111;
-	width: 100%; //100% 바꾸지 말 것
+	height: 100%; //100% 바꾸지 말 것
+	padding: 0px 0 0;
 `;
 
 const FooterContainer = styled.footer`
