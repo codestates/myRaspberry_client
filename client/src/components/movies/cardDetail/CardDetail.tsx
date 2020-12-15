@@ -14,7 +14,7 @@ import Youtube from "../youtube/Youtube";
 type FromCard = {
 	poster: string;
 	movie: MoviesType;
-	closeMovieDetail: () => void;
+	closeMovieDetail: any;
 };
 
 const fixRuntime = runtime => {
