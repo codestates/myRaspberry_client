@@ -1,14 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { RiThumbUpLine } from "react-icons/ri";
 
 const ThumbsUp = () => {
-	return (
-		<RasupImg
-			onClick={() => alert("따봉!")}
-			src="https://i.ibb.co/zfLpY3s/raspberry-new-good-150.png"
-			alt="thumbs-up"
-		/>
-	);
+	return <RasupImg onClick={() => alert("따봉!")} />;
 };
 
 const RasupContainer = styled.div`
@@ -16,15 +11,16 @@ const RasupContainer = styled.div`
 	display: flex;
 `;
 
-const RasupImg = styled.img`
-	//background-image: url("https://i.ibb.co/zfLpY3s/raspberry-new-good-150.png");
+const RasupImg = styled(RiThumbUpLine)`
 	display: flex;
 	justify-content: column;
 	width: 30%;
-	top: -105px;
-	left: 90px;
+	top: -150px;
+	color: whitesmoke;
+	right: 15px;
 	position: absolute;
 	cursor: pointer;
+	font-size: 35px;
 `;
 
 export default ThumbsUp;

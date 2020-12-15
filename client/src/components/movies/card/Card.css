@@ -15,7 +15,7 @@
 .moviecard:hover {
 	opacity: 0.7;
 	cursor: pointer;
-	transition: 0.2s ease-in-out;
+	/* transition: 0.2s ease-in-out; */
 }
 
 .moviecard_box.hoverOff {

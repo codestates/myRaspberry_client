@@ -17,7 +17,7 @@ const MovieCard = ({ poster, movie }) => {
 	// console.log(onMouse);
 	return (
 		<>
-			<div className="moviecard_box" onClick={() => setShowDetail(true)}>
+			<div className="moviecard_box">
 				<img
 					className="moviecard"
 					src={poster}
