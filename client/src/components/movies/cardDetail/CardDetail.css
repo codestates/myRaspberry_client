@@ -2,7 +2,6 @@
 border : 1px solid black;  */
 
 .modal-open {
-	position: fixed;
 	overflow: hidden;
 }
 
