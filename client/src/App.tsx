@@ -18,24 +18,24 @@ import Sign from "./page/sign/Sign";
 
 const App = (): JSX.Element => {
 	return (
-		<BrowserRouter>
-			<div>
-				<HeaderContainer>
-					<Header />
-				</HeaderContainer>
-				<MainContainer>
-					<Switch>
-						<Route path={["/", "/intro"]} exact component={Introduction} />
-						<Route path="/main" component={Main} />
-						<Route path="/mypage" component={Mypage} />
-						<Route path="/user" component={Sign} />
-					</Switch>
-				</MainContainer>
-				<FooterContainer>
-					<Footer />
-				</FooterContainer>
-			</div>
-		</BrowserRouter>
+		// <BrowserRouter>
+		<div>
+			<HeaderContainer>
+				<Header />
+			</HeaderContainer>
+			<MainContainer>
+				<Switch>
+					<Route path={["/", "/intro"]} exact component={Introduction} />
+					<Route path="/main" component={Main} />
+					<Route path="/mypage" component={Mypage} />
+					<Route path="/user" component={Sign} />
+				</Switch>
+			</MainContainer>
+			<FooterContainer>
+				<Footer />
+			</FooterContainer>
+		</div>
+		// </BrowserRouter>
 	);
 };
 

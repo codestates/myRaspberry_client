@@ -11,10 +11,14 @@ import {
 	userColor,
 } from "../../common/colors";
 import { Link } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 
 const raspberryUrl = "https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png";
 
 const NavSideBar = ({ navBarOpen, handleClose }) => {
+	const { userState } = useUser();
+	const { isLogin } = userState;
+	console.log("isLogin in nav Bar", isLogin);
 	return (
 		<>
 			<div className={navBarOpen ? "mdl show" : "mdl"}>
@@ -36,8 +40,13 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 						<Link to="/mypage" onClick={handleClose}>
 							<p className="linkText mypage"></p>
 						</Link>
-						<Link to="/user" onClick={handleClose}>
-							<p className="linkText sign"></p>
+
+						<Link to={isLogin ? "/signout" : "/user"} onClick={handleClose}>
+							{isLogin ? (
+								<p className="linkText signout"></p>
+							) : (
+								<p className="linkText sign"></p>
+							)}
 						</Link>
 					</SideBottom>
 				</div>
