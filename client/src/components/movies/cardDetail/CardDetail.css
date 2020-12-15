@@ -1,38 +1,49 @@
 /* 영역 확인용  : border : 1px solid red; / 
 border : 1px solid black;  */
 
+.modal-open {
+	position: fixed;
+	overflow: hidden;
+}
+
 .nav_backgroud {
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.4);
+	width: 100%;
+	height: 100%;
+}
+
+.nav_showoff {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
 	z-index: 98;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .nav_detailbar {
-	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	position: fixed;
-	height: 90%;
+	height: 100%;
+	top: 8rem;
 	color: white;
 	z-index: 99;
-	overflow: inherit;
 	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -5%);
+	overflow: scroll;
 }
 
 .detail_top {
 	display: flex;
 	width: 100%;
 	height: 35%;
+	min-height: 250px;
 	justify-content: space-between;
 	background-color: rgb(30, 30, 30);
 }
@@ -47,6 +58,9 @@ border : 1px solid black;  */
 
 .detail_top_poster {
 	height: 90%;
+}
+
+.detail_thumbs_box {
 }
 
 .detail_top_context {
@@ -118,19 +132,34 @@ border : 1px solid black;  */
 
 .plot {
 	margin: 0;
-	display: flex;
 	width: 95%;
 	letter-spacing: 0.25px;
 	line-height: 23px;
+}
+
+.plot > b {
+	cursor: pointer;
+}
+
+.plot-long {
+	display: none;
+}
+
+.plot-long.on {
+	display: block;
+}
+
+.plot.off {
+	display: none;
 }
 
 .youtube_box {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: stretch;
+	align-items: initial;
 	width: 100%;
-	height: 50%;
+	height: 25%;
 }
 
 .like,

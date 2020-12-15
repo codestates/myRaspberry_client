@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./CardDetail.css";
 import { FaCompressArrowsAlt, FaRegWindowClose } from "react-icons/fa";
 
@@ -6,6 +6,8 @@ import { MoviesType } from "../../../modules/movies";
 import useYoutube from "../../../hooks/useYoutube";
 import LoadingAnimation from "../../../page/LoadingAnimation";
 import Youtube from "../youtube/Youtube";
+import ThumbsDown from "../thumbsDown/ThumbsDown";
+import ThumbsUp from "../thumbsUp/ThumbsUp";
 // import { Data } from "../../../api/moveis";
 
 // 영화 카드별로 정보가 담겨야 한다.
@@ -29,6 +31,7 @@ const fixRuntime = runtime => {
 //const defaultUrl = "https://i.ibb.co/HnNxZyh/default-poster.jpg";
 const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	const { videoState, getVideoData } = useYoutube();
+	const [viewAllPlot, setViewAllPlot] = useState(false);
 	// const [defaultPoster, setDefaultPoster] = useState(false);
 
 	const {
@@ -53,7 +56,6 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 		getVideoData(title);
 	}, []);
 
-	// console.log(poster);
 	// if (poster === defaultUrl) {
 	// 	console.log("포스터 없음");
 	// }
@@ -62,54 +64,69 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	actorArr = actorArr.slice(0, 6);
 	let actorString = actorArr.join(",");
 	const { loading, videos } = videoState;
-	// console.log(videos);
+	console.log(plotKr.slice(0, 100));
+	const newPlotKr = plotKr.slice(0, 40);
+	const viewmore = "더보기";
+	console.log(viewAllPlot);
 	if (loading) {
 		return <LoadingAnimation />;
 	} else {
 		return (
 			<>
-				<div className="nav_backgroud" onClick={closeMovieDetail}></div>
-				<div className="nav_detailbar">
-					<div className="detail_top">
-						<div className="detail_top_poster_box">
-							<img className="detail_top_poster" src={poster} alt="poster" />
+				<div className="nav_showoff" onClick={closeMovieDetail}></div>
+				<div className="nav_backgroud">
+					<div className="nav_detailbar">
+						<div className="detail_top">
+							<div className="detail_top_poster_box">
+								<img className="detail_top_poster" src={poster} alt="poster" />
+								{/* <div className="detail_thumbs_box">
+									<ThumbsDown />
+									<ThumbsUp />
+								</div> */}
+							</div>
+							<div className="detail_top_context">
+								<div className="title_box">
+									<h3 className="title_box_title">
+										{title}({year})
+										<br />
+										{titleEng}
+									</h3>
+									<button className="title_box_btn" onClick={closeMovieDetail}>
+										<FaRegWindowClose />
+									</button>
+								</div>
+								<div className="genre_box">
+									<h5 className="genre">
+										{genre}&nbsp; | &nbsp;{runtimeKor}
+									</h5>
+								</div>
+								<div className="character">
+									<p className="director">
+										<b>감독</b>&nbsp;&nbsp;
+										<span className="smallText">{director}</span>
+									</p>
+									<p className="actor">
+										<b>출연</b>&nbsp;&nbsp;
+										<span className="smallText">{actorString}</span>
+									</p>
+								</div>
+								<span className={viewAllPlot ? "plot off" : "plot"}>
+									{newPlotKr}...
+									<b onClick={() => setViewAllPlot(true)}>{viewmore}</b>
+								</span>
+								<span className={viewAllPlot ? "plot-long on" : "plot-long"}>
+									{plotKr}
+								</span>
+							</div>
 						</div>
-						<div className="detail_top_context">
-							<div className="title_box">
-								<h3 className="title_box_title">
-									{title}({year})
-									<br />
-									{titleEng}
-								</h3>
-								<button className="title_box_btn" onClick={closeMovieDetail}>
-									<FaRegWindowClose />
-								</button>
+						<div className="detail_bottom">
+							<div className="image_box"></div>
+							<div className="youtube_box">
+								{videos &&
+									videos.map(video => (
+										<Youtube key={video.id.videoId} video={video.id.videoId} />
+									))}
 							</div>
-							<div className="genre_box">
-								<h5 className="genre">
-									{genre}&nbsp; | &nbsp;{runtimeKor}
-								</h5>
-							</div>
-							<div className="character">
-								<p className="director">
-									<b>감독</b>&nbsp;&nbsp;
-									<span className="smallText">{director}</span>
-								</p>
-								<p className="actor">
-									<b>출연</b>&nbsp;&nbsp;
-									<span className="smallText">{actorString}</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="detail_bottom">
-						<p className="plot">{plotKr}</p>
-						<div className="image_box"></div>
-						<div className="youtube_box">
-							{videos &&
-								videos.map(video => (
-									<Youtube key={video.id.videoId} video={video.id.videoId} />
-								))}
 						</div>
 					</div>
 				</div>
