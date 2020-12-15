@@ -99,7 +99,7 @@ export const getVideos = title => async (
 			type: SEARCH_LOADING,
 		});
 
-		const { data } = await axios.get(`https://localhost/movie/${title}`);
+		const { data } = await axios.get(`https://myraspberry.shop/movie/${title}`);
 		dispatch(searchVideos(data.items));
 	} catch (e) {
 		dispatch(searchFail(e));
