@@ -3,6 +3,7 @@ import "./Card.css";
 import CardDetail from "../cardDetail/CardDetail";
 import ThumbsUp from "../thumbsUp/ThumbsUp";
 import ThumbsDown from "../thumbsDown/ThumbsDown";
+import styled from "styled-components";
 
 //const defaultPoster: string = "https://i.ibb.co/HnNxZyh/default-poster.jpg";
 
@@ -11,24 +12,28 @@ const MovieCard = ({ poster, movie }) => {
 	const [onMouse, setOnMouse] = useState(false);
 	// -1 = hate / 0 = 보통 상태 / 1 = like
 	const [hate, setHate] = useState(0);
-	const handleOnMouse = () => setOnMouse(true);
-	const handleOnMouseOut = () => setOnMouse(false);
-	const closeMovieDetail = () => setShowDetail(false);
-	// console.log(onMouse);
+	const handleOnMouse = e => {
+		e.preventDefault();
+		setOnMouse(true);
+	};
+	const handleOnMouseOut = e => {
+		e.preventDefault();
+		setOnMouse(false);
+	};
+	const closeMovieDetail = e => {
+		e.preventDefault();
+		setShowDetail(false);
+	};
+	console.log(onMouse);
 	return (
 		<>
 			<div className="moviecard_box">
-				<img
-					className="moviecard"
-					src={poster}
-					onMouseEnter={handleOnMouse}
+				<MovieImage
+					onMouse={onMouse}
+					poster={poster}
+					onMouseOver={handleOnMouse}
 					onMouseLeave={handleOnMouseOut}
-					alt="moviecard-poster"
 				/>
-				<div className={onMouse ? "moviecard_box" : "moviecard_box hoverOff"}>
-					<ThumbsDown />
-					<ThumbsUp />
-				</div>
 			</div>
 
 			{showDetail ? (
@@ -41,6 +46,33 @@ const MovieCard = ({ poster, movie }) => {
 		</>
 	);
 };
+
+function MovieImage(props: any): JSX.Element {
+	const { onMouse, poster, onMouseOver, onMouseLeave } = props;
+	const blackBox = onMouse ? "black_box on" : "black_box";
+	return (
+		<div
+			className="movie_image"
+			style={{
+				backgroundImage: `url(${poster})`,
+			}}
+			onMouseOver={onMouseOver}
+			onMouseLeave={onMouseLeave}>
+			<div className={blackBox}></div>
+			<div className="thumbs_box">
+				{/* <div className="moviecard_box"> */}
+				{onMouse && <ThumbsDown />}
+				{onMouse && <ThumbsUp />}
+				{/* <ThumbsDown />
+				<ThumbsUp /> */}
+			</div>
+		</div>
+	);
+}
+
+/* const MovieImage = styled.div`
+  background : url(${poster})
+`; */
 
 export default MovieCard;
 
