@@ -9,7 +9,6 @@
 	height: 50vh;
 }
 .page_whole {
-	height: 10vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -22,19 +21,28 @@
 }
 
 .box1 {
+	display: flex;
+	justify-content: center;
 	width: 50%;
-	height: 70%;
-	border: 1px solid red;
+	height: 100%;
+	/* border: 1px solid red; */
 }
 .box1 img {
-	height: 50%;
+	height: 35vh;
 }
 .box2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	justify-content: space-around;
 	width: 50%;
-	height: 70%;
-	border: 1px solid blue;
+	height: 42vh;
+	/* border: 1px solid blue; */
 }
 
-h3 {
+.box2 span {
+	margin: 0;
+	padding: 0;
 	color: white;
 }

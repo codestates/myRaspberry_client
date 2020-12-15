@@ -6,6 +6,7 @@ import {
 	socialLogin,
 	goToIntro,
 	userFail,
+	tagUpdate,
 } from "../modules/users";
 
 export default function useUser() {
@@ -18,6 +19,8 @@ export default function useUser() {
 	const onSocialLogin = (social: string) => dispatch(socialLogin(social));
 	const onGoToIntro = () => dispatch(goToIntro());
 	const onUserFail = (err: string) => dispatch(userFail(err));
+	const onTagUpdate = (isLike: string, docid: string, tag: number[]) =>
+		dispatch(tagUpdate(isLike, docid, tag));
 
 	return {
 		onSignIn,
@@ -27,5 +30,6 @@ export default function useUser() {
 		onSocialLogin,
 		dispatch,
 		onUserFail,
+		onTagUpdate,
 	};
 }

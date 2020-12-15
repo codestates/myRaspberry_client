@@ -24,10 +24,11 @@ const USER_REQUEST = "users/USER_REQUEST" as const;
 const USER_SIGNIN = "users/USER_SIGNIN" as const;
 const USER_SIGNUP = "users/USERS_SIGNUP" as const;
 const USER_SOCIAL_LOGIN = "users/USERS_SOCIAL_LOGIN" as const;
-const USER_INFO_UPDATE = "users/USER_INFO_UPDATE" as const;
+const USER_SELECT_MOVIE_UPDATE = "users/USER_SELECT_MOVIE_UPDATE" as const;
 const USER_TAG_UPDATE = "users/USER_TAG_UPDATE" as const;
 const USER_SIGNOUT = "users/USER_SIGNOUT" as const;
 const USER_FAIL = "users/USER_FAIL" as const;
+const UPDATE_USER_INFO = "users/UPDATE_USER_INFO" as const;
 
 // 액션 생성 함수
 export const userRequest = () => ({
@@ -48,13 +49,19 @@ export const userSocialLogin = (data: UserInfoType) => ({
 	payload: data,
 });
 
-export const userInfoUpdate = () => ({
-	type: USER_INFO_UPDATE,
+export const userSelectMovieUpdate = (selectMovie: UserInfoType) => ({
+	type: USER_SELECT_MOVIE_UPDATE,
+	payload: selectMovie,
 });
 
-export const userTagUpdate = (tag: UserTag) => ({
+export const userTagUpdate = (tag: UserInfoType) => ({
 	type: USER_TAG_UPDATE,
 	payload: tag,
+});
+
+export const updateUserInfo = (user: UserInfoType) => ({
+	type: UPDATE_USER_INFO,
+	payload: user,
 });
 
 export const userSignout = () => ({
@@ -71,8 +78,13 @@ type UserInfoType = {
 	isLogin?: boolean;
 	isSignUp?: boolean;
 	profileImg?: string;
-	tag?: UserTag;
+	selectMovie?: { key: number }; // 0: dislike, 1: default, 2: like
+	tag?: { like: object; dislike: object };
 	err?: string;
+};
+
+type Like = {
+	tagNum: string;
 };
 
 type UserTag = {
@@ -80,19 +92,16 @@ type UserTag = {
 	dislike: Like;
 };
 
-type Like = {
-	tagNum: string;
-};
-
 type UsersAction =
 	| ReturnType<typeof userRequest>
 	| ReturnType<typeof userSignin>
 	| ReturnType<typeof userSignup>
 	| ReturnType<typeof userSocialLogin>
-	| ReturnType<typeof userInfoUpdate>
+	| ReturnType<typeof userSelectMovieUpdate>
 	| ReturnType<typeof userTagUpdate>
 	| ReturnType<typeof userSignout>
-	| ReturnType<typeof userFail>;
+	| ReturnType<typeof userFail>
+	| ReturnType<typeof updateUserInfo>;
 
 // 상태를 위한 타입 선언
 export type DefaultState = {
@@ -100,6 +109,7 @@ export type DefaultState = {
 	isSignUp?: boolean;
 	username?: string;
 	profileImg?: string;
+	selectMovie: object;
 	tag?: UserTag;
 	err?: string;
 };
@@ -110,6 +120,7 @@ const defaultState: DefaultState = {
 	isSignUp: false,
 	username: "",
 	profileImg: "",
+	selectMovie: {},
 	tag: { like: { tagNum: "" }, dislike: { tagNum: "" } },
 	err: "",
 };
@@ -146,9 +157,15 @@ export function userReducer(
 				tag: action.payload.tag,
 				isLogin: action.payload.isLogin,
 			};
-		case USER_INFO_UPDATE:
+		case USER_SELECT_MOVIE_UPDATE:
 			return {
 				...state,
+				selectMovie: action.payload.selectMovie,
+			};
+		case UPDATE_USER_INFO:
+			return {
+				...state,
+				...action.payload.user,
 			};
 		case USER_TAG_UPDATE:
 			return {
@@ -177,6 +194,52 @@ export const goToIntro = () => (
 	history.push("/main");
 };
 
+const setTag = (isLike: Like, tag: number[]): object => {
+	tag.forEach((x) => {
+		if (isLike[x] === undefined) {
+			isLike[x] = 0;
+		}
+		isLike[x] = Number(isLike[x]) + 1;
+	});
+	return isLike;
+};
+
+export const tagUpdate = (
+	isLike: string,
+	docid: string,
+	tag: number[],
+) => async (dispatch: Dispatch<UsersAction>, getState: any) => {
+	const user = getState().userReducer;
+	let status: number = 1;
+	if (user.selectMovie === undefined) {
+		user.selectMovie = {};
+	}
+	if (user.selectMovie[docid] === undefined) {
+		user.selectMovie[docid] = status;
+	} else {
+		if (user.selectMovie[docid] === 0 || user.selectMovie[docid] === 2) {
+			status = 1;
+		} else {
+			if (isLike === "up") {
+				status = 2;
+				user.tag.like = setTag(user.tag.like, tag);
+			} else {
+				status = 0;
+				user.tag.dislike = setTag(user.tag.dislike, tag);
+			}
+		}
+		user.selectMovie[docid] = status;
+	}
+	dispatch(updateUserInfo({ ...user }));
+	// dispatch(
+	// 	userSelectMovieUpdate({
+	// 		...user.selectMovie,
+	// 		selectMovie: user.selectMovie,
+	// 	}),
+	// );
+	// dispatch(userTagUpdate({ ...user.tag.like, tag: user.tag.like }));
+};
+
 export const signIn = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
@@ -185,7 +248,7 @@ export const signIn = (email: string, password: string) => async (
 	dispatch(userRequest());
 	// const { data, status } =
 	await axios
-		.post("http://localhost:8080/auth/signin", {
+		.post("https://myraspberry.shop/auth/signin", {
 			email,
 			password,
 		})
@@ -222,7 +285,7 @@ export const socialLogin = (social: string) => async (
 	getState: any,
 ) => {
 	console.log(social);
-	const url = `http://localhost:8080/auth/${social}`;
+	const url = `https://myraspberry.shop/auth/${social}`;
 	console.log(url);
 	await axios
 		.get(url)
@@ -238,7 +301,7 @@ export const socialLogin = (social: string) => async (
 		});
 
 	// try {
-	// 	const { data } = await axios.get(`http://localhost:8080/auth/${social}`);
+	// 	const { data } = await axios.get(`https://myraspberry.shop/auth/${social}`);
 
 	// 	dispatch(userSocialLogin({ ...data, isLogin: true }));
 	// 	dispatch(goToIntro());
@@ -252,7 +315,7 @@ export const signUp = (email: string, password: string) => async (
 	getState: any,
 ) => {
 	await axios
-		.post("http://localhost:8080/auth/signup", {
+		.post("https://myraspberry.shop/auth/signup", {
 			email,
 			password,
 		})

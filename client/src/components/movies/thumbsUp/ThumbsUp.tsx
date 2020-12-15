@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { RiThumbUpLine } from "react-icons/ri";
 import { compColor } from "../../../common/colors";
+import useUser from "../../../hooks/useUser";
 
-const ThumbsUp = () => {
+const ThumbsUp = ({ fromMovieCard }) => {
+	const { userState, onTagUpdate } = useUser();
+	console.log("썸즈업 처음 유저상태", userState);
+	console.log("fromMovieCard: ", fromMovieCard);
+
 	const [onMouse, setOnMouse] = useState(false);
-	const handleOver = e => {
+	const handleOver = (e) => {
 		e.preventDefault();
 		setOnMouse(true);
 	};
-	const handleLeave = e => {
+	const handleLeave = (e) => {
 		e.preventDefault();
 		setOnMouse(false);
 	};
@@ -20,7 +25,10 @@ const ThumbsUp = () => {
 			className={onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
-				onClick={() => alert("따봉!")}
+				onClick={() =>
+					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag)
+				}
+				// onClick={() => alert("따봉!")}
 			/>
 		</RasupContainer>
 	);
