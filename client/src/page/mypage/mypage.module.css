@@ -1,0 +1,138 @@
+@value mainColor from "../../common/colors.css";
+@value subColor from "../../common/colors.css";
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+.outBox {
+  width: 100vw;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+}
+
+.mypageBox {
+  background-color: subColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 500px;
+}
+
+.mypage_upper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chage_info_ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  padding-left: 0px;
+}
+
+.chage_info_li {
+  width: 100%;
+  padding-top: 10px;
+  display: flex;
+}
+
+.change_info_li_item {
+  text-align: center;
+  font-size: 100%;
+  font-weight: bold;
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
+    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+}
+
+.change_info_li_item:focus {
+  outline: none;
+}
+
+.change_info_li_item:placeholder {
+  text-align: center;
+}
+
+.invisible {
+  display: none;
+}
+
+.submitBtn {
+  color: white;
+  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
+    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+  border: none;
+  border-radius: 15px;
+  background-color: mainColor;
+  width: 100px;
+  font-size: 15px;
+  font-weight: bolder;
+  height: 40px;
+}
+
+.submitBtn:focus {
+  outline: none;
+}
+
+.errMessage {
+  font-weight: bold;
+  height: 20px;
+  color: black;
+  margin: 5px;
+}
+
+.change_img_box {
+  width: 150px;
+  height: 150px;
+  background-color: green;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+}
+
+.change_info_box {
+  margin-left: 100px;
+  width: 500px;
+}
+
+.mypage_lower {
+  margin-top: 30px;
+}
+
+.checkPass {
+  display: flex;
+}
+
+.checkPass .change_info_li_item {
+  width: 250px;
+}
+
+.checkPass_btnBox {
+  margin-left: 50px;
+}
+
+.img_submit .submitBtn {
+  width: 150px;
+}
