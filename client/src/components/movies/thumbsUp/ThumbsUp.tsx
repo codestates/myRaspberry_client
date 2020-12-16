@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { RiThumbUpLine } from "react-icons/ri";
 import { compColor } from "../../../common/colors";
 import useUser from "../../../hooks/useUser";
+import ReactTooltip from "react-tooltip";
 
 const ThumbsUp = ({ fromMovieCard }) => {
 	const { userState, onTagUpdate } = useUser();
@@ -20,16 +21,25 @@ const ThumbsUp = ({ fromMovieCard }) => {
 	};
 	return (
 		<RasupContainer
+			data-tip
+			data-for="thumbsUpTip"
 			onMouseOver={handleOver}
 			onMouseLeave={handleLeave}
-			className={onMouse ? "changeThumbsColor" : ""}
-			data-tooltip="좋아요!">
+			className={onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
 				onClick={() =>
 					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag)
 				}
 			/>
+			<ReactTooltip
+				className="tooltip"
+				id="thumbsUpTip"
+				place="top"
+				type="light"
+				effect="solid">
+				좋아요!
+			</ReactTooltip>
 		</RasupContainer>
 	);
 };

@@ -3,21 +3,24 @@ import styled from "styled-components";
 import { RiThumbDownLine } from "react-icons/ri";
 import { pointColor } from "../../../common/colors";
 import useUser from "../../../hooks/useUser";
+import ReactTooltip from "react-tooltip";
 
 const ThumbsDown = ({ fromMovieCard }) => {
 	const [onMouse, setOnMouse] = useState(false);
 	const { userState, onTagUpdate } = useUser();
 
-	const handleOver = (e) => {
+	const handleOver = e => {
 		e.preventDefault();
 		setOnMouse(true);
 	};
-	const handleLeave = (e) => {
+	const handleLeave = e => {
 		e.preventDefault();
 		setOnMouse(false);
 	};
 	return (
 		<RasupContainer
+			data-tip
+			data-for="thumbsDownTip"
 			onMouseOver={handleOver}
 			onMouseLeave={handleLeave}
 			className={onMouse ? "changeThumbsColor" : ""}>
@@ -27,6 +30,14 @@ const ThumbsDown = ({ fromMovieCard }) => {
 					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag)
 				}
 			/>
+			<ReactTooltip
+				className="tooltip"
+				id="thumbsDownTip"
+				place="top"
+				type="light"
+				effect="solid">
+				내 취향이 아니에요!
+			</ReactTooltip>
 		</RasupContainer>
 	);
 };
