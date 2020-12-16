@@ -84,7 +84,7 @@ type UserInfoType = {
 };
 
 type Like = {
-	tagNum: string;
+	tagNum: number;
 };
 
 type UserTag = {
@@ -121,7 +121,7 @@ const defaultState: DefaultState = {
 	username: "",
 	profileImg: "",
 	selectMovie: {},
-	tag: { like: { tagNum: "" }, dislike: { tagNum: "" } },
+	tag: { like: { tagNum: 0 }, dislike: { tagNum: 0 } },
 	err: "",
 };
 
@@ -194,42 +194,83 @@ export const goToIntro = () => (
 	history.push("/main");
 };
 
-const setTag = (isLike: Like, tag: number[]): object => {
+const setTag = (like: object, tag: number[], cancel: boolean): object => {
 	tag.forEach((x) => {
-		if (isLike[x] === undefined) {
-			isLike[x] = 0;
+		if (like[x] === undefined) {
+			like[x] = 0;
 		}
-		isLike[x] = Number(isLike[x]) + 1;
+		like[x] = cancel ? Number(like[x]) - 1 : Number(like[x]) + 1;
+		if (like[x] === 0) {
+			delete like[x];
+		}
 	});
-	return isLike;
+	return like;
 };
 
+const setIsLike = (prevStatus: number, userTag: UserTag ,tag: number[], isLike: boolean) => {
+	interface NEWTAG  { like: object, dislike: object }
+	let newStatus: number = 1;
+	let cancel: boolean = false; // 취소냐?
+	let newTag: NEWTAG = { like: {...userTag.like}, dislike: {...userTag.dislike} };
+	
+	switch (prevStatus) {
+		case 0:
+			newStatus = isLike ? 2 : 1;
+			cancel = true;
+			newTag.dislike = setTag(newTag.dislike, tag, cancel);
+			if ( isLike ) {
+				newTag.like = setTag(newTag.like, tag, !cancel);
+			}
+			break;
+		case 2:
+			newStatus = isLike ? 1 : 0;
+			cancel = true;
+			newTag.like = setTag(newTag.like, tag, cancel);
+			if (!isLike) {
+				newTag.dislike = setTag(newTag.dislike, tag, !cancel);
+			}
+			break;
+		default:
+			newStatus = isLike ? 2 : 0;
+			if ( isLike ) {
+				newTag.like = setTag(newTag.like, tag, cancel);
+			} else {
+				newTag.dislike = setTag(newTag.dislike, tag, cancel);
+			}
+			break;
+	}
+
+	return [newStatus, newTag];
+}
+
 export const tagUpdate = (
-	isLike: string,
+	isUp: string,
 	docid: string,
 	tag: number[],
 ) => async (dispatch: Dispatch<UsersAction>, getState: any) => {
 	const user = getState().userReducer;
 	let status: number = 1;
+	let isLike: boolean = isUp === "up"; // 어떤 버튼을 누른거냐
 	if (user.selectMovie === undefined) {
 		user.selectMovie = {};
 	}
+	
 	if (user.selectMovie[docid] === undefined) {
 		user.selectMovie[docid] = status;
-	} else {
-		if (user.selectMovie[docid] === 0 || user.selectMovie[docid] === 2) {
-			status = 1;
-		} else {
-			if (isLike === "up") {
-				status = 2;
-				user.tag.like = setTag(user.tag.like, tag);
-			} else {
-				status = 0;
-				user.tag.dislike = setTag(user.tag.dislike, tag);
-			}
-		}
-		user.selectMovie[docid] = status;
 	}
+
+	if ( isLike ) {
+		const [tmpStatus, tmpTag] = setIsLike(user.selectMovie[docid], user.tag, tag, isLike);
+		user.selectMovie[docid] = tmpStatus;
+		console.log(tmpStatus);
+		user.tag = tmpTag;
+	} else {
+		const [tmpStatus, tmpTag] = setIsLike(user.selectMovie[docid], user.tag, tag, isLike);
+		user.selectMovie[docid] = tmpStatus;
+		console.log(tmpStatus);
+		user.tag = tmpTag;
+	}
+	
 	dispatch(updateUserInfo({ ...user }));
 	// dispatch(
 	// 	userSelectMovieUpdate({
