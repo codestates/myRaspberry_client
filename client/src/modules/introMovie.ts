@@ -1,10 +1,7 @@
 import { MoviesType } from "./movies";
 import { Dispatch } from "redux";
 import introData from "../lib/introData.json";
-import useUser from "../hooks/useUser";
-
-// MOVIES DATA 상태 관련 로직
-// 1. 영화 데이터 요청
+import userReducer from "./users";
 
 // 액션 type
 const INTRO_MOVIES_LOADING = "intro/MOVIES_LOADING" as const;
@@ -31,30 +28,6 @@ export const introMovieUpdate = (data: MoviesType[]) => ({
 	type: INTRO_MOVIES_UPDATE,
 	payload: data,
 });
-
-// type IntroMoviesActions =
-// 	| ReturnType<typeof introMoviesLoading>
-// 	| ReturnType<typeof introMoviesSuccess>
-// 	| ReturnType<typeof introMoviesFail>;
-
-// interface IntroMoviesLoading {
-// 	type: typeof INTRO_MOVIES_LOADING;
-// }
-
-// interface IntroMoviesSuccess {
-// 	type: typeof INTRO_MOVIES_SUCCESS;
-// 	payload: MoviesType[];
-// }
-
-// interface IntroMoviesFail {
-// 	type: typeof INTRO_MOVIES_FAIL;
-// 	payload?: string;
-// }
-
-// interface IntroMovieUpdate {
-// 	type: typeof INTRO_MOVIES_UPDATE;
-// 	payload?: MoviesType[];
-// }
 
 type IntroMoviesDispatchTypes =
 	| ReturnType<typeof introMoviesLoading>
@@ -84,7 +57,7 @@ const defaultState: DefaultState = {
 
 export function introMoviesreducer(
 	state: DefaultState = defaultState,
-	action: IntroMoviesDispatchTypes
+	action: IntroMoviesDispatchTypes,
 ): DefaultState {
 	switch (action.type) {
 		case INTRO_MOVIES_LOADING:
@@ -109,8 +82,8 @@ export function introMoviesreducer(
 			return {
 				...state,
 				loading: false,
-				introMovies: { 
-					intro: action.payload
+				introMovies: {
+					intro: action.payload,
 				},
 			};
 		default:
@@ -119,7 +92,7 @@ export function introMoviesreducer(
 }
 
 export const getIntroMovies = () => async (
-	dispatch: Dispatch<IntroMoviesDispatchTypes>
+	dispatch: Dispatch<IntroMoviesDispatchTypes>,
 ) => {
 	try {
 		dispatch(introMoviesLoading());
@@ -128,34 +101,41 @@ export const getIntroMovies = () => async (
 	}
 };
 
-const getScore = (tag:object, movie: number[]):number => {
-  if (Object.keys(tag).length > 0 && movie) {
-    const userFav: number[] = Object.keys(tag).map((x) => Number(x));
-    const isUserLike: number[] = userFav.filter((x) => movie.includes(x));
+const getScore = (tag: object, movie: number[]): number => {
+	if (Object.keys(tag).length > 0 && movie) {
+		const userFav: number[] = Object.keys(tag).map((x) => Number(x));
+		const isUserLike: number[] = userFav.filter((x) => movie.includes(x));
 
-    return isUserLike.reduce((a, c) => (tag[c] ? a + tag[c] : a), 0) * 10;
-  }
-  return 0;
-}
+		return isUserLike.reduce((a, c) => (tag[c] ? a + tag[c] : a), 0) * 10;
+	}
+	return 0;
+};
 
-const updateMovies = (userTag:any, movies: MoviesType[]):MoviesType[] => {
-	if ( Object.keys(userTag).length > 0 ) {
+const updateMovies = (userTag: any, movies: MoviesType[]): MoviesType[] => {
+	if (Object.keys(userTag).length > 0) {
 		const { like, dislike } = userTag;
-		for ( let movie of movies ) {
+		for (let movie of movies) {
 			movie.score += getScore(like, movie.tag);
 			movie.score -= getScore(dislike, movie.tag);
 		}
 	}
-	return movies.sort((a,b)=>b.score - a.score);
-}
+	return movies.sort((a, b) => b.score - a.score);
+};
 
 export const updateIntroMovies = () => async (
 	dispatch: Dispatch<IntroMoviesDispatchTypes>,
-	getState: any
+	getState: any,
 ) => {
 	try {
 		const movies = getState().introMoviesreducer;
-		const user = useUser().userState;
+
+		// const user = useUser().userState --> hook 요청은 함수 컴포넌트 내에서만 가능
+		const user = getState().userReducer;
+		console.log(
+			"introMovie.ts에서 업 다운 버튼 클릭 하면 가져오는 유저 데이터 ",
+			user,
+		);
+
 		const newMovies = updateMovies(user.tag, movies.introMovies.intro);
 		dispatch(introMovieUpdate([...newMovies]));
 	} catch (err) {
