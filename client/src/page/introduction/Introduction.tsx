@@ -116,7 +116,7 @@ const Introduction = (): JSX.Element => {
 const MainTop = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 6rem;
+	margin-top: 5.5rem;
 `;
 
 const CardBoxContainer = styled.div`
@@ -131,7 +131,7 @@ const CardBoxContainer = styled.div`
 
 const ResultBoxContainer = styled.div`
 	background-color: #353535;
-	margin-bottom: 4rem;
+	margin-bottom: 2.3rem;
 `;
 
 const Title = styled.div`
@@ -139,7 +139,8 @@ const Title = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	margin-left: 5%;
-	margin-top: 15px;
+	margin-top: 1rem;
+	margin-bottom: 0.8rem;
 `;
 
 const TitleText = styled.div`

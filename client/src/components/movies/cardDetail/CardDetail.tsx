@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./CardDetail.css";
 import { FaCompressArrowsAlt, FaRegWindowClose } from "react-icons/fa";
-
+import Slider from "react-slick";
 import { MoviesType } from "../../../modules/movies";
 import useYoutube from "../../../hooks/useYoutube";
 import LoadingAnimation from "../../../page/LoadingAnimation";
@@ -19,6 +19,9 @@ type FromCard = {
 	closeMovieDetail: any;
 };
 
+type Settings = {
+	[key: string]: number | boolean | string;
+};
 const fixRuntime = runtime => {
 	let time = 0;
 	while (runtime > 60) {
@@ -33,7 +36,16 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	const { videoState, getVideoData } = useYoutube();
 	const [viewAllPlot, setViewAllPlot] = useState(false);
 	// const [defaultPoster, setDefaultPoster] = useState(false);
-
+	const settings: Settings = {
+		dots: false,
+		infinite: true,
+		speed: 1000,
+		autoplay: true,
+		autoplaySpeed: 15000,
+		focusOnSelect: true,
+		centerPadding: "15px",
+		className: "detail_stills_slider",
+	};
 	const {
 		title,
 		titleEng,
@@ -67,7 +79,9 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	console.log(plotKr.slice(0, 100));
 	const newPlotKr = plotKr.slice(0, 40);
 	const viewmore = "더보기";
-	console.log(viewAllPlot);
+	const viewclosed = "접기";
+	// const images = image.stlls.split(",");
+	console.log(image.stlls);
 	if (loading) {
 		return <LoadingAnimation />;
 	} else {
@@ -75,7 +89,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 			<>
 				<div className="nav_showoff" onClick={closeMovieDetail}></div>
 				<div className="nav_backgroud">
-					<div className="nav_detailbar">
+					<div role="dialog" className="nav_detailbar">
 						<div className="detail_top">
 							<div className="detail_top_poster_box">
 								<img className="detail_top_poster" src={poster} alt="poster" />
@@ -110,17 +124,41 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 										<span className="smallText">{actorString}</span>
 									</p>
 								</div>
-								<span className={viewAllPlot ? "plot off" : "plot"}>
+								<span className={viewAllPlot ? "plot _off" : "plot"}>
 									{newPlotKr}...
-									<b onClick={() => setViewAllPlot(true)}>{viewmore}</b>
 								</span>
-								<span className={viewAllPlot ? "plot-long on" : "plot-long"}>
+								<span className={viewAllPlot ? "plot-long _on" : "plot-long"}>
 									{plotKr}
 								</span>
+								<b
+									className={viewAllPlot ? "view-btn" : "view-btn open"}
+									onClick={() => setViewAllPlot(true)}>
+									{viewmore}
+								</b>
+								<b
+									className={viewAllPlot ? "view-btn open" : "view-btn"}
+									onClick={() => setViewAllPlot(false)}>
+									{viewclosed}
+								</b>
 							</div>
 						</div>
 						<div className="detail_bottom">
-							<div className="image_box"></div>
+							{/* {image && (
+								<div className="detail_still_container">
+									<Slider {...settings}>
+										{image
+											? image.stlls.map(movie => (
+													<div className="detail_still">
+														<img
+															src={`https://imgraspberry.s3-accelerate.amazonaws.com/${movie}`}
+															alt="img"
+														/>
+													</div>
+											  ))
+											: "이미지 준비 중입니다."}
+									</Slider>
+								</div>
+							)} */}
 							<div className="youtube_box">
 								{videos &&
 									videos.map(video => (

@@ -46,7 +46,7 @@ export type MoviesType = {
 	genre: string;
 	image: {
 		posters: string;
-		stlls: string;
+		stlls: string[];
 	};
 	tag: number[];
 	date: string;
@@ -110,7 +110,7 @@ const defaultState: DefaultState = {
 
 export function moviesreducer(
 	state: DefaultState = defaultState,
-	action: MoviesActions,
+	action: MoviesActions
 ): DefaultState {
 	switch (action.type) {
 		case MOVIES_LOADING:

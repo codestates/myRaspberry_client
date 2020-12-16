@@ -99,7 +99,11 @@ export const getVideos = title => async (
 			type: SEARCH_LOADING,
 		});
 
-		const { data } = await axios.get(`https://myraspberry.shop/movie/${title}`);
+		//`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.REACT_APP_YOUTUBE_API_KEY}&q=${title}&maxResults=3&type=video&videoEmbeddable=true`
+		//`https://myraspberry.shop/movie/${title}`
+		const { data } = await axios.get(
+			`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.REACT_APP_YOUTUBE_API_KEY}&q=${title}&maxResults=3&type=video&videoEmbeddable=true`
+		);
 		dispatch(searchVideos(data.items));
 	} catch (e) {
 		dispatch(searchFail(e));
