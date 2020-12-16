@@ -24,7 +24,7 @@ const ThumbsDown = ({ fromMovieCard }) => {
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
 				onClick={() =>
-					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag)
+					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag)
 				}
 			/>
 		</RasupContainer>
