@@ -1,0 +1,9 @@
+@import url('./elements/elements.css');
+@import url('./footer/footer.module.css');
+@import url('./goButton/goButton.module.css');
+@import url('./header/header.module.css');
+@import url('./introBanner/introBanner.module.css');
+@import url('./mainBanner/MainBanner.css');
+@import url('./movies/movies.css');
+@import url('./mypageBottom/mypageBottom.module.css');
+@import url('./mypageTop/mypageTop.module.css');
