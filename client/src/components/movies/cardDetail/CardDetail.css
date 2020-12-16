@@ -82,6 +82,7 @@ border : 1px solid black;  */
 
 .detail_top_poster_box {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 30%;
@@ -94,6 +95,28 @@ border : 1px solid black;  */
 }
 
 .detail_thumbs_box {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	display: flex;
+	flex-direction: row;
+	width: 70%;
+	justify-content: space-evenly;
+}
+
+.detail_thumbs_box > div {
+	position: inherit;
+	/* top: -4.5rem; */
+	/* width: auto; */
+	/* height: auto; */
+	border-radius: 100%;
+	border: solid 3.2px white;
+	width: 28%;
+	top: -5.5rem;
+	height: 57px;
+}
+
+.detail_thumbs_box > div > svg {
+	top: 19%;
 }
 
 .detail_top_context {
@@ -208,12 +231,20 @@ border : 1px solid black;  */
 /*Slider 관련*/
 
 .detail_still_container {
+	width: -webkit-fill-available;
+	height: auto;
 }
 
-.detail_stills {
+.detail_ul {
 }
 
-.detail_still {
+.detail_li {
+	height: 200px !important;
+	width: auto !important;
+}
+.still_img {
+	height: -webkit-fill-available;
+	width: auto !important;
 }
 
 .youtube_box {

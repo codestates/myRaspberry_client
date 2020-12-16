@@ -10,11 +10,11 @@ const ThumbsUp = ({ fromMovieCard }) => {
 	console.log("fromMovieCard: ", fromMovieCard);
 
 	const [onMouse, setOnMouse] = useState(false);
-	const handleOver = (e) => {
+	const handleOver = e => {
 		e.preventDefault();
 		setOnMouse(true);
 	};
-	const handleLeave = (e) => {
+	const handleLeave = e => {
 		e.preventDefault();
 		setOnMouse(false);
 	};
@@ -22,13 +22,13 @@ const ThumbsUp = ({ fromMovieCard }) => {
 		<RasupContainer
 			onMouseOver={handleOver}
 			onMouseLeave={handleLeave}
-			className={onMouse ? "changeThumbsColor" : ""}>
+			className={onMouse ? "changeThumbsColor" : ""}
+			data-tooltip="좋아요!">
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
 				onClick={() =>
 					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag)
 				}
-				// onClick={() => alert("따봉!")}
 			/>
 		</RasupContainer>
 	);
@@ -58,6 +58,28 @@ const RasupImg = styled(RiThumbUpLine)`
 	top: 25%;
 	&.changeThumbsColor {
 		color: ${compColor};
+	}
+	[data-md-tooltip] {
+		position: relative;
+	}
+	[data-md-tooltip]:before {
+		content: attr(data-md-tooltip);
+		position: absolute;
+		bottom: -35px;
+		left: 50%;
+		padding: 8px;
+		transform: translateX(-50%) scale(0);
+		transition: transform 0.3s ease-in-out;
+		transform-origin: top;
+		background: #616161e6;
+		color: white;
+		border-radius: 2px;
+		font-size: 12px;
+		font-family: Roboto, sans-serif;
+		font-weight: 400;
+	}
+	[data-md-tooltip]:hover:before {
+		transform: translateX(-50%) scale(1);
 	}
 `;
 

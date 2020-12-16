@@ -45,7 +45,7 @@
 	cursor: pointer;
 }
 
-.slick-list {
-	margin-bottom: 2rem;
-	margin-top: 2rem;
+.slick-slider {
+	margin-bottom: 2rem !important;
+	margin-top: 2rem !important;
 }

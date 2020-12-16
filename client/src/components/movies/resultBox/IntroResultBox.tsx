@@ -60,7 +60,6 @@ function MovieImage(props: any): JSX.Element {
 			onMouseOver={onMouseOver}
 			onMouseLeave={onMouseLeave}
 			onClick={() => {
-				console.log("hi");
 				document.body.classList.add("modal-open");
 				setShowDetail(true);
 				setSelectMovie({ ...movie });

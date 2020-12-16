@@ -8,11 +8,16 @@ import LoadingAnimation from "../../../page/LoadingAnimation";
 import Youtube from "../youtube/Youtube";
 import ThumbsDown from "../thumbsDown/ThumbsDown";
 import ThumbsUp from "../thumbsUp/ThumbsUp";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Autoplay } from "swiper";
 // import { Data } from "../../../api/moveis";
 
 // 영화 카드별로 정보가 담겨야 한다.
 // 영화 카드와 연결이 필요하다. 그럼 MovieCard에서 활용해야 한다.
 // 어떻게? onMouse로 상태 변경으로 클래스명을 display : none 으로 활용 가능
+
+SwiperCore.use([Navigation, Autoplay]);
+
 type FromCard = {
 	poster: string;
 	movie: MoviesType;
@@ -36,16 +41,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	const { videoState, getVideoData } = useYoutube();
 	const [viewAllPlot, setViewAllPlot] = useState(false);
 	// const [defaultPoster, setDefaultPoster] = useState(false);
-	const settings: Settings = {
-		dots: false,
-		infinite: true,
-		speed: 1000,
-		autoplay: true,
-		autoplaySpeed: 15000,
-		focusOnSelect: true,
-		centerPadding: "15px",
-		className: "detail_stills_slider",
-	};
+
 	const {
 		title,
 		titleEng,
@@ -82,6 +78,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	const viewclosed = "접기";
 	// const images = image.stlls.split(",");
 	console.log(image.stlls);
+
 	if (loading) {
 		return <LoadingAnimation />;
 	} else {
@@ -97,6 +94,10 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 									<ThumbsDown />
 									<ThumbsUp />
 								</div> */}
+								<div className="detail_thumbs_box">
+									<ThumbsUp fromMovieCard={movie} />
+									<ThumbsDown fromMovieCard={movie} />
+								</div>
 							</div>
 							<div className="detail_top_context">
 								<div className="title_box">
@@ -143,22 +144,31 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 							</div>
 						</div>
 						<div className="detail_bottom">
-							{/* {image && (
+							{image && (
 								<div className="detail_still_container">
-									<Slider {...settings}>
+									<Swiper
+										tag="section"
+										wrapperTag="ul"
+										className="datail_ul"
+										navigation
+										autoplay={true}
+										spaceBetween={25}
+										slidesPerView={4}
+										loop={true}>
 										{image
-											? image.stlls.map(movie => (
-													<div className="detail_still">
+											? image.stlls.map((movie, i) => (
+													<SwiperSlide key={i} tag="li" className="detail_li">
 														<img
 															src={`https://imgraspberry.s3-accelerate.amazonaws.com/${movie}`}
 															alt="img"
+															className="still_img"
 														/>
-													</div>
+													</SwiperSlide>
 											  ))
-											: "이미지 준비 중입니다."}
-									</Slider>
+											: null}
+									</Swiper>
 								</div>
-							)} */}
+							)}
 							<div className="youtube_box">
 								{videos &&
 									videos.map(video => (
