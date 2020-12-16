@@ -10,7 +10,7 @@ type Settings = {
 function MainBanner(): any {
 	const { moviesState } = useMovies();
 	const { renew, eng, kor, long, short } = moviesState.movies;
-	const dataForBanner = [renew[0], eng[0], kor[0], long[0], short[0]];
+	const dataForBanner = [renew[0], eng[0], kor[0], short[2]];
 
 	const settings: Settings = {
 		dots: false,
@@ -36,7 +36,11 @@ function MainBanner(): any {
 									/>
 								</div>
 								<div className="box2">
-									<h1>여기가 2이다.</h1>
+									<span>{movie.title}</span>
+									<span>{movie.date.slice(0, 4)}년 라즈베리 수상작</span>
+									<span>
+										korany 님 five1star 님 QuePark님 문구는 뭐가 좋을까요?
+									</span>
 								</div>
 							</div>
 						</div>

@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { RiThumbDownLine } from "react-icons/ri";
 import { pointColor } from "../../../common/colors";
+import useUser from "../../../hooks/useUser";
 
-const ThumbsDown = () => {
+const ThumbsDown = ({ fromMovieCard }) => {
 	const [onMouse, setOnMouse] = useState(false);
-	const handleOver = e => {
+	const { userState, onTagUpdate } = useUser();
+
+	const handleOver = (e) => {
 		e.preventDefault();
 		setOnMouse(true);
 	};
-	const handleLeave = e => {
+	const handleLeave = (e) => {
 		e.preventDefault();
 		setOnMouse(false);
 	};
@@ -20,7 +23,9 @@ const ThumbsDown = () => {
 			className={onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
-				onClick={() => alert("안따봉~")}
+				onClick={() =>
+					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag)
+				}
 			/>
 		</RasupContainer>
 	);

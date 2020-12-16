@@ -12,15 +12,15 @@ const MovieCard = ({ poster, movie }) => {
 	const [onMouse, setOnMouse] = useState(false);
 	// -1 = hate / 0 = 보통 상태 / 1 = like
 	const [hate, setHate] = useState(0);
-	const handleOnMouse = e => {
+	const handleOnMouse = (e) => {
 		e.preventDefault();
 		setOnMouse(true);
 	};
-	const handleOnMouseOut = e => {
+	const handleOnMouseOut = (e) => {
 		e.preventDefault();
 		setOnMouse(false);
 	};
-	const closeMovieDetail = e => {
+	const closeMovieDetail = (e) => {
 		e.preventDefault();
 		setShowDetail(false);
 	};
@@ -31,6 +31,7 @@ const MovieCard = ({ poster, movie }) => {
 				<MovieImage
 					onMouse={onMouse}
 					poster={poster}
+					movie={movie}
 					onMouseOver={handleOnMouse}
 					onMouseLeave={handleOnMouseOut}
 				/>
@@ -48,7 +49,7 @@ const MovieCard = ({ poster, movie }) => {
 };
 
 function MovieImage(props: any): JSX.Element {
-	const { onMouse, poster, onMouseOver, onMouseLeave } = props;
+	const { onMouse, poster, onMouseOver, onMouseLeave, movie } = props;
 	const blackBox = onMouse ? "black_box on" : "black_box";
 	return (
 		<div
@@ -61,8 +62,8 @@ function MovieImage(props: any): JSX.Element {
 			<div className={blackBox}></div>
 			<div className="thumbs_box">
 				{/* <div className="moviecard_box"> */}
-				{onMouse && <ThumbsDown />}
-				{onMouse && <ThumbsUp />}
+				{onMouse && <ThumbsDown fromMovieCard={movie} />}
+				{onMouse && <ThumbsUp fromMovieCard={movie} />}
 				{/* <ThumbsDown />
 				<ThumbsUp /> */}
 			</div>
