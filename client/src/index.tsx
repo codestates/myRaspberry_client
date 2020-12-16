@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./modules";
 import Thunk from "redux-thunk";
+import "./index.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Router } from "react-router-dom";
