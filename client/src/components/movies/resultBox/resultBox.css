@@ -1,32 +1,32 @@
-.swiper-container {
-	width: 90%;
-	height: 105%;
-	background-color: #353535;
-	border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-}
+/* /* .swiper-container {
+  width: 90%;
+  height: 105%;
+  background-color: #353535;
+  border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+} */
 
 .swiper-wrapper {
-	padding-inline-start: 0;
-	list-style: none;
+  padding-inline-start: 0;
+  list-style: none;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
-	position: absolute;
-	margin-left: -0.7rem;
-	margin-right: 0rem;
-	font-weight: 900;
+  position: absolute;
+  margin-left: -0.7rem;
+  margin-right: 0rem;
+  font-weight: 900;
 }
 
 .swiper-button-prev:after,
 .swiper-button-next:after {
-	color: whitesmoke !important;
+  color: whitesmoke !important;
 }
 
 .swiper-slide {
-	width: 13% !important;
-	margin-left: 2rem;
-	margin-right: 2rem;
+  width: 13% !important;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 /* .swiper-pagination-fraction,
@@ -36,18 +36,18 @@
 } */
 
 .swiper-pagination-bullet {
-	background: #cf3535 !important;
-	opacity: 0.5 !important;
+  background: #cf3535 !important;
+  opacity: 0.5 !important;
 }
 .swiper-pagination-bullet-active {
-	background: beige !important;
+  background: beige !important;
 }
 .swiper-pagination {
-	z-index: 0 !important;
+  z-index: 0 !important;
 }
 
 .cardImg:hover {
-	cursor: pointer;
-	border: solid 1px;
-	transition: linear 0.5s ease-in-out;
-}
+  cursor: pointer;
+  border: solid 1px;
+  transition: linear 0.5s ease-in-out;
+} */
