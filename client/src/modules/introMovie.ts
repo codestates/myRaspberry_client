@@ -1,6 +1,7 @@
 import { MoviesType } from "./movies";
 import { Dispatch } from "redux";
 import introData from "../lib/introData.json";
+import useUser from "../hooks/useUser";
 
 // MOVIES DATA 상태 관련 로직
 // 1. 영화 데이터 요청
@@ -9,6 +10,7 @@ import introData from "../lib/introData.json";
 const INTRO_MOVIES_LOADING = "intro/MOVIES_LOADING" as const;
 const INTRO_MOVIES_SUCCESS = "intro/MOVIES_SUCCESS" as const;
 const INTRO_MOVIES_FAIL = "intro/MOVIES_FAIL" as const;
+const INTRO_MOVIES_UPDATE = "intro/INTRO_MOVIES_UPDATE" as const;
 
 // 액션 생성 함수
 export const introMoviesLoading = () => ({
@@ -25,29 +27,40 @@ export const introMoviesFail = (err: string) => ({
 	payload: err,
 });
 
+export const introMovieUpdate = (data: MoviesType[]) => ({
+	type: INTRO_MOVIES_UPDATE,
+	payload: data,
+});
+
 // type IntroMoviesActions =
 // 	| ReturnType<typeof introMoviesLoading>
 // 	| ReturnType<typeof introMoviesSuccess>
 // 	| ReturnType<typeof introMoviesFail>;
 
-interface IntroMoviesLoading {
-	type: typeof INTRO_MOVIES_LOADING;
-}
+// interface IntroMoviesLoading {
+// 	type: typeof INTRO_MOVIES_LOADING;
+// }
 
-interface IntroMoviesSuccess {
-	type: typeof INTRO_MOVIES_SUCCESS;
-	payload: MoviesType[];
-}
+// interface IntroMoviesSuccess {
+// 	type: typeof INTRO_MOVIES_SUCCESS;
+// 	payload: MoviesType[];
+// }
 
-interface IntroMoviesFail {
-	type: typeof INTRO_MOVIES_FAIL;
-	payload?: string;
-}
+// interface IntroMoviesFail {
+// 	type: typeof INTRO_MOVIES_FAIL;
+// 	payload?: string;
+// }
+
+// interface IntroMovieUpdate {
+// 	type: typeof INTRO_MOVIES_UPDATE;
+// 	payload?: MoviesType[];
+// }
 
 type IntroMoviesDispatchTypes =
-	| IntroMoviesLoading
-	| IntroMoviesSuccess
-	| IntroMoviesFail;
+	| ReturnType<typeof introMoviesLoading>
+	| ReturnType<typeof introMoviesSuccess>
+	| ReturnType<typeof introMoviesFail>
+	| ReturnType<typeof introMovieUpdate>;
 
 // 상태를 위한 타입 선언
 export type DefaultState = {
@@ -92,6 +105,14 @@ export function introMoviesreducer(
 				loading: false,
 				err: action.payload,
 			};
+		case INTRO_MOVIES_UPDATE:
+			return {
+				...state,
+				loading: false,
+				introMovies: { 
+					intro: action.payload
+				},
+			};
 		default:
 			return state;
 	}
@@ -102,6 +123,41 @@ export const getIntroMovies = () => async (
 ) => {
 	try {
 		dispatch(introMoviesLoading());
+	} catch (err) {
+		dispatch(introMoviesFail(err));
+	}
+};
+
+const getScore = (tag:object, movie: number[]):number => {
+  if (Object.keys(tag).length > 0 && movie) {
+    const userFav: number[] = Object.keys(tag).map((x) => Number(x));
+    const isUserLike: number[] = userFav.filter((x) => movie.includes(x));
+
+    return isUserLike.reduce((a, c) => (tag[c] ? a + tag[c] : a), 0) * 10;
+  }
+  return 0;
+}
+
+const updateMovies = (userTag:any, movies: MoviesType[]):MoviesType[] => {
+	if ( Object.keys(userTag).length > 0 ) {
+		const { like, dislike } = userTag;
+		for ( let movie of movies ) {
+			movie.score += getScore(like, movie.tag);
+			movie.score -= getScore(dislike, movie.tag);
+		}
+	}
+	return movies.sort((a,b)=>b.score - a.score);
+}
+
+export const updateIntroMovies = () => async (
+	dispatch: Dispatch<IntroMoviesDispatchTypes>,
+	getState: any
+) => {
+	try {
+		const movies = getState().introMoviesreducer;
+		const user = useUser().userState;
+		const newMovies = updateMovies(user.tag, movies.introMovies.intro);
+		dispatch(introMovieUpdate([...newMovies]));
 	} catch (err) {
 		dispatch(introMoviesFail(err));
 	}
