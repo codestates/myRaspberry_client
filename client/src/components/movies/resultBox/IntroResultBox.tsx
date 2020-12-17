@@ -51,6 +51,14 @@ function MovieImage(props: any): JSX.Element {
 		setSelectMovie,
 	} = props;
 	const blackBox = onMouse ? "resultBlack_box on" : "resultBlack_box";
+	// const [defaultImage, setDefaultImage] = useState(false);
+	// if (poster === "https://i.ibb.co/HnNxZyh/default-poster.jpg") {
+	// 	console.log(movie.title);
+	// 	setDefaultImage(true);
+	// }
+	// const defaultPoster = defaultImage
+	// 	? "eachMovieCard defaultImage"
+	// 	: "eachMovieCard";
 	return (
 		<div
 			className="eachMovieCard"
@@ -64,7 +72,10 @@ function MovieImage(props: any): JSX.Element {
 				setShowDetail(true);
 				setSelectMovie({ ...movie });
 			}}>
-			<div className={blackBox}></div>
+			<div className={blackBox}>
+				{poster === "https://i.ibb.co/HnNxZyh/default-poster.jpg" &&
+					movie.title}
+			</div>
 		</div>
 	);
 }

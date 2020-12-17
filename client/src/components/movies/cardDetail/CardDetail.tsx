@@ -64,20 +64,14 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 		getVideoData(title);
 	}, []);
 
-	// if (poster === defaultUrl) {
-	// 	console.log("포스터 없음");
-	// }
+	const { loading, videos } = videoState;
 
 	let actorArr = actor.split(",");
 	actorArr = actorArr.slice(0, 6);
 	let actorString = actorArr.join(",");
-	const { loading, videos } = videoState;
-	console.log(plotKr.slice(0, 100));
-	const newPlotKr = plotKr.slice(0, 40);
+	const newPlotKr = plotKr.slice(0, 250);
 	const viewmore = "더보기";
 	const viewclosed = "접기";
-	// const images = image.stlls.split(",");
-	console.log(image.stlls);
 
 	if (loading) {
 		return <LoadingAnimation />;
@@ -90,10 +84,6 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 						<div className="detail_top">
 							<div className="detail_top_poster_box">
 								<img className="detail_top_poster" src={poster} alt="poster" />
-								{/* <div className="detail_thumbs_box">
-									<ThumbsDown />
-									<ThumbsUp />
-								</div> */}
 								<div className="detail_thumbs_box">
 									<ThumbsUp fromMovieCard={movie} />
 									<ThumbsDown fromMovieCard={movie} />
@@ -126,21 +116,26 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 									</p>
 								</div>
 								<span className={viewAllPlot ? "plot _off" : "plot"}>
-									{newPlotKr}...
+									{newPlotKr}
+									{plotKr[250] && "..."}
 								</span>
 								<span className={viewAllPlot ? "plot-long _on" : "plot-long"}>
 									{plotKr}
 								</span>
-								<b
-									className={viewAllPlot ? "view-btn" : "view-btn open"}
-									onClick={() => setViewAllPlot(true)}>
-									{viewmore}
-								</b>
-								<b
-									className={viewAllPlot ? "view-btn open" : "view-btn"}
-									onClick={() => setViewAllPlot(false)}>
-									{viewclosed}
-								</b>
+								{plotKr[250] && (
+									<>
+										<b
+											className={viewAllPlot ? "view-btn" : "view-btn open"}
+											onClick={() => setViewAllPlot(true)}>
+											{viewmore}
+										</b>
+										<b
+											className={viewAllPlot ? "view-btn open" : "view-btn"}
+											onClick={() => setViewAllPlot(false)}>
+											{viewclosed}
+										</b>
+									</>
+								)}
 							</div>
 						</div>
 						<div className="detail_bottom">
@@ -169,6 +164,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 									</Swiper>
 								</div>
 							)}
+							<div className="youtube_one"></div>
 							<div className="youtube_box">
 								{videos &&
 									videos.map(video => (

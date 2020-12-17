@@ -46,14 +46,7 @@ const Introduction = (): JSX.Element => {
 					<CardBox />
 				</CardBoxContainer>
 				<Title>
-					<TitleText>
-						오늘 이 영화 어때요?
-						<span
-							className="simptip-position-top"
-							data-tooltip="Tooltip's content">
-							좋아요!
-						</span>
-					</TitleText>
+					<TitleText>오늘 이 영화 어때요?</TitleText>
 				</Title>
 				<ResultBoxContainer>
 					<IntroResultBox />
