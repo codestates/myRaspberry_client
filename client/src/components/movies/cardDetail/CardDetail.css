@@ -4,7 +4,8 @@ border : 1px solid black;  */
 .modal-open {
 	overflow: hidden;
 	/*NOTE 배포시에는 반드시 지우고!*/
-	/* position: fixed; */
+	position: fixed;
+	overflow-x: hidden;
 }
 
 .nav_backgroud {

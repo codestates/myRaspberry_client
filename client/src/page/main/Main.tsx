@@ -14,9 +14,12 @@ const Main = () => {
 	const { moviesState, getmovieData } = useMovies();
 	const { userState } = useUser();
 	console.log("잘 넘어왔니? 데이터야?", userState);
+
 	React.useEffect(() => {
 		getmovieData();
 	}, []);
+
+	console.log("main", moviesState);
 
 	const { renew, kor, eng, long, short } = moviesState.movies;
 
@@ -49,8 +52,6 @@ const Main = () => {
 					<ResultBox short={short} />
 				</CardboxContainer>
 			</MainTop>
-			{/* TODO loading 이미지가 보고싶다면 주석을 풀어주세요 */}
-			{/* <LoadingAnimation /> */}
 		</>
 	);
 };

@@ -63,6 +63,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	useEffect(() => {
 		getVideoData(title);
 	}, []);
+	console.log("main에서 image왜안나올까?", image);
 
 	const { loading, videos } = videoState;
 
