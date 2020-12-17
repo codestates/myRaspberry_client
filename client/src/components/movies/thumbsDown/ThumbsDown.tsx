@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { RiThumbDownLine } from "react-icons/ri";
 import { pointColor } from "../../../common/colors";
 import useUser from "../../../hooks/useUser";
+import useIntroMovies from "../../../hooks/useIntroMovies";
 
 const ThumbsDown = ({ fromMovieCard }) => {
+	const { introMovieState, onUpdateIntroMovies } = useIntroMovies();
+	console.log("썸즈 다운 클릭 전 후 데이터 확인용", introMovieState);
+
 	const [onMouse, setOnMouse] = useState(false);
 	const { userState, onTagUpdate } = useUser();
 
@@ -23,9 +27,10 @@ const ThumbsDown = ({ fromMovieCard }) => {
 			className={onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
-				onClick={() =>
-					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag)
-				}
+				onClick={() => {
+					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag);
+					onUpdateIntroMovies();
+				}}
 			/>
 		</RasupContainer>
 	);
