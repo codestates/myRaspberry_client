@@ -1,23 +1,29 @@
+//Task017-re
+//import React from 'react'
+//import './navSideBar.scss'
+//import styled from 'styled-components'
+ //=======
 import React, {useState} from "react";
 import "./navSideBar.scss";
 import styled from "styled-components";
+//test
 import {
-	mainColor,
-	headerColor,
-	textColor,
-	subColor,
-	inputColor,
-	buttonColor,
-	userColor,
-} from "../../common/colors";
-import { Link } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+  mainColor,
+  headerColor,
+  textColor,
+  subColor,
+  inputColor,
+  buttonColor,
+  userColor,
+} from '../../common/colors'
+import {Link} from 'react-router-dom'
+import useUser from '../../hooks/useUser'
 
-const raspberryUrl = "https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png";
+const raspberryUrl = 'https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png'
 
 const NavSideBar = ({ navBarOpen, handleClose }) => {
 	const { userState } = useUser();
-	const { isLogin } = userState;
+	const { isLogin, profileImg, username } = userState;
 	console.log("isLogin in nav Bar", isLogin);
 	const [onMouse, setOnMouse] = useState({0:false, 1:false, 2:false, 3:false});
 	const handleOver = key => {
@@ -48,7 +54,17 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 				<div className="sidebar">
 					<SideTop>
 						<p>WELCOME!</p>
-						<img src={raspberryUrl} alt="potter-raspberry" />
+            {isLogin ? <p>{username} 님</p> : <p> 게스트 님!</p>}
+            {isLogin ? (
+              profileImg === 'noPath' ? (
+                <img src={raspberryUrl} alt="potter-raspberry" />
+              ) : (
+                <img src={profileImg} alt="profileImg" />
+              )
+            ) : (
+              <img src={raspberryUrl} alt="potter-raspberry" />
+            )}
+            {/* <img src={raspberryUrl} alt="potter-raspberry" /> */}
 					</SideTop>
 					<SideBottom>
 						<Link to="/intro" onClick={handleClose}>
@@ -79,22 +95,22 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 };
 
 const SideTop = styled.div`
-	grid-area: SideTop;
-	text-align: center;
-	p {
-		font-size: 1.5rem;
-		font-family: "Times New Roman", Times, serif;
-		font-weight: bolder;
-	}
-	img {
-		margin-top: 0.5rem;
-		max-width: 7rem;
-	}
-`;
+  grid-area: SideTop;
+  text-align: center;
+  p {
+    font-size: 1.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+  }
+  img {
+    margin-top: 0.5rem;
+    max-width: 7rem;
+  }
+`
 
 const SideBottom = styled.div`
-	grid-area: SideBottom;
-	text-align: center;
-`;
+  grid-area: SideBottom;
+  text-align: center;
+`
 
-export default NavSideBar;
+export default NavSideBar
