@@ -15,18 +15,17 @@ top: -${TOP};
 `;
 
 const setModalOpen = (isSet: boolean) => {
-	if ( isSet ) {
-		document.body.style.setProperty("overflow-x", "hidden");
+	if (isSet) {
 		document.body.style.setProperty("overflow-y", "hidden");
 	} else {
-                document.body.style.setProperty("overflow-y", "");
-		window.scrollTo({top:TOP, behavior:'auto'});
+		document.body.style.setProperty("overflow-y", "");
+		window.scrollTo({ top: TOP, behavior: "auto" });
 	}
-}
+};
 
 const getScrollTop = () => {
 	TOP = document.documentElement.scrollTop;
-}
+};
 
 type Movie = {
 	renew: MoviesType[];
@@ -176,7 +175,7 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 		slidesToShow: per,
 		slidesToScroll: 3,
 		autoplay: true,
-		autoplaySpeed: 5000,
+		autoplaySpeed: 35000,
 		swipeToSlide: true,
 	};
 
