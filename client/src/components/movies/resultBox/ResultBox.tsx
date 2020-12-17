@@ -9,6 +9,26 @@ import ThumbsUp from "../thumbsUp/ThumbsUp";
 import ThumbsDown from "../thumbsDown/ThumbsDown";
 import "swiper/swiper-bundle.css";
 
+let TOP = 0;
+const gradient = `
+top: -${TOP};
+`;
+
+const setModalOpen = (isSet: boolean) => {
+	if ( isSet ) {
+		document.body.style.setProperty("top", `-${TOP}px`);
+		document.body.style.setProperty("position","fixed");
+	} else {
+		document.body.style.top = "";
+		document.body.style.position = "";
+		window.scrollTo({top:TOP, behavior:'auto'});
+	}
+}
+
+const getScrollTop = () => {
+	TOP = document.documentElement.scrollTop;
+}
+
 type Movie = {
 	renew: MoviesType[];
 	kor: MoviesType[];
@@ -68,7 +88,8 @@ function MovieImage(props: any): JSX.Element {
 			onMouseOver={onMouseOver}
 			onMouseLeave={onMouseLeave}
 			onClick={() => {
-				document.body.classList.add("modal-open");
+				getScrollTop();
+				setModalOpen(true);
 				setShowDetail(true);
 				setSelectMovie({ ...movie });
 			}}>
@@ -100,7 +121,6 @@ function useWindowSize() {
 }
 
 const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
-	console.log("renew!!!", renew);
 	const MOVIE: MoviesType = {
 		id: 0,
 		docid: "",
@@ -126,7 +146,7 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 	const width = useWindowSize();
 	const closeMovieDetail = e => {
 		e.preventDefault();
-		document.body.classList.remove("modal-open");
+		setModalOpen(false);
 		setSelectMovie(MOVIE);
 	};
 
@@ -159,11 +179,6 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 		autoplay: true,
 		autoplaySpeed: 5000,
 		swipeToSlide: true,
-		afterChange: function (index) {
-			console.log(
-				`Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-			);
-		},
 	};
 
 	useEffect(() => {

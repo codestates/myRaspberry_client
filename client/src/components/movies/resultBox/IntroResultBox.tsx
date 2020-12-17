@@ -8,11 +8,28 @@ import useIntroMovies from "../../../hooks/useIntroMovies";
 import CardDetail from "../cardDetail/CardDetail";
 import { MoviesType } from "../../../modules/movies";
 
-// SwiperCore.use([Navigation])
+let TOP = 0;
+const gradient = `
+top: -${TOP};
+`;
+
+const setModalOpen = (isSet: boolean) => {
+	if ( isSet ) {
+		document.body.style.setProperty("top", `-${TOP}px`);
+		document.body.style.setProperty("position","fixed");
+	} else {
+		document.body.style.top = "";
+		document.body.style.position = "";
+		window.scrollTo({top:TOP, behavior:'auto'});
+	}
+}
+
+const getScrollTop = () => {
+	TOP = document.documentElement.scrollTop;
+}
 
 const MovieCard = ({ poster, movie, setShowDetail, setSelectMovie }) => {
 	const [onMouse, setOnMouse] = useState(false);
-	// -1 = hate / 0 = 보통 상태 / 1 = like
 
 	const handleOnMouse = e => {
 		e.preventDefault();
@@ -68,7 +85,8 @@ function MovieImage(props: any): JSX.Element {
 			onMouseOver={onMouseOver}
 			onMouseLeave={onMouseLeave}
 			onClick={() => {
-				document.body.classList.add("modal-open");
+				getScrollTop();
+				setModalOpen(true);
 				setShowDetail(true);
 				setSelectMovie({ ...movie });
 			}}>
@@ -142,7 +160,7 @@ const IntroResultBox = () => {
 
 	const closeMovieDetail = e => {
 		e.preventDefault();
-		document.body.classList.remove("modal-open");
+		setModalOpen(false);
 		setSelectMovie(MOVIE);
 	};
 
