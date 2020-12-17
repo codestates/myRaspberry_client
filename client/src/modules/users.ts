@@ -2,6 +2,8 @@ import { Dispatch } from "redux";
 import axios from "axios";
 import { Data } from "../api/moveis";
 import { StringDecoder } from "string_decoder";
+import { bcrypt } from "bcrypt";
+const saltRounds = 10;
 
 // 액션 type
 const USER_REQUEST = "users/USER_REQUEST" as const;
@@ -13,50 +15,40 @@ const USER_TAG_UPDATE = "users/USER_TAG_UPDATE" as const;
 const USER_SIGNOUT = "users/USER_SIGNOUT" as const;
 const USER_FAIL = "users/USER_FAIL" as const;
 const UPDATE_USER_INFO = "users/UPDATE_USER_INFO" as const;
-
 // 액션 생성 함수
 export const userRequest = () => ({
 	type: USER_REQUEST,
 });
-
 export const userSignin = (data: UserInfoType): any => ({
 	type: USER_SIGNIN,
 	payload: data,
 });
-
 export const userSignup = () => ({
 	type: USER_SIGNUP,
 });
-
 export const userSocialLogin = (data: UserInfoType) => ({
 	type: USER_SOCIAL_LOGIN,
 	payload: data,
 });
-
 export const userSelectMovieUpdate = (selectMovie: UserInfoType) => ({
 	type: USER_SELECT_MOVIE_UPDATE,
 	payload: selectMovie,
 });
-
 export const userTagUpdate = (tag: UserInfoType) => ({
 	type: USER_TAG_UPDATE,
 	payload: tag,
 });
-
 export const updateUserInfo = (user: UserInfoType) => ({
 	type: UPDATE_USER_INFO,
 	payload: user,
 });
-
 export const userSignout = () => ({
 	type: USER_SIGNOUT,
 });
-
 export const userFail = (err: string) => ({
 	type: USER_FAIL,
 	payload: err,
 });
-
 export type UserInfoType = {
 	username?: string;
 	isLogin?: boolean;
@@ -66,16 +58,13 @@ export type UserInfoType = {
 	tag?: { like: object; dislike: object };
 	err?: string;
 };
-
 type Like = {
 	tagNum: number;
 };
-
 type UserTag = {
 	like: Like;
 	dislike: Like;
 };
-
 type UsersAction =
 	| ReturnType<typeof userRequest>
 	| ReturnType<typeof userSignin>
@@ -86,7 +75,6 @@ type UsersAction =
 	| ReturnType<typeof userSignout>
 	| ReturnType<typeof userFail>
 	| ReturnType<typeof updateUserInfo>;
-
 // 초깃값 설정
 const defaultState: UserInfoType = {
 	isLogin: false,
@@ -97,7 +85,6 @@ const defaultState: UserInfoType = {
 	tag: { like: { tagNum: 0 }, dislike: { tagNum: 0 } },
 	err: "",
 };
-
 export function userReducer(
 	state: UserInfoType = defaultState,
 	action: UsersAction,
@@ -158,7 +145,6 @@ export function userReducer(
 			return state;
 	}
 }
-
 export const goToIntro = () => (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
@@ -166,7 +152,6 @@ export const goToIntro = () => (
 ) => {
 	history.push("/main");
 };
-
 const setTag = (like: object, tag: number[], cancel: boolean): object => {
 	tag.forEach((x) => {
 		if (like[x] === undefined) {
@@ -179,7 +164,6 @@ const setTag = (like: object, tag: number[], cancel: boolean): object => {
 	});
 	return like;
 };
-
 const setIsLike = (
 	prevStatus: number,
 	userTag: UserTag,
@@ -196,7 +180,6 @@ const setIsLike = (
 		like: { ...userTag.like },
 		dislike: { ...userTag.dislike },
 	};
-
 	switch (prevStatus) {
 		case 0:
 			newStatus = isLike ? 2 : 1;
@@ -223,10 +206,8 @@ const setIsLike = (
 			}
 			break;
 	}
-
 	return [newStatus, newTag];
 };
-
 export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
@@ -237,11 +218,9 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 	if (user.selectMovie === undefined) {
 		user.selectMovie = {};
 	}
-
 	if (user.selectMovie[docid] === undefined) {
 		user.selectMovie[docid] = status;
 	}
-
 	if (isLike) {
 		const [tmpStatus, tmpTag] = setIsLike(
 			user.selectMovie[docid],
@@ -263,7 +242,6 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 		// console.log(tmpStatus);
 		user.tag = tmpTag;
 	}
-
 	dispatch(updateUserInfo({ ...user }));
 	// dispatch(
 	// 	userSelectMovieUpdate({
@@ -273,7 +251,6 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 	// );
 	// dispatch(userTagUpdate({ ...user.tag.like, tag: user.tag.like }));
 };
-
 export const signIn = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
@@ -290,7 +267,6 @@ export const signIn = (email: string, password: string) => async (
 			dispatch(userSignin({ ...data.data, isLogin: true }));
 			dispatch(goToIntro());
 		})
-
 		.catch((err) => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
@@ -300,19 +276,16 @@ export const signIn = (email: string, password: string) => async (
 				dispatch(userSignin({ ...data, err: message }));
 			}
 		});
-
 	//send["message"] ==='일치하는 정보가 존재하지 않습니다 => 회원가입으로 전환
 	//send["message"] ==='비밀번호가 일치하지 않습니다 => setErrormessage => send['message']내용을 담아준다
 	// { message: "비밀번호가 일치하지 않습니다." }
 	// { message: "일치하는 정보가 존재하지 않습니다."}
-
 	// console.log("after", getState().userReducer);
 	// } catch (err) {
 	// 	console.log("에러다")
 	// 	dispatch(userFail(err));
 	// }
 };
-
 export const socialLogin = (social: string) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
@@ -328,30 +301,37 @@ export const socialLogin = (social: string) => async (
 		.catch((err) => {
 			dispatch(userFail(err));
 		});
-
 	// try {
 	// 	const { data } = await axios.get(`https://myraspberry.shop/auth/${social}`);
-
 	// 	dispatch(userSocialLogin({ ...data, isLogin: true }));
 	// 	dispatch(goToIntro());
 	// } catch (err) {
 	// 	dispatch(userFail(err));
 	// }
 };
-
 export const signUp = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
 ) => {
+	const cryptPassword = await bcrypt.genSalt(
+		saltRounds,
+		async (err: any, salt: any) => {
+			if (err) throw new Error(err);
+			await bcrypt.hash(password, salt, (err: any, hash: any) => {
+				if (err) throw new Error(err);
+			});
+		},
+	);
+
 	await axios
 		.post("https://myraspberry.shop/auth/signup", {
 			email,
 			password,
+			cryptPassword,
 		})
 		.then((data) => {
 			dispatch(userSignin({ ...data.data, isSignUp: false }));
 		})
-
 		.catch((err) => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
@@ -362,6 +342,75 @@ export const signUp = (email: string, password: string) => async (
 			// } else if (message === "비밀번호가 일치하지 않습니다.") {
 			// 	dispatch(userSignin({ ...data, err: message }));
 			// }
+		});
+};
+
+export const myImageUpdate = (formData?: any) => async (
+	dispatch: Dispatch<UsersAction>,
+	getState: any,
+) => {
+	console.log("들어오니?", formData);
+
+	dispatch(userRequest());
+
+	await axios
+		// .patch('http://localhost:8080/mypage/changeimage', {
+		.post("https://myraspberry.shop/mypage/changeimage", {
+			formData,
+		})
+		.then((data) => {
+			// 결과값  { username, isChanged: true }
+			console.log("AAAAAAAAAAAAAAAA");
+			dispatch(userSignin({ ...data.data }));
+			console.log(
+				"여기는 마이페이지 수정 요청 후 나온 결과",
+				getState().userReducer,
+			);
+			// dispatch(goToIntro())
+		})
+		.catch((err) => {
+			const { message } = err.response.data;
+			const data = getState().userReducer;
+			if (message === "일치하는 정보가 존재하지 않습니다.") {
+				dispatch(userSignin({ ...data, isSignUp: true }));
+			} else if (message === "비밀번호가 일치하지 않습니다.") {
+				dispatch(userSignin({ ...data, err: message }));
+			}
+		});
+};
+
+export const mypageUpdate = (
+	password?: string,
+	newPass?: string,
+	newUserName?: string,
+) => async (dispatch: Dispatch<UsersAction>, getState: any) => {
+	dispatch(userRequest());
+
+	await axios
+		// .patch('http://localhost:8080/mypage/changeinfo', {
+		.post("https://myraspberry.shop/mypage/changeinfo", {
+			password,
+			newPass,
+			newUserName,
+		})
+		.then((data) => {
+			// 결과값  { username, isChanged: true }
+			console.log("AAAAAAAAAAAAAAAA");
+			dispatch(userSignin({ ...data.data }));
+			console.log(
+				"여기는 마이페이지 수정 요청 후 나온 결과",
+				getState().userReducer,
+			);
+			// dispatch(goToIntro())
+		})
+		.catch((err) => {
+			const { message } = err.response.data;
+			const data = getState().userReducer;
+			if (message === "일치하는 정보가 존재하지 않습니다.") {
+				dispatch(userSignin({ ...data, isSignUp: true }));
+			} else if (message === "비밀번호가 일치하지 않습니다.") {
+				dispatch(userSignin({ ...data, err: message }));
+			}
 		});
 };
 
