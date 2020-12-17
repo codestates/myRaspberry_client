@@ -10,6 +10,7 @@ import ThumbsDown from "../thumbsDown/ThumbsDown";
 import ThumbsUp from "../thumbsUp/ThumbsUp";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
+import YoutubePlayer from "../youtube/YoutubePlayer";
 // import { Data } from "../../../api/moveis";
 
 // 영화 카드별로 정보가 담겨야 한다.
@@ -55,7 +56,8 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 		tag,
 		date,
 	} = movie;
-
+	const { loading, playingVideo, videos } = videoState;
+	const videosArray = Object.keys(videos);
 	//상연년도만 표출
 	const year = date.slice(0, 4);
 	//runtime => 시간단위로
@@ -63,9 +65,6 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	useEffect(() => {
 		getVideoData(title);
 	}, []);
-	console.log("main에서 image왜안나올까?", image);
-
-	const { loading, videos } = videoState;
 
 	let actorArr = actor.split(",");
 	actorArr = actorArr.slice(0, 6);
@@ -165,12 +164,17 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 									</Swiper>
 								</div>
 							)}
-							<div className="youtube_one"></div>
+							<div className="youtube_one">
+								{playingVideo.id && <YoutubePlayer video={playingVideo.id} />}
+							</div>
 							<div className="youtube_box">
-								{videos &&
-									videos.map(video => (
-										<Youtube key={video.id.videoId} video={video.id.videoId} />
-									))}
+								{videosArray.map(key => (
+									<Youtube
+										key={videos[key].id}
+										video={videos[key]}
+										videosKey={key}
+									/>
+								))}
 							</div>
 						</div>
 					</div>

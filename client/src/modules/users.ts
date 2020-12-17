@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import axios from "axios";
 import { Data } from "../api/moveis";
 import { StringDecoder } from "string_decoder";
-import { bcrypt } from "bcrypt";
+// import { bcrypt } from "bcrypt";
 const saltRounds = 10;
 
 // 액션 type
@@ -87,7 +87,7 @@ const defaultState: UserInfoType = {
 };
 export function userReducer(
 	state: UserInfoType = defaultState,
-	action: UsersAction,
+	action: UsersAction
 ): UserInfoType {
 	switch (action.type) {
 		case USER_REQUEST:
@@ -148,12 +148,12 @@ export function userReducer(
 export const goToIntro = () => (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
-	{ history },
+	{ history }
 ) => {
 	history.push("/main");
 };
 const setTag = (like: object, tag: number[], cancel: boolean): object => {
-	tag.forEach((x) => {
+	tag.forEach(x => {
 		if (like[x] === undefined) {
 			like[x] = 0;
 		}
@@ -168,7 +168,7 @@ const setIsLike = (
 	prevStatus: number,
 	userTag: UserTag,
 	tag: number[],
-	isLike: boolean,
+	isLike: boolean
 ) => {
 	interface NEWTAG {
 		like: object;
@@ -210,7 +210,7 @@ const setIsLike = (
 };
 export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any,
+	getState: any
 ) => {
 	const user = getState().userReducer;
 	let status: number = 1;
@@ -226,7 +226,7 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 			user.selectMovie[docid],
 			user.tag,
 			tag,
-			isLike,
+			isLike
 		);
 		user.selectMovie[docid] = tmpStatus;
 		// console.log(tmpStatus);
@@ -236,7 +236,7 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 			user.selectMovie[docid],
 			user.tag,
 			tag,
-			isLike,
+			isLike
 		);
 		user.selectMovie[docid] = tmpStatus;
 		// console.log(tmpStatus);
@@ -253,7 +253,7 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 };
 export const signIn = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any,
+	getState: any
 ) => {
 	// try {
 	dispatch(userRequest());
@@ -263,11 +263,11 @@ export const signIn = (email: string, password: string) => async (
 			email,
 			password,
 		})
-		.then((data) => {
+		.then(data => {
 			dispatch(userSignin({ ...data.data, isLogin: true }));
 			dispatch(goToIntro());
 		})
-		.catch((err) => {
+		.catch(err => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
 			if (message === "일치하는 정보가 존재하지 않습니다.") {
@@ -288,17 +288,17 @@ export const signIn = (email: string, password: string) => async (
 };
 export const socialLogin = (social: string) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any,
+	getState: any
 ) => {
 	const url = `https://myraspberry.shop/auth/${social}`;
 	await axios
 		.get(url)
-		.then((data) => {
+		.then(data => {
 			dispatch(userSignin({ ...data.data, isLogin: true }));
 			// console.log("여기는 소셜 로그인에서 나온 결과", getState().userReducer);
 			dispatch(goToIntro());
 		})
-		.catch((err) => {
+		.catch(err => {
 			dispatch(userFail(err));
 		});
 	// try {
@@ -311,28 +311,27 @@ export const socialLogin = (social: string) => async (
 };
 export const signUp = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any,
+	getState: any
 ) => {
-	const cryptPassword = await bcrypt.genSalt(
-		saltRounds,
-		async (err: any, salt: any) => {
-			if (err) throw new Error(err);
-			await bcrypt.hash(password, salt, (err: any, hash: any) => {
-				if (err) throw new Error(err);
-			});
-		},
-	);
+	// const cryptPassword = await bcrypt.genSalt(
+	// 	saltRounds,
+	// 	async (err: any, salt: any) => {
+	// 		if (err) throw new Error(err);
+	// 		await bcrypt.hash(password, salt, (err: any, hash: any) => {
+	// 			if (err) throw new Error(err);
+	// 		});
+	// 	},
+	// );
 
 	await axios
 		.post("https://myraspberry.shop/auth/signup", {
 			email,
 			password,
-			cryptPassword,
 		})
-		.then((data) => {
+		.then(data => {
 			dispatch(userSignin({ ...data.data, isSignUp: false }));
 		})
-		.catch((err) => {
+		.catch(err => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
 			dispatch(userSignin({ ...data, err: message }));
@@ -347,7 +346,7 @@ export const signUp = (email: string, password: string) => async (
 
 export const myImageUpdate = (formData?: any) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any,
+	getState: any
 ) => {
 	console.log("들어오니?", formData);
 
@@ -358,17 +357,17 @@ export const myImageUpdate = (formData?: any) => async (
 		.post("https://myraspberry.shop/mypage/changeimage", {
 			formData,
 		})
-		.then((data) => {
+		.then(data => {
 			// 결과값  { username, isChanged: true }
 			console.log("AAAAAAAAAAAAAAAA");
 			dispatch(userSignin({ ...data.data }));
 			console.log(
 				"여기는 마이페이지 수정 요청 후 나온 결과",
-				getState().userReducer,
+				getState().userReducer
 			);
 			// dispatch(goToIntro())
 		})
-		.catch((err) => {
+		.catch(err => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
 			if (message === "일치하는 정보가 존재하지 않습니다.") {
@@ -382,7 +381,7 @@ export const myImageUpdate = (formData?: any) => async (
 export const mypageUpdate = (
 	password?: string,
 	newPass?: string,
-	newUserName?: string,
+	newUserName?: string
 ) => async (dispatch: Dispatch<UsersAction>, getState: any) => {
 	dispatch(userRequest());
 
@@ -393,17 +392,17 @@ export const mypageUpdate = (
 			newPass,
 			newUserName,
 		})
-		.then((data) => {
+		.then(data => {
 			// 결과값  { username, isChanged: true }
 			console.log("AAAAAAAAAAAAAAAA");
 			dispatch(userSignin({ ...data.data }));
 			console.log(
 				"여기는 마이페이지 수정 요청 후 나온 결과",
-				getState().userReducer,
+				getState().userReducer
 			);
 			// dispatch(goToIntro())
 		})
-		.catch((err) => {
+		.catch(err => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
 			if (message === "일치하는 정보가 존재하지 않습니다.") {

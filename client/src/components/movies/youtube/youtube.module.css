@@ -1,4 +1,21 @@
 .videoContainer {
-	position: relative;
+	width: 33.3%;
+}
+
+.videos {
+	width: -webkit-fill-available;
+	cursor: pointer;
+}
+
+.videoPlayer {
+	margin-top: 2.5rem;
+	margin-bottom: 2.5rem;
 	display: flex;
+	position: relative;
+	width: 45rem;
+	height: 25rem;
+}
+
+.youtube {
+	width: -webkit-fill-available;
 }

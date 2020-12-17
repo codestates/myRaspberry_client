@@ -14,19 +14,19 @@ top: -${TOP};
 `;
 
 const setModalOpen = (isSet: boolean) => {
-	if ( isSet ) {
+	if (isSet) {
 		document.body.style.setProperty("top", `-${TOP}px`);
-		document.body.style.setProperty("position","fixed");
+		document.body.style.setProperty("position", "fixed");
 	} else {
 		document.body.style.top = "";
 		document.body.style.position = "";
-		window.scrollTo({top:TOP, behavior:'auto'});
+		window.scrollTo({ top: TOP, behavior: "auto" });
 	}
-}
+};
 
 const getScrollTop = () => {
 	TOP = document.documentElement.scrollTop;
-}
+};
 
 const MovieCard = ({ poster, movie, setShowDetail, setSelectMovie }) => {
 	const [onMouse, setOnMouse] = useState(false);
@@ -172,8 +172,7 @@ const IntroResultBox = () => {
 		speed: 1000,
 		slidesToShow: per,
 		slidesToScroll: 3,
-		autoplay: true,
-		autoplaySpeed: 5000,
+		autoplay: false,
 	};
 	useEffect(() => {
 		getIntroMovieData();
