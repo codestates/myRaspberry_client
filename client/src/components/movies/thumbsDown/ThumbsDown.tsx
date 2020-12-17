@@ -8,11 +8,10 @@ import useIntroMovies from "../../../hooks/useIntroMovies";
 
 const ThumbsDown = ({ fromMovieCard }) => {
 	const { introMovieState, onUpdateIntroMovies } = useIntroMovies();
-	console.log("썸즈 다운 클릭 전 후 데이터 확인용", introMovieState);
-
 	const [onMouse, setOnMouse] = useState(false);
 	const { userState, onTagUpdate } = useUser();
 
+	const isSelected = () => userState.selectMovie && userState.selectMovie[fromMovieCard.docid] !== undefined && userState.selectMovie[fromMovieCard.docid] === 0;
 	const handleOver = e => {
 		e.preventDefault();
 		setOnMouse(true);
@@ -27,10 +26,11 @@ const ThumbsDown = ({ fromMovieCard }) => {
 			data-for="thumbsDownTip"
 			onMouseOver={handleOver}
 			onMouseLeave={handleLeave}
-			className={onMouse ? "changeThumbsColor" : ""}>
+			className={isSelected() || onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
-				className={onMouse ? "changeThumbsColor" : ""}
-				onClick={() => {
+				className={isSelected() || onMouse ? "changeThumbsColor" : ""}
+				onClick={(e) => {
+					e.stopPropagation();
 					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag);
 					onUpdateIntroMovies();
 				}}

@@ -120,13 +120,17 @@ const MainTop = styled.div`
 `;
 
 const CardBoxContainer = styled.div`
-	width: 100%;
+/* NOTE 반응형 만들기,,*/
+	max-width: -webkit-fill-available;
 	display: flex;
 	-webkit-box-align: center;
 	flex-direction: row;
 	-webkit-box-pack: justify;
 	justify-content: space-around;
 	margin-bottom: 1rem;
+	@media (max-width: 425px) {
+    overflow: hidden;
+  }
 `;
 
 const ResultBoxContainer = styled.div`

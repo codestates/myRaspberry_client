@@ -250,7 +250,7 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 			isLike,
 		);
 		user.selectMovie[docid] = tmpStatus;
-		console.log(tmpStatus);
+		// console.log(tmpStatus);
 		user.tag = tmpTag;
 	} else {
 		const [tmpStatus, tmpTag] = setIsLike(
@@ -260,7 +260,7 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 			isLike,
 		);
 		user.selectMovie[docid] = tmpStatus;
-		console.log(tmpStatus);
+		// console.log(tmpStatus);
 		user.tag = tmpTag;
 	}
 
@@ -288,7 +288,6 @@ export const signIn = (email: string, password: string) => async (
 		})
 		.then((data) => {
 			dispatch(userSignin({ ...data.data, isLogin: true }));
-			console.log("여기는 유저스 테에스에서 나온 결과", getState().userReducer);
 			dispatch(goToIntro());
 		})
 
@@ -318,16 +317,12 @@ export const socialLogin = (social: string) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
 ) => {
-	console.log(social);
 	const url = `https://myraspberry.shop/auth/${social}`;
-	console.log(url);
 	await axios
 		.get(url)
 		.then((data) => {
-			console.log("에러 2");
 			dispatch(userSignin({ ...data.data, isLogin: true }));
-			console.log("에러 3");
-			console.log("여기는 소셜 로그인에서 나온 결과", getState().userReducer);
+			// console.log("여기는 소셜 로그인에서 나온 결과", getState().userReducer);
 			dispatch(goToIntro());
 		})
 		.catch((err) => {

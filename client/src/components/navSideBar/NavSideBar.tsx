@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./navSideBar.scss";
 import styled from "styled-components";
 import {
@@ -19,6 +19,26 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 	const { userState } = useUser();
 	const { isLogin } = userState;
 	console.log("isLogin in nav Bar", isLogin);
+	const [onMouse, setOnMouse] = useState({0:false, 1:false, 2:false, 3:false});
+	const handleOver = key => {
+		const newState = {...onMouse};
+		newState[key] = true;
+		setOnMouse(newState);
+	};
+	const handleLeave = key => {
+		const newState = {...onMouse};
+		newState[key] = false;
+		setOnMouse(newState);
+	};
+
+	const setPTag = (listOfClass: string[], listOfText: string[], key: number) => {
+		listOfText = listOfText.map(x=>x.toUpperCase());
+		const nameOfClass = listOfClass.join(' ');
+		const text = onMouse[key] ? listOfText[1] : listOfText[0];
+		const color = {color: (onMouse[key] ? "#cf3535" : "whitesmoke")};
+		return <p style={color}className={nameOfClass} onMouseOver={(e)=>{e.preventDefault(); handleOver(key);}} onMouseLeave={(e)=>{e.preventDefault(); handleLeave(key);}}>{text}</p>
+	}
+	const linkText = "linkText";
 	return (
 		<>
 			<div className={navBarOpen ? "mdl show" : "mdl"}>
@@ -32,20 +52,23 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 					</SideTop>
 					<SideBottom>
 						<Link to="/intro" onClick={handleClose}>
-							<p className="linkText intro"></p>
+							{setPTag([linkText, "intro"], ["introduction","라즈베리 서비스란?"], 0)}
 						</Link>
 						<Link to="/main" onClick={handleClose}>
-							<p className="linkText main"></p>
+						{setPTag([linkText, "main"], ["raspberry","영화고르러 가기"], 1)}
 						</Link>
-						<Link to="/mypage" onClick={handleClose}>
-							<p className="linkText mypage"></p>
-						</Link>
-
+						{isLogin && (
+							<>
+								<Link to="/mypage" onClick={handleClose}>
+									{setPTag([linkText, "mypage"], ["mypage","내 정보 보러가기"], 2)}
+								</Link>
+							</>
+						)}
 						<Link to={isLogin ? "/signout" : "/user"} onClick={handleClose}>
 							{isLogin ? (
-								<p className="linkText signout"></p>
+								setPTag([linkText, "signout"], ["signout","로그아웃"], 3)
 							) : (
-								<p className="linkText sign"></p>
+								setPTag([linkText, "sigin"], ["signin","로그인"], 3)
 							)}
 						</Link>
 					</SideBottom>
