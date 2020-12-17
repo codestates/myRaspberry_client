@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import styles from './mypage.module.css'
-
+import axios from 'axios'
 import useUser from '../../hooks/useUser'
 
 const Mypage = () => {
+  const {userState, onMypageUpdate} = useUser()
+  const {profileImg} = userState
   const [confirmChange, setConfirmChange] = useState(false)
   const [newUserName, setNewUserName] = useState('')
   const [newPass, setNewPass] = useState('')
@@ -11,15 +13,36 @@ const Mypage = () => {
 
   const [errMessage, setErrorMessage] = useState('')
 
+  // 새로 작성 이미지 변경
+  const [img, setImage] = useState<any>(null)
+  const onChange = e => {
+    setImage(e.target.files[0])
+  }
+
+  const onSubmit = async () => {
+    const formData = new FormData()
+    formData.append('img', img)
+    // onMyImageUpdate(formData)
+    // return axios
+    //   .patch('http://localhost:8080/mypage/changeimage', formData)
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(err => {
+    //     console.log('에러')
+    //   })
+    // onMypageUpdate('', '', '', formData)
+  }
+  //
+
   const userNameChange = e => setNewUserName(e.target.value)
   const passwordChange = e => setNewPass(e.target.value)
   const checkPassword = e => setPassword(e.target.value)
 
   const onClick = () => {
     if (confirmChange) {
-      // patch /mypage/changeinfo 로 {password,newPass,newUserName} 을 보내줘야합니다. 바뀐 정보를 보내줘야겠네요
-      // patch /mypage/changeimage 로 img = 이미지값으로 이미지를 변경해줘야합니다. 바뀐 정보를 보내줘야겠네요
-      // 변경 후에는 user 스테이트의 변경된 상태를 업데이트시켜야합니다.
+      let data = [password, newPass, newUserName]
+      onMypageUpdate(...data)
     } else if (newUserName || newPass) {
       if (newPass) {
         if (passwordValidationCheck(newPass)) {
@@ -53,6 +76,48 @@ const Mypage = () => {
     } else return true
   }
 
+  /*
+editProfile: async (isImageDeleted, image, bodyData, headers) => {
+    const body = formDataMaker(image, bodyData);
+    try {
+      const response = axios.patch(
+        `${endpoint}?img-del=${isImageDeleted}`,
+        body,
+        headers,
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.message;
+    }
+  },
+
+const formDataMaker = (photo, body) => {
+  const data = new FormData();
+
+  if (typeof photo === 'object' && photo !== null) {
+    data.append('image', {
+      name: photo.fileName,
+      type: photo.type,
+      uri:
+        Platform.OS === 'android'
+          ? photo.uri
+          : photo.uri.replace('file://', ''),
+    });
+  }
+
+  Object.keys(body).forEach(key => {
+    if (key !== 'image') {
+      data.append(key, body[key]);
+    }
+  });
+
+  return data;
+};
+
+
+  */
+
   return (
     <div className={styles.outBox}>
       <div className={styles.mypageBox}>
@@ -62,7 +127,11 @@ const Mypage = () => {
             <div className={styles.img_box}>
               <img
                 className={styles.img}
-                src={'https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png'}
+                src={
+                  !profileImg
+                    ? 'https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png'
+                    : profileImg
+                }
                 alt="userProfileImg"
               ></img>
               <div className={styles.img_submit}>
@@ -70,19 +139,21 @@ const Mypage = () => {
                   name="img"
                   type="file"
                   id="img"
-                  onChange={() => {
-                    onClick()
-                  }}
+                  onChange={onChange}
                   accept="image/png, image/jpeg, image/jpg"
                   hidden
                 />
                 <label className={styles.submitBtn} htmlFor="img">
                   변경
                 </label>
+                <button onClick={onSubmit}>변경요청</button>
               </div>
             </div>
           </div>
           <div className={styles.change_info_box}>
+            <div className={styles.mypage_title}>
+              안녕하세요 {userState.username} 유저님!
+            </div>
             <ul className={styles.chage_info_ul}>
               <li className={styles.chage_info_li}>
                 <input
