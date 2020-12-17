@@ -2,6 +2,8 @@ import { Dispatch } from "redux";
 import axios from "axios";
 import { Data } from "../api/moveis";
 import { StringDecoder } from "string_decoder";
+import { bcrypt } from "bcrypt";
+const saltRounds = 10;
 
 // 액션 type
 const USER_REQUEST = "users/USER_REQUEST" as const;
@@ -343,10 +345,20 @@ export const signUp = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
 ) => {
+	const cryptPassword = await bcrypt.genSalt(
+		saltRounds,
+		async (err: any, salt: any) => {
+			if (err) throw new Error(err);
+			await bcrypt.hash(password, salt, (err: any, hash: any) => {
+				if (err) throw new Error(err);
+			});
+		},
+	);
+
 	await axios
 		.post("https://myraspberry.shop/auth/signup", {
 			email,
-			password,
+			cryptPassword,
 		})
 		.then((data) => {
 			dispatch(userSignin({ ...data.data, isSignUp: false }));
