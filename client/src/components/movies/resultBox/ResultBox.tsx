@@ -16,11 +16,10 @@ top: -${TOP};
 
 const setModalOpen = (isSet: boolean) => {
 	if ( isSet ) {
-		document.body.style.setProperty("top", `-${TOP}px`);
-		document.body.style.setProperty("position","fixed");
+		document.body.style.setProperty("overflow-x", "hidden");
+		document.body.style.setProperty("overflow-y", "hidden");
 	} else {
-		document.body.style.top = "";
-		document.body.style.position = "";
+                document.body.style.setProperty("overflow-y", "");
 		window.scrollTo({top:TOP, behavior:'auto'});
 	}
 }
