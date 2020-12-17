@@ -58,7 +58,7 @@ const Main = () => {
 const MainTop = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 6rem;
+	margin-top: 7.5rem;
 `;
 
 const SlideContainer = styled.div`

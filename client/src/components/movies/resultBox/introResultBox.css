@@ -1,42 +1,57 @@
 .eachMovieCard {
-  width: 13rem;
-  border-radius: 5%;
-  height: 18rem;
-  box-shadow: 5px 3px 3px #292929;
-  background-repeat: round;
-  background-size: cover;
+	width: 13rem;
+	border-radius: 5%;
+	height: 18rem;
+	box-shadow: 5px 3px 3px #292929;
+	background-repeat: round;
+	background-size: cover;
 }
 
 .slick_container {
-  width: 100%;
+	width: 100%;
 }
 
 .resultCard_box {
-  width: 13rem;
-  height: 18rem;
-  position: relative;
-  margin-right: 1rem;
-  display: flex;
-  height: 100%;
-  flex-direction: row;
-  justify-content: space-around;
+	width: 13rem;
+	height: 18rem;
+	position: relative;
+	margin-right: 1rem;
+	display: flex;
+	height: 100%;
+	flex-direction: row;
+	justify-content: space-around;
 }
 
 .resultCard_box:hover {
-  cursor: pointer;
-  border: solid 1px;
-  transition: linear 0.5s ease-in-out;
+	cursor: pointer;
+	border: solid 1px;
+	transition: linear 0.5s ease-in-out;
 }
 
 .resultBlack_box {
-  border-radius: 5%;
-  width: 13rem;
-  height: 18rem;
-  display: none;
+	border-radius: 5%;
+	width: 13rem;
+	height: 18rem;
+	display: none;
 }
 
 .on {
-  display: block;
-  background: rgb(0, 0, 0);
-  opacity: 0.63 !important;
+	display: block;
+	background: rgb(0, 0, 0);
+	opacity: 0.4 !important;
+}
+
+.eachMovieCard {
+	cursor: pointer;
+}
+
+.slick-slider {
+	margin-bottom: 2rem !important;
+	margin-top: 2rem !important;
+}
+
+.tooltip {
+	font-size: 20px !important;
+	pointer-events: auto !important;
+	font-weight: bolder !important;
 }

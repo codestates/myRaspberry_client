@@ -3,16 +3,40 @@ border : 1px solid black;  */
 
 .modal-open {
 	overflow: hidden;
+	/*NOTE 배포시에는 반드시 지우고!*/
+	/* position: fixed; */
 }
 
 .nav_backgroud {
-	position: absolute;
+	/* position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	width: 100%;
+  height: 100%; */
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-moz-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	will-change: scroll-position;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
 	height: 100%;
+	z-index: 99;
+	position: fixed;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .nav_showoff {
@@ -20,22 +44,31 @@ border : 1px solid black;  */
 	height: 100%;
 	position: absolute;
 	top: 0;
-	z-index: 98;
+	z-index: 99;
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .nav_detailbar {
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	height: 100%;
-	top: 8rem;
-	color: white;
-	z-index: 99;
-	left: 50%;
-	transform: translate(-50%, -5%);
-	overflow: scroll;
+	width: 915.02px;
+	top: 370px;
+	left: auto;
+	transform: translateX(0px) translateY(calc(-332px + 2em)) scaleX(1) scaleY(1)
+		translateZ(0px);
+	box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
+	opacity: 1;
+	transform-origin: center top;
+	margin-bottom: 2em;
+	min-width: 850px;
+	will-change: transform;
+	position: absolute;
+	color: #fff;
+	background-color: transparent;
+	font-size: 16px;
+	z-index: 999;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	overflow: hidden;
 }
 
 .detail_top {
@@ -49,6 +82,7 @@ border : 1px solid black;  */
 
 .detail_top_poster_box {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 30%;
@@ -57,9 +91,32 @@ border : 1px solid black;  */
 
 .detail_top_poster {
 	height: 90%;
+	max-height: 18rem;
 }
 
 .detail_thumbs_box {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	display: flex;
+	flex-direction: row;
+	width: 70%;
+	justify-content: space-evenly;
+}
+
+.detail_thumbs_box > div {
+	position: inherit;
+	/* top: -4.5rem; */
+	/* width: auto; */
+	/* height: auto; */
+	border-radius: 100%;
+	border: solid 3.2px whitesmoke;
+	width: 28%;
+	top: -5.5rem;
+	height: 57px;
+}
+
+.detail_thumbs_box > div > svg {
+	top: 19%;
 }
 
 .detail_top_context {
@@ -118,6 +175,48 @@ border : 1px solid black;  */
 	font-size: 15px;
 }
 
+.view-btn {
+	cursor: pointer;
+	display: none;
+	align-self: flex-end;
+	margin-bottom: 1rem;
+}
+
+.view-btn.open {
+	display: block;
+}
+
+.view-btn.close {
+	display: block;
+}
+
+.plot {
+	margin: 0;
+	width: 95%;
+	letter-spacing: 0.25px;
+	line-height: 23px;
+}
+
+.plot-long {
+	display: none;
+}
+
+.plot-long._on {
+	display: block;
+	margin: 0;
+	width: 95%;
+	letter-spacing: 0.25px;
+	line-height: 23px;
+}
+
+.plot-long._on > b {
+	cursor: pointer;
+}
+
+.plot._off {
+	display: none;
+}
+
 .detail_bottom {
 	width: 100%;
 	height: 100%;
@@ -129,27 +228,23 @@ border : 1px solid black;  */
 	position: relative;
 }
 
-.plot {
-	margin: 0;
-	width: 95%;
-	letter-spacing: 0.25px;
-	line-height: 23px;
+/*Slider 관련*/
+
+.detail_still_container {
+	width: -webkit-fill-available;
+	height: auto;
 }
 
-.plot > b {
-	cursor: pointer;
+.detail_ul {
 }
 
-.plot-long {
-	display: none;
+.detail_li {
+	height: 200px !important;
+	width: auto !important;
 }
-
-.plot-long.on {
-	display: block;
-}
-
-.plot.off {
-	display: none;
+.still_img {
+	height: -webkit-fill-available;
+	width: auto !important;
 }
 
 .youtube_box {
