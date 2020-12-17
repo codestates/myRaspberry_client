@@ -4,12 +4,16 @@ import { RiThumbUpLine } from "react-icons/ri";
 import { compColor } from "../../../common/colors";
 import useUser from "../../../hooks/useUser";
 import ReactTooltip from "react-tooltip";
+import useIntroMovies from "../../../hooks/useIntroMovies";
 
 const ThumbsUp = ({ fromMovieCard }) => {
-	const { userState, onTagUpdate } = useUser();
-	console.log("썸즈업 처음 유저상태", userState);
-	console.log("fromMovieCard: ", fromMovieCard);
+	const { introMovieState, onUpdateIntroMovies } = useIntroMovies();
+	console.log(
+		"썸즈업 버튼을 누르기 전과 후에 결과를 확인하기 위한 콘솔",
+		introMovieState
+	);
 
+	const { userState, onTagUpdate } = useUser();
 	const [onMouse, setOnMouse] = useState(false);
 	const handleOver = e => {
 		e.preventDefault();
@@ -28,9 +32,11 @@ const ThumbsUp = ({ fromMovieCard }) => {
 			className={onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
-				onClick={() =>
-					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag)
-				}
+				onClick={() => {
+					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag);
+					onUpdateIntroMovies();
+				}}
+				// onClick={() => alert("따봉!")}
 			/>
 			<ReactTooltip
 				className="tooltip"
@@ -46,13 +52,13 @@ const ThumbsUp = ({ fromMovieCard }) => {
 
 const RasupContainer = styled.div`
 	position: relative;
-	width: 35%;
-	top: -5.5rem;
-	height: 74px;
+	width: 28%;
+	top: -5.1rem;
+	height: 61px;
 	border-radius: 100%;
-	border: solid 2.5px white;
+	border: solid 3.2px whitesmoke;
 	&.changeThumbsColor {
-		border: solid 2.5px ${compColor};
+		border: solid 3.2px ${compColor};
 	}
 `;
 
@@ -65,31 +71,9 @@ const RasupImg = styled(RiThumbUpLine)`
 	margin: auto;
 	display: flex;
 	overflow: visible;
-	top: 25%;
+	top: 19%;
 	&.changeThumbsColor {
 		color: ${compColor};
-	}
-	[data-md-tooltip] {
-		position: relative;
-	}
-	[data-md-tooltip]:before {
-		content: attr(data-md-tooltip);
-		position: absolute;
-		bottom: -35px;
-		left: 50%;
-		padding: 8px;
-		transform: translateX(-50%) scale(0);
-		transition: transform 0.3s ease-in-out;
-		transform-origin: top;
-		background: #616161e6;
-		color: white;
-		border-radius: 2px;
-		font-size: 12px;
-		font-family: Roboto, sans-serif;
-		font-weight: 400;
-	}
-	[data-md-tooltip]:hover:before {
-		transform: translateX(-50%) scale(1);
 	}
 `;
 

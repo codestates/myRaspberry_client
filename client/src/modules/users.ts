@@ -3,22 +3,6 @@ import axios from "axios";
 import { Data } from "../api/moveis";
 import { StringDecoder } from "string_decoder";
 
-// user 상태 관련 로직
-// <1. 로그인 요청>
-// 		- 일반 로그인
-// 		- 소셜 로그인
-//    -----> 로그인 후에는 profileimg / username / tag (로그인 상태는 쿠키에 담긴 토큰으로 확인 가능)
-// 	1-1 로그인 상태 (isUser = true or false  (로그인 상태는 쿠키에 담긴 토큰으로 확인 가능) )
-
-// <2. 좋아요, 싫어요 선택>
-
-// * 로그인 전 = 저장된 데이터로만 결과 보여주기 tag 저장 안 함
-
-// * 로그인 후
-//  -> user 정보에 (좋아요 영화, 싫어요 영화) 정보 저장
-//  -> 서버에 put ? patch (태그별 카운트 body에 담아서) 요청. (취향이 반영된 영화 데이터 받기)
-//  -> 프론트 user 상태에 태그별 카운트 변경
-
 // 액션 type
 const USER_REQUEST = "users/USER_REQUEST" as const;
 const USER_SIGNIN = "users/USER_SIGNIN" as const;
@@ -73,7 +57,7 @@ export const userFail = (err: string) => ({
 	payload: err,
 });
 
-type UserInfoType = {
+export type UserInfoType = {
 	username?: string;
 	isLogin?: boolean;
 	isSignUp?: boolean;
@@ -103,32 +87,21 @@ type UsersAction =
 	| ReturnType<typeof userFail>
 	| ReturnType<typeof updateUserInfo>;
 
-// 상태를 위한 타입 선언
-export type DefaultState = {
-	isLogin?: boolean;
-	isSignUp?: boolean;
-	username?: string;
-	profileImg?: string;
-	selectMovie: object;
-	tag?: UserTag;
-	err?: string;
-};
-
 // 초깃값 설정
-const defaultState: DefaultState = {
+const defaultState: UserInfoType = {
 	isLogin: false,
 	isSignUp: false,
 	username: "",
 	profileImg: "",
-	selectMovie: {},
+	selectMovie: { key: 0 },
 	tag: { like: { tagNum: 0 }, dislike: { tagNum: 0 } },
 	err: "",
 };
 
 export function userReducer(
-	state: DefaultState = defaultState,
+	state: UserInfoType = defaultState,
 	action: UsersAction,
-): DefaultState {
+): UserInfoType {
 	switch (action.type) {
 		case USER_REQUEST:
 			return {
@@ -207,18 +180,29 @@ const setTag = (like: object, tag: number[], cancel: boolean): object => {
 	return like;
 };
 
-const setIsLike = (prevStatus: number, userTag: UserTag ,tag: number[], isLike: boolean) => {
-	interface NEWTAG  { like: object, dislike: object }
+const setIsLike = (
+	prevStatus: number,
+	userTag: UserTag,
+	tag: number[],
+	isLike: boolean,
+) => {
+	interface NEWTAG {
+		like: object;
+		dislike: object;
+	}
 	let newStatus: number = 1;
 	let cancel: boolean = false; // 취소냐?
-	let newTag: NEWTAG = { like: {...userTag.like}, dislike: {...userTag.dislike} };
-	
+	let newTag: NEWTAG = {
+		like: { ...userTag.like },
+		dislike: { ...userTag.dislike },
+	};
+
 	switch (prevStatus) {
 		case 0:
 			newStatus = isLike ? 2 : 1;
 			cancel = true;
 			newTag.dislike = setTag(newTag.dislike, tag, cancel);
-			if ( isLike ) {
+			if (isLike) {
 				newTag.like = setTag(newTag.like, tag, !cancel);
 			}
 			break;
@@ -232,7 +216,7 @@ const setIsLike = (prevStatus: number, userTag: UserTag ,tag: number[], isLike: 
 			break;
 		default:
 			newStatus = isLike ? 2 : 0;
-			if ( isLike ) {
+			if (isLike) {
 				newTag.like = setTag(newTag.like, tag, cancel);
 			} else {
 				newTag.dislike = setTag(newTag.dislike, tag, cancel);
@@ -241,36 +225,45 @@ const setIsLike = (prevStatus: number, userTag: UserTag ,tag: number[], isLike: 
 	}
 
 	return [newStatus, newTag];
-}
+};
 
-export const tagUpdate = (
-	isUp: string,
-	docid: string,
-	tag: number[],
-) => async (dispatch: Dispatch<UsersAction>, getState: any) => {
+export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
+	dispatch: Dispatch<UsersAction>,
+	getState: any,
+) => {
 	const user = getState().userReducer;
 	let status: number = 1;
 	let isLike: boolean = isUp === "up"; // 어떤 버튼을 누른거냐
 	if (user.selectMovie === undefined) {
 		user.selectMovie = {};
 	}
-	
+
 	if (user.selectMovie[docid] === undefined) {
 		user.selectMovie[docid] = status;
 	}
 
-	if ( isLike ) {
-		const [tmpStatus, tmpTag] = setIsLike(user.selectMovie[docid], user.tag, tag, isLike);
+	if (isLike) {
+		const [tmpStatus, tmpTag] = setIsLike(
+			user.selectMovie[docid],
+			user.tag,
+			tag,
+			isLike,
+		);
 		user.selectMovie[docid] = tmpStatus;
 		console.log(tmpStatus);
 		user.tag = tmpTag;
 	} else {
-		const [tmpStatus, tmpTag] = setIsLike(user.selectMovie[docid], user.tag, tag, isLike);
+		const [tmpStatus, tmpTag] = setIsLike(
+			user.selectMovie[docid],
+			user.tag,
+			tag,
+			isLike,
+		);
 		user.selectMovie[docid] = tmpStatus;
 		console.log(tmpStatus);
 		user.tag = tmpTag;
 	}
-	
+
 	dispatch(updateUserInfo({ ...user }));
 	// dispatch(
 	// 	userSelectMovieUpdate({

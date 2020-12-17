@@ -4,8 +4,12 @@ import { RiThumbDownLine } from "react-icons/ri";
 import { pointColor } from "../../../common/colors";
 import useUser from "../../../hooks/useUser";
 import ReactTooltip from "react-tooltip";
+import useIntroMovies from "../../../hooks/useIntroMovies";
 
 const ThumbsDown = ({ fromMovieCard }) => {
+	const { introMovieState, onUpdateIntroMovies } = useIntroMovies();
+	console.log("썸즈 다운 클릭 전 후 데이터 확인용", introMovieState);
+
 	const [onMouse, setOnMouse] = useState(false);
 	const { userState, onTagUpdate } = useUser();
 
@@ -26,9 +30,10 @@ const ThumbsDown = ({ fromMovieCard }) => {
 			className={onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
 				className={onMouse ? "changeThumbsColor" : ""}
-				onClick={() =>
-					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag)
-				}
+				onClick={() => {
+					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag);
+					onUpdateIntroMovies();
+				}}
 			/>
 			<ReactTooltip
 				className="tooltip"
@@ -44,16 +49,16 @@ const ThumbsDown = ({ fromMovieCard }) => {
 
 const RasupContainer = styled.div`
 	position: relative;
-	width: 35%;
-	top: -5.5rem;
-	height: 74px;
+	width: 28%;
+	top: -5.1rem;
+	height: 61px;
 	display: inline-block;
 	border-radius: 100%;
 	z-index: 99;
 	opacity: 1;
-	border: solid 2.5px whitesmoke;
+	border: solid 3.2px whitesmoke;
 	&.changeThumbsColor {
-		border: solid 2.5px ${pointColor};
+		border: solid 3.2px ${pointColor};
 	}
 `;
 
@@ -65,7 +70,7 @@ const RasupImg = styled(RiThumbDownLine)`
 	font-size: 35px;
 	margin: auto;
 	display: flex;
-	top: 25%;
+	top: 19%;
 	z-index: 100;
 	overflow: auto;
 	&.changeThumbsColor {

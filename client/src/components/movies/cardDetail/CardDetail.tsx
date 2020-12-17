@@ -85,8 +85,8 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 							<div className="detail_top_poster_box">
 								<img className="detail_top_poster" src={poster} alt="poster" />
 								<div className="detail_thumbs_box">
-									<ThumbsUp fromMovieCard={movie} />
 									<ThumbsDown fromMovieCard={movie} />
+									<ThumbsUp fromMovieCard={movie} />
 								</div>
 							</div>
 							<div className="detail_top_context">
