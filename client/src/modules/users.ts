@@ -234,6 +234,7 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
   dispatch: Dispatch<UsersAction>,
   getState: any,
 ) => {
+// Task017-re
   const user = getState().userReducer
   let status: number = 1
   let isLike: boolean = isUp === 'up' // 어떤 버튼을 누른거냐
@@ -276,11 +277,56 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
   // );
   // dispatch(userTagUpdate({ ...user.tag.like, tag: user.tag.like }));
 }
+//
+	const user = getState().userReducer;
+	let status: number = 1;
+	let isLike: boolean = isUp === "up"; // 어떤 버튼을 누른거냐
+	if (user.selectMovie === undefined) {
+		user.selectMovie = {};
+	}
+
+	if (user.selectMovie[docid] === undefined) {
+		user.selectMovie[docid] = status;
+	}
+
+	if (isLike) {
+		const [tmpStatus, tmpTag] = setIsLike(
+			user.selectMovie[docid],
+			user.tag,
+			tag,
+			isLike,
+		);
+		user.selectMovie[docid] = tmpStatus;
+		// console.log(tmpStatus);
+		user.tag = tmpTag;
+	} else {
+		const [tmpStatus, tmpTag] = setIsLike(
+			user.selectMovie[docid],
+			user.tag,
+			tag,
+			isLike,
+		);
+		user.selectMovie[docid] = tmpStatus;
+		// console.log(tmpStatus);
+		user.tag = tmpTag;
+	}
+
+	dispatch(updateUserInfo({ ...user }));
+	// dispatch(
+	// 	userSelectMovieUpdate({
+	// 		...user.selectMovie,
+	// 		selectMovie: user.selectMovie,
+	// 	}),
+	// );
+	// dispatch(userTagUpdate({ ...user.tag.like, tag: user.tag.like }));
+};
+// test
 
 export const signIn = (email: string, password: string) => async (
   dispatch: Dispatch<UsersAction>,
   getState: any,
 ) => {
+// Task017-re
   // try {
   dispatch(userRequest())
   // const { data, status } =
@@ -317,11 +363,48 @@ export const signIn = (email: string, password: string) => async (
   // 	dispatch(userFail(err));
   // }
 }
+//=======
+	// try {
+	dispatch(userRequest());
+	// const { data, status } =
+	await axios
+		.post("https://myraspberry.shop/auth/signin", {
+			email,
+			password,
+		})
+		.then((data) => {
+			dispatch(userSignin({ ...data.data, isLogin: true }));
+			dispatch(goToIntro());
+		})
+
+		.catch((err) => {
+			const { message } = err.response.data;
+			const data = getState().userReducer;
+			if (message === "일치하는 정보가 존재하지 않습니다.") {
+				dispatch(userSignin({ ...data, isSignUp: true }));
+			} else if (message === "비밀번호가 일치하지 않습니다.") {
+				dispatch(userSignin({ ...data, err: message }));
+			}
+		});
+
+	//send["message"] ==='일치하는 정보가 존재하지 않습니다 => 회원가입으로 전환
+	//send["message"] ==='비밀번호가 일치하지 않습니다 => setErrormessage => send['message']내용을 담아준다
+	// { message: "비밀번호가 일치하지 않습니다." }
+	// { message: "일치하는 정보가 존재하지 않습니다."}
+
+	// console.log("after", getState().userReducer);
+	// } catch (err) {
+	// 	console.log("에러다")
+	// 	dispatch(userFail(err));
+	// }
+};
+////test
 
 export const socialLogin = (social: string) => async (
   dispatch: Dispatch<UsersAction>,
   getState: any,
 ) => {
+///Task017-re
   console.log(social)
   const url = `https://myraspberry.shop/auth/${social}`
   //   const url = `http://localhost:8080/auth/${social}`
@@ -348,6 +431,29 @@ export const socialLogin = (social: string) => async (
   // 	dispatch(userFail(err));
   // }
 }
+// =======
+	const url = `https://myraspberry.shop/auth/${social}`;
+	await axios
+		.get(url)
+		.then((data) => {
+			dispatch(userSignin({ ...data.data, isLogin: true }));
+			// console.log("여기는 소셜 로그인에서 나온 결과", getState().userReducer);
+			dispatch(goToIntro());
+		})
+		.catch((err) => {
+			dispatch(userFail(err));
+		});
+
+	// try {
+	// 	const { data } = await axios.get(`https://myraspberry.shop/auth/${social}`);
+
+	// 	dispatch(userSocialLogin({ ...data, isLogin: true }));
+	// 	dispatch(goToIntro());
+	// } catch (err) {
+	// 	dispatch(userFail(err));
+	// }
+};
+// test
 
 export const signUp = (email: string, password: string) => async (
   dispatch: Dispatch<UsersAction>,

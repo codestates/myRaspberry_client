@@ -131,36 +131,36 @@ export const updateIntroMovies = () => async (
 
 		// const user = useUser().userState --> hook 요청은 함수 컴포넌트 내에서만 가능
 		const user = getState().userReducer;
-		console.log(
-			"introMovie.ts에서 업 다운 버튼 클릭 하면 가져오는 유저 데이터 ",
-			user,
-		);
 		const likeMovies: MoviesType[] = [];
 		const dislikeMovies: MoviesType[] = [];
 		let neutralMovies: MoviesType[] = [];
 		
 		for ( let movie of movies.introMovies.intro ) {
-			if ( user.selectMovie[movie.docid] === 0) {
-				if (movie.score > 800) {
-					movie.score -= 200;
-				}
-				dislikeMovies.push(movie);
-			} else if ( user.selectMovie[movie.docid] === 2 ) {
-				if (movie.score < 1300) {
-					movie.score += 100;
-				}
-				likeMovies.push(movie);
-			} else {
-				neutralMovies.push(movie);
+			switch (user.selectMovie[movie.docid]) {
+				case 0:
+					if (movie.score > 800) {
+						movie.score -= 200;
+					}
+					dislikeMovies.push(movie);
+					break;
+				case 1:
+						movie.score = 1000;
+						neutralMovies.push(movie);
+						break;
+				case 2:
+					if (movie.score < 1300) {
+						movie.score += 100;
+					}
+					likeMovies.push(movie);
+					break;
+				default:
+					neutralMovies.push(movie);
+					break;
 			}
 		}
 
 		neutralMovies = updateMovies(user.tag, neutralMovies);
 		const newMovies = [...likeMovies, ...neutralMovies, ...dislikeMovies].sort((a, b) => b.score - a.score);
-		
-		console.log("likeMovies: ", likeMovies);
-		console.log("dislikeMovies: ", dislikeMovies);
-		console.log("neutralMovies: ", neutralMovies);
 
 		dispatch(introMovieUpdate([...newMovies]));
 	} catch (err) {
