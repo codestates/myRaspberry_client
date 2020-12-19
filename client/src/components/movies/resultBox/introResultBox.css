@@ -39,6 +39,12 @@
 	display: block;
 	background: rgb(0, 0, 0);
 	opacity: 0.4 !important;
+	font-size: 2rem;
+}
+
+.on > :first-child {
+	color: black;
+	opacity: 1;
 }
 
 .eachMovieCard {

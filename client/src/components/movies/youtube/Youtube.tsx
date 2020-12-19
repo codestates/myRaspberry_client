@@ -1,13 +1,17 @@
 import React from "react";
+import useYoutube from "../../../hooks/useYoutube";
 import styles from "./youtube.module.css";
 
-const Youtube = ({ video }) => {
+const Youtube = ({ video, videosKey }) => {
+	const { updateVideos } = useYoutube();
 	return (
-		<div className={styles.videoContainer}>
-			<iframe
-				className={styles.youtube}
-				src={`https://www.youtube.com/embed/${video}`}
-				allowFullScreen></iframe>
+		<div
+			className={styles.videoContainer}
+			onClick={e => {
+				e.preventDefault();
+				updateVideos(videosKey);
+			}}>
+			<img className={styles.videos} src={video.url} alt="" />
 		</div>
 	);
 };

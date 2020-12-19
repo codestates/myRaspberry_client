@@ -8,6 +8,27 @@ import { FaLongArrowAltUp } from "react-icons/fa";
 import ThumbsUp from "../thumbsUp/ThumbsUp";
 import ThumbsDown from "../thumbsDown/ThumbsDown";
 import "swiper/swiper-bundle.css";
+import useMovies from "../../../hooks/useMovies";
+
+const MOVIE: MoviesType = {
+	id: 0,
+	docid: "",
+	title: "",
+	titleEng: "",
+	director: "",
+	actor: "",
+	plotKr: "",
+	plotEng: "",
+	runtime: 0,
+	genre: "",
+	image: {
+		posters: "",
+		stlls: [],
+	},
+	tag: [],
+	date: "",
+	score: 0,
+};
 
 let TOP = 0;
 const gradient = `
@@ -15,18 +36,17 @@ top: -${TOP};
 `;
 
 const setModalOpen = (isSet: boolean) => {
-	if ( isSet ) {
-		document.body.style.setProperty("overflow-x", "hidden");
+	if (isSet) {
 		document.body.style.setProperty("overflow-y", "hidden");
 	} else {
-                document.body.style.setProperty("overflow-y", "");
-		window.scrollTo({top:TOP, behavior:'auto'});
+		document.body.style.setProperty("overflow-y", "");
+		window.scrollTo({ top: TOP, behavior: "auto" });
 	}
-}
+};
 
 const getScrollTop = () => {
 	TOP = document.documentElement.scrollTop;
-}
+};
 
 type Movie = {
 	renew: MoviesType[];
@@ -119,37 +139,14 @@ function useWindowSize() {
 	return size;
 }
 
-const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
-	const MOVIE: MoviesType = {
-		id: 0,
-		docid: "",
-		title: "",
-		titleEng: "",
-		director: "",
-		actor: "",
-		plotKr: "",
-		plotEng: "",
-		runtime: 0,
-		genre: "",
-		image: {
-			posters: "",
-			stlls: [],
-		},
-		tag: [],
-		date: "",
-		score: 0,
-	};
-	const [per, setPer] = useState(5);
-	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
+const ResultBox: any = ({ tag, data }) => {
+	const { moviesState, onUpdateMovies } = useMovies();
 	const [showDetail, setShowDetail] = useState(false);
+	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
+	const [per, setPer] = useState(5);
+	const { loading, movies } = moviesState;
 	const width = useWindowSize();
-	const closeMovieDetail = e => {
-		e.preventDefault();
-		setModalOpen(false);
-		setSelectMovie(MOVIE);
-	};
-
-	function CalWith(args) {
+	function calWith(args) {
 		const width = args[0];
 		if (width > 2200) {
 			setPer(10);
@@ -169,6 +166,13 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 			setPer(2);
 		}
 	}
+
+	const closeMovieDetail = e => {
+		e.preventDefault();
+		setModalOpen(false);
+		setSelectMovie(MOVIE);
+	};
+
 	const slideSettings = {
 		className: "slick_container",
 		infinite: true,
@@ -176,200 +180,53 @@ const ResultBox: any = ({ renew, eng, kor, long, short }: Movie) => {
 		slidesToShow: per,
 		slidesToScroll: 3,
 		autoplay: true,
-		autoplaySpeed: 5000,
+		autoplaySpeed: 35000,
 		swipeToSlide: true,
 	};
 
 	useEffect(() => {
-		CalWith(width);
+		onUpdateMovies();
+	}, []);
+
+	useEffect(() => {
+		calWith(width);
 	}, [width]);
 
-	if (Array.isArray(renew)) {
-		return (
-			<>
-				<Slider {...slideSettings}>
-					{renew.map(movie => (
-						<MovieCard
-							key={movie.id}
-							movie={movie}
-							poster={
-								movie.image.posters[0] === "image/posters/default.jpg"
-									? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-									: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
-							}
-							setShowDetail={setShowDetail}
-							setSelectMovie={setSelectMovie}
-						/>
-					))}
-				</Slider>
-				{selectMovie.id ? (
-					<CardDetail
+	const setSlider = (data: any) => (
+		<>
+			<Slider {...slideSettings}>
+				{data.map(movie => (
+					<MovieCard
+						key={movie.id}
+						movie={movie}
 						poster={
-							selectMovie.image.posters[0] === "image/posters/default.jpg"
+							movie.image.posters[0] === "image/posters/default.jpg"
 								? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-								: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
+								: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
 						}
-						movie={selectMovie}
-						closeMovieDetail={closeMovieDetail}
+						setShowDetail={setShowDetail}
+						setSelectMovie={setSelectMovie}
 					/>
-				) : null}
-			</>
-		);
-	} else if (Array.isArray(kor)) {
-		return (
-			<>
-				<Slider {...slideSettings}>
-					{kor.map(movie => (
-						<MovieCard
-							key={movie.id}
-							movie={movie}
-							poster={
-								movie.image.posters[0] === "image/posters/default.jpg"
-									? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-									: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
-							}
-							setShowDetail={setShowDetail}
-							setSelectMovie={setSelectMovie}
-						/>
-					))}
-				</Slider>
-				{selectMovie.id ? (
-					<CardDetail
-						poster={
-							selectMovie.image.posters[0] === "image/posters/default.jpg"
-								? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-								: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
-						}
-						movie={selectMovie}
-						closeMovieDetail={closeMovieDetail}
-					/>
-				) : null}
-			</>
-		);
-	} else if (Array.isArray(eng)) {
-		return (
-			<>
-				<Slider {...slideSettings}>
-					{eng.map(movie => (
-						<MovieCard
-							key={movie.id}
-							movie={movie}
-							poster={
-								movie.image.posters[0] === "image/posters/default.jpg"
-									? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-									: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
-							}
-							setShowDetail={setShowDetail}
-							setSelectMovie={setSelectMovie}
-						/>
-					))}
-				</Slider>
-				{selectMovie.id ? (
-					<CardDetail
-						poster={
-							selectMovie.image.posters[0] === "image/posters/default.jpg"
-								? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-								: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
-						}
-						movie={selectMovie}
-						closeMovieDetail={closeMovieDetail}
-					/>
-				) : null}
-			</>
-		);
-	} else if (Array.isArray(short)) {
-		return (
-			<>
-				<Slider {...slideSettings}>
-					{short.map(movie => (
-						<MovieCard
-							key={movie.id}
-							movie={movie}
-							poster={
-								movie.image.posters[0] === "image/posters/default.jpg"
-									? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-									: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
-							}
-							setShowDetail={setShowDetail}
-							setSelectMovie={setSelectMovie}
-						/>
-					))}
-				</Slider>
-				{selectMovie.id ? (
-					<CardDetail
-						poster={
-							selectMovie.image.posters[0] === "image/posters/default.jpg"
-								? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-								: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
-						}
-						movie={selectMovie}
-						closeMovieDetail={closeMovieDetail}
-					/>
-				) : null}
-			</>
-		);
-	} else if (Array.isArray(long)) {
-		return (
-			<>
-				<Slider {...slideSettings}>
-					{long.map(movie => (
-						<MovieCard
-							key={movie.id}
-							movie={movie}
-							poster={
-								movie.image.posters[0] === "image/posters/default.jpg"
-									? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-									: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
-							}
-							setShowDetail={setShowDetail}
-							setSelectMovie={setSelectMovie}
-						/>
-					))}
-				</Slider>
-				{selectMovie.id ? (
-					<CardDetail
-						poster={
-							selectMovie.image.posters[0] === "image/posters/default.jpg"
-								? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-								: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
-						}
-						movie={selectMovie}
-						closeMovieDetail={closeMovieDetail}
-					/>
-				) : null}
-			</>
-		);
+				))}
+			</Slider>
+			{selectMovie.id ? (
+				<CardDetail
+					poster={
+						selectMovie.image.posters[0] === "image/posters/default.jpg"
+							? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
+							: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
+					}
+					movie={selectMovie}
+					closeMovieDetail={closeMovieDetail}
+				/>
+			) : null}
+		</>
+	);
+	const isArray = tag => Array.isArray(tag);
+	if (isArray(movies[tag])) {
+		return setSlider(movies[tag]);
 	} else {
-		return (
-			<>
-				<Slider {...slideSettings}>
-					{data.map(movie => (
-						<MovieCard
-							key={movie.id}
-							movie={movie}
-							poster={
-								movie.image.posters[0] === "image/posters/default.jpg"
-									? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-									: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
-							}
-							setShowDetail={setShowDetail}
-							setSelectMovie={setSelectMovie}
-						/>
-					))}
-				</Slider>
-				{selectMovie.id ? (
-					<CardDetail
-						poster={
-							selectMovie.image.posters[0] === "image/posters/default.jpg"
-								? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-								: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
-						}
-						movie={selectMovie}
-						closeMovieDetail={closeMovieDetail}
-					/>
-				) : null}
-			</>
-		);
+		return setSlider(data);
 	}
 };
 

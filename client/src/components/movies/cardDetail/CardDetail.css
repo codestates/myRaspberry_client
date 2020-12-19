@@ -43,29 +43,31 @@ border : 1px solid black;  */
 .nav_showoff {
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 99;
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba(0, 0, 0, 0.63);
+	cursor: pointer;
 }
 
 .nav_detailbar {
-	width: 915.02px;
-	top: 370px;
+	/*반응형은 div에 직접*/
+	top: 4rem;
 	left: auto;
-	transform: translateX(0px) translateY(calc(-332px + 2em)) scaleX(1) scaleY(1)
-		translateZ(0px);
+	/* transform: translateX(0px) translateY(calc(-332px + 2em)) scaleX(1) scaleY(1)
+		translateZ(0px); */
+	transform: none;
 	box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;
-	opacity: 1;
-	transform-origin: center top;
+	/* opacity: 1; */
+	transform-origin: 50% 12.5%;
 	margin-bottom: 2em;
-	min-width: 850px;
+	min-width: 0px;
 	will-change: transform;
 	position: absolute;
 	color: #fff;
 	background-color: transparent;
 	font-size: 16px;
-	z-index: 999;
+	z-index: 2;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
@@ -88,6 +90,11 @@ border : 1px solid black;  */
 	align-items: center;
 	width: 30%;
 	height: 100%;
+	/* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;*/
 }
 
 .detail_top_poster {
@@ -100,8 +107,11 @@ border : 1px solid black;  */
 	margin-bottom: 0.5rem;
 	display: flex;
 	flex-direction: row;
-	width: 70%;
+	width: 100%;
 	justify-content: space-evenly;
+	/*
+  줄어들어서 poster박스 width가 사라지면
+  justify-content: center; */
 }
 
 .detail_thumbs_box > div {
@@ -111,7 +121,7 @@ border : 1px solid black;  */
 	/* height: auto; */
 	border-radius: 100%;
 	border: solid 3.2px whitesmoke;
-	width: 28%;
+	width: 57px;
 	top: -5.5rem;
 	height: 57px;
 }
@@ -125,9 +135,14 @@ border : 1px solid black;  */
 	flex-direction: column;
 	/* justify-content: space-between; */
 	align-items: flex-start;
-	padding: 0 2vw 0 2vw;
+	padding: 0 2vw 2vw 2vw;
 	width: 70%;
 	height: 100%;
+	/* 
+  줄어들어서 poster 박스 width가 사라지면
+  align-items: center;
+  width: 100%;
+*/
 }
 
 .title_box {
@@ -148,7 +163,20 @@ border : 1px solid black;  */
 	outline: none;
 	cursor: pointer;
 	background-color: rgb(30, 30, 30);
-	margin: 0 -2% 3% 0;
+	padding: 0 1% 0 0;
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 2;
+}
+
+.title_box_btn > svg {
+	width: 40px;
+	height: 40px;
+	background-color: #181818;
+	-moz-border-radius: 50%;
+	padding: 8px;
 }
 
 .title_box_btn:hover {
@@ -240,7 +268,7 @@ border : 1px solid black;  */
 }
 
 .detail_li {
-	height: 200px !important;
+	height: 150px !important;
 	width: auto !important;
 }
 .still_img {
@@ -250,11 +278,17 @@ border : 1px solid black;  */
 
 .youtube_box {
 	display: flex;
+	position: relative;
 	flex-direction: row;
 	justify-content: center;
 	align-items: initial;
+	width: 90%;
+	margin-bottom: 2.5rem;
+}
+
+.youtube_one {
 	width: 100%;
-	height: 25%;
+	height: 100%;
 }
 
 .like,

@@ -57,6 +57,7 @@ export type UserInfoType = {
 	selectMovie?: { key: number }; // 0: dislike, 1: default, 2: like
 	tag?: { like: object; dislike: object };
 	err?: string;
+	isChanged?: boolean;
 };
 type Like = {
 	tagNum: number;
@@ -84,6 +85,7 @@ const defaultState: UserInfoType = {
 	selectMovie: { key: 0 },
 	tag: { like: { tagNum: 0 }, dislike: { tagNum: 0 } },
 	err: "",
+	isChanged: false,
 };
 export function userReducer(
 	state: UserInfoType = defaultState,
@@ -135,6 +137,7 @@ export function userReducer(
 		case USER_SIGNOUT:
 			return {
 				...state,
+				...defaultState,
 			};
 		case USER_FAIL:
 			return {
@@ -265,6 +268,8 @@ export const signIn = (email: string, password: string) => async (
 		})
 		.then(data => {
 			dispatch(userSignin({ ...data.data, isLogin: true }));
+			const isLogin = getState().userReducer.isLogin;
+			localStorage.setItem("isLogin", isLogin);
 			dispatch(goToIntro());
 		})
 		.catch(err => {
@@ -276,38 +281,29 @@ export const signIn = (email: string, password: string) => async (
 				dispatch(userSignin({ ...data, err: message }));
 			}
 		});
-	//send["message"] ==='일치하는 정보가 존재하지 않습니다 => 회원가입으로 전환
-	//send["message"] ==='비밀번호가 일치하지 않습니다 => setErrormessage => send['message']내용을 담아준다
-	// { message: "비밀번호가 일치하지 않습니다." }
-	// { message: "일치하는 정보가 존재하지 않습니다."}
-	// console.log("after", getState().userReducer);
-	// } catch (err) {
-	// 	console.log("에러다")
-	// 	dispatch(userFail(err));
-	// }
 };
 export const socialLogin = (social: string) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any
 ) => {
-	const url = `https://myraspberry.shop/auth/${social}`;
-	await axios
-		.get(url)
-		.then(data => {
-			dispatch(userSignin({ ...data.data, isLogin: true }));
-			// console.log("여기는 소셜 로그인에서 나온 결과", getState().userReducer);
-			dispatch(goToIntro());
-		})
-		.catch(err => {
-			dispatch(userFail(err));
-		});
-	// try {
-	// 	const { data } = await axios.get(`https://myraspberry.shop/auth/${social}`);
-	// 	dispatch(userSocialLogin({ ...data, isLogin: true }));
-	// 	dispatch(goToIntro());
-	// } catch (err) {
-	// 	dispatch(userFail(err));
-	// }
+	// 소셜로그인 응답 데이터를 어떻게 받아오나? Sign페이지에서 a태그 href로 요청을 보내니까....
+	// dispatch(userSignin({ ...data.data, isLogin: true }));
+	const isLogin = getState().userReducer.isLogin;
+	localStorage.setItem("isLogin", isLogin);
+
+	// const url = `https://myraspberry.shop/auth/${social}`;
+	// await axios
+	// 	.get(url)
+	// 	.then((data) => {
+	// 		dispatch(userSignin({ ...data.data, isLogin: true }));
+	// 		const isLogin = getState().userReducer.isLogin;
+	// 		localStorage.setItem("isLogin", isLogin);
+	// 		// console.log("여기는 소셜 로그인에서 나온 결과", getState().userReducer);
+	// 		dispatch(goToIntro());
+	// 	})
+	// 	.catch((err) => {
+	// 		dispatch(userFail(err));
+	// 	});
 };
 export const signUp = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
@@ -336,36 +332,25 @@ export const signUp = (email: string, password: string) => async (
 			const data = getState().userReducer;
 			dispatch(userSignin({ ...data, err: message }));
 			console.log("fail and 400", message);
-			// if (message === "일치하는 정보가 존재하지 않습니다.") {
-			// 	dispatch(userSignin({ ...data, isSignUp: true }));
-			// } else if (message === "비밀번호가 일치하지 않습니다.") {
-			// 	dispatch(userSignin({ ...data, err: message }));
-			// }
 		});
 };
 
-export const myImageUpdate = (formData?: any) => async (
+export const myImageUpdate = (testvar: string, formData?: any) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any
 ) => {
-	console.log("들어오니?", formData);
+	console.log(testvar, formData);
 
 	dispatch(userRequest());
-
 	await axios
 		// .patch('http://localhost:8080/mypage/changeimage', {
-		.post("https://myraspberry.shop/mypage/changeimage", {
+		.patch("https://myraspberry.shop/mypage/changeimage", {
 			formData,
 		})
 		.then(data => {
 			// 결과값  { username, isChanged: true }
-			console.log("AAAAAAAAAAAAAAAA");
+			// console.log("AAAAAAAAAAAAAAAA");
 			dispatch(userSignin({ ...data.data }));
-			console.log(
-				"여기는 마이페이지 수정 요청 후 나온 결과",
-				getState().userReducer
-			);
-			// dispatch(goToIntro())
 		})
 		.catch(err => {
 			const { message } = err.response.data;
@@ -387,20 +372,15 @@ export const mypageUpdate = (
 
 	await axios
 		// .patch('http://localhost:8080/mypage/changeinfo', {
-		.post("https://myraspberry.shop/mypage/changeinfo", {
+		.patch("https://myraspberry.shop/mypage/changeinfo", {
 			password,
 			newPass,
 			newUserName,
 		})
 		.then(data => {
 			// 결과값  { username, isChanged: true }
-			console.log("AAAAAAAAAAAAAAAA");
+			// console.log("AAAAAAAAAAAAAAAA");
 			dispatch(userSignin({ ...data.data }));
-			console.log(
-				"여기는 마이페이지 수정 요청 후 나온 결과",
-				getState().userReducer
-			);
-			// dispatch(goToIntro())
 		})
 		.catch(err => {
 			const { message } = err.response.data;
@@ -411,6 +391,15 @@ export const mypageUpdate = (
 				dispatch(userSignin({ ...data, err: message }));
 			}
 		});
+};
+
+export const Signout = () => async (
+	dispatch: Dispatch<UsersAction>,
+	getState: any
+) => {
+	dispatch(userSignout());
+	localStorage.removeItem("isLogin");
+	goToIntro();
 };
 
 export default userReducer;
