@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./MainBanner.css";
 import Slider from "react-slick";
 import useMovies from "../../hooks/useMovies";
@@ -60,36 +60,42 @@ const getImage = (title: string) => {
 		case "뮤직 앤 리얼리티":
 			return src + "/image/banner/mar.jpg";
 		default:
-			return src + "/image/banner/joje.jpg"
+			return src + "/image/banner/joje.jpg";
 	}
-}
+};
 
 const modifyData = (movies: any[]) => {
 	const result: any[] = [];
-	for ( let movie of movies ) {
+	for (let movie of movies) {
 		const src = getImage(movie.title);
 		result.push({
 			title: movie.title,
-			poster: "https://imgraspberry.s3-accelerate.amazonaws.com" + movie.image.posters[0],
+			poster:
+				"https://imgraspberry.s3-accelerate.amazonaws.com" +
+				movie.image.posters[0],
 			year: movie.date.slice(0, 4),
 			description: movie.plotKr.slice(0, 200),
-			src: src
+			src: src,
 		});
 	}
 	return result;
-}
+};
 
 function MainBanner(): any {
 	const { moviesState } = useMovies();
 	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
 	const [showDetail, setShowDetail] = useState(false);
 
-
 	const keys = Object.keys(moviesState.movies);
-	const data = [moviesState.movies[keys[0]][0],moviesState.movies[keys[1]][0], moviesState.movies[keys[2]][0], moviesState.movies[keys[4]][2]];
+	const data = [
+		moviesState.movies[keys[0]][0],
+		moviesState.movies[keys[1]][0],
+		moviesState.movies[keys[2]][0],
+		moviesState.movies[keys[4]][2],
+	];
 	const dataForBanner = modifyData(data);
 	const [onMouse, setOnMouse] = useState(false);
-	
+
 	const handleOver = e => {
 		e.preventDefault();
 		setOnMouse(true);
@@ -113,43 +119,54 @@ function MainBanner(): any {
 		setModalOpen(false);
 		setSelectMovie(MOVIE);
 	};
-	const more = onMouse ? { color: "#54BBFF", fontWeight: 600 } : { color: "whitesmoke" };
+	const more = onMouse
+		? { color: "#54BBFF", fontWeight: 600 }
+		: { color: "whitesmoke" };
 	return (
 		<>
 			<Slider {...settings}>
-				{dataForBanner && dataForBanner.map((movie, i) => (
-							<div className="pages"
-								onMouseOver={handleOver}
-								onMouseLeave={handleLeave}
-								onClick={() => {
-									// getScrollTop();
-									// setModalOpen(true);
-									console.log(movie.title)
-									setShowDetail(true);
-									setSelectMovie({ ...data[i] });
-								}}>
-								<div className="page_whole">
-									<div className="box1">
-										<img
-											src={`${movie.src}`}
-											alt="img"
-											style={{maxWidth: "100%", maxHeight: "40rem"}}
-										/>
-									</div>
-									<div className="box2">
+				{dataForBanner &&
+					dataForBanner.map((movie, i) => (
+						<div
+							className="pages"
+							onMouseOver={handleOver}
+							onMouseLeave={handleLeave}
+							onClick={() => {
+								// getScrollTop();
+								// setModalOpen(true);
+								console.log(movie.title);
+								setShowDetail(true);
+								setSelectMovie({ ...data[i] });
+							}}>
+							<div className="page_whole">
+								<div className="box1">
+									<img
+										src={`${movie.src}`}
+										alt="img"
+										style={{ maxWidth: "100%", maxHeight: "40rem" }}
+									/>
+								</div>
+								<div className="box2">
 									{/* <span style={{fontSize: "2rem"}}>영화소개</span> */}
-										<span style={{fontSize: "2rem"}}>{movie.title}</span>
-										{/* <span>{movie.year}년 라즈베리 수상작</span> */}
-										<span style={{paddingRight:"1rem", fontSize: "inherit", lineHeight:"1.5"}}>
-											{movie.description}
-										</span>
-										<span className="banner-more" style={more}>상세정보</span>
-									</div>
+									<span style={{ fontSize: "2rem" }}>{movie.title}</span>
+									{/* <span>{movie.year}년 라즈베리 수상작</span> */}
+									<span
+										style={{
+											paddingRight: "1rem",
+											fontSize: "inherit",
+											lineHeight: "1.5",
+										}}>
+										{movie.description}
+									</span>
+									<span className="banner-more" style={more}>
+										상세정보
+									</span>
 								</div>
 							</div>
-						))}
+						</div>
+					))}
 			</Slider>
-			{selectMovie.id && (
+			{selectMovie.id ? (
 				<CardDetail
 					poster={
 						selectMovie.image.posters[0] === "image/posters/default.jpg"
@@ -159,7 +176,7 @@ function MainBanner(): any {
 					movie={selectMovie}
 					closeMovieDetail={closeMovieDetail}
 				/>
-			)}
+			) : null}
 		</>
 	);
 }

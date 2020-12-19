@@ -20,7 +20,13 @@ const Main = () => {
 	}, []);
 
 	// console.log("main", moviesState);
-	const titleText = ["신작영화 어때요?","자막없이 보는 한국영화 어때요?","외국영화 어때요?","킬링타임용 짧은 영화는 어때요?","여유있게 긴 영화는 어때요?"];
+	const titleText = [
+		"신작영화 어때요?",
+		"자막없이 보는 한국영화 어때요?",
+		"외국영화 어때요?",
+		"킬링타임용 짧은 영화는 어때요?",
+		"여유있게 긴 영화는 어때요?",
+	];
 	const tags = ["renew", "kor", "eng", "long", "short"];
 	return (
 		<>
@@ -32,10 +38,10 @@ const Main = () => {
 					{tags.map((tag, i) => {
 						return (
 							<>
-						  	<Title>
-				  	  	  <TitleText>{titleText[i]}</TitleText>
-				      	</Title>
-			  	    	<ResultBox tag={tag} data={moviesState.movies[tag]} key={tag} />
+								<Title>
+									<TitleText>{titleText[i]}</TitleText>
+								</Title>
+								<ResultBox tag={tag} data={moviesState.movies[tag]} key={tag} />
 							</>
 						);
 					})}
