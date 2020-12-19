@@ -12,15 +12,15 @@ const MovieCard = ({ poster, movie }) => {
 	const [onMouse, setOnMouse] = useState(false);
 	// -1 = hate / 0 = 보통 상태 / 1 = like
 	const [hate, setHate] = useState(0);
-	const handleOnMouse = (e) => {
+	const handleOnMouse = e => {
 		e.preventDefault();
 		setOnMouse(true);
 	};
-	const handleOnMouseOut = (e) => {
+	const handleOnMouseOut = e => {
 		e.preventDefault();
 		setOnMouse(false);
 	};
-	const closeMovieDetail = (e) => {
+	const closeMovieDetail = e => {
 		e.preventDefault();
 		setShowDetail(false);
 	};

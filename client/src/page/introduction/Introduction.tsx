@@ -9,7 +9,7 @@ import CardBox from "../../components/movies/cordBox/CardBox";
 import ResultBox from "../../components/movies/resultBox/ResultBox";
 import { RiMovie2Line } from "react-icons/ri";
 import { AiFillTags } from "react-icons/ai";
-import test from "./count";
+import count from "./count";
 import { Link } from "react-router-dom";
 
 const Introduction = (): JSX.Element => {
@@ -36,7 +36,7 @@ const Introduction = (): JSX.Element => {
 	}, [scrollEvent]);
 
 	useEffect(() => {
-		scrollEvent && test();
+		scrollEvent && count();
 	}, [scrollEvent]);
 
 	return (
@@ -120,7 +120,7 @@ const MainTop = styled.div`
 `;
 
 const CardBoxContainer = styled.div`
-/* NOTE 반응형 만들기,,*/
+	/* NOTE 반응형 만들기,,*/
 	max-width: -webkit-fill-available;
 	display: flex;
 	-webkit-box-align: center;
@@ -129,8 +129,8 @@ const CardBoxContainer = styled.div`
 	justify-content: space-around;
 	margin-bottom: 1rem;
 	@media (max-width: 425px) {
-    overflow: hidden;
-  }
+		overflow: hidden;
+	}
 `;
 
 const ResultBoxContainer = styled.div`
@@ -217,7 +217,6 @@ const MainImage2 = styled(MainImage)`
 const MainImage3 = styled(MainImage)`
 	z-index: 0;
 	background-image: url("https://wallpapercave.com/wp/i2JDlzW.jpg");
-	background-position-y: -242px;
 	::after {
 		z-index: -1;
 		background: rgb(0, 0, 0);
