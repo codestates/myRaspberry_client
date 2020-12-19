@@ -8,6 +8,26 @@ import useIntroMovies from "../../../hooks/useIntroMovies";
 import CardDetail from "../cardDetail/CardDetail";
 import { MoviesType } from "../../../modules/movies";
 
+const MOVIE: MoviesType = {
+	id: 0,
+	docid: "",
+	title: "",
+	titleEng: "",
+	director: "",
+	actor: "",
+	plotKr: "",
+	plotEng: "",
+	runtime: 0,
+	genre: "",
+	image: {
+		posters: "",
+		stlls: [],
+	},
+	tag: [],
+	date: "",
+	score: 0,
+};
+
 let TOP = 0;
 const gradient = `
 top: -${TOP};
@@ -114,6 +134,9 @@ function useWindowSize() {
 const IntroResultBox = () => {
 	const { introMovieState, getIntroMovieData } = useIntroMovies();
 	const [showDetail, setShowDetail] = useState(false);
+	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
+	const [per, setPer] = useState(5);
+	const { loading, introMovies } = introMovieState;
 	const width = useWindowSize();
 	function calWith(args) {
 		const width = args[0];
@@ -136,35 +159,11 @@ const IntroResultBox = () => {
 		}
 	}
 
-	const MOVIE: MoviesType = {
-		id: 0,
-		docid: "",
-		title: "",
-		titleEng: "",
-		director: "",
-		actor: "",
-		plotKr: "",
-		plotEng: "",
-		runtime: 0,
-		genre: "",
-		image: {
-			posters: "",
-			stlls: [],
-		},
-		tag: [],
-		date: "",
-		score: 0,
-	};
-	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
-	const [per, setPer] = useState(5);
-
 	const closeMovieDetail = e => {
 		e.preventDefault();
 		setModalOpen(false);
 		setSelectMovie(MOVIE);
 	};
-
-	const { loading, introMovies } = introMovieState;
 
 	const slideSettings = {
 		className: "slick_container",
@@ -199,7 +198,7 @@ const IntroResultBox = () => {
 				))}
 			</Slider>
 
-			{selectMovie.id ? (
+			{selectMovie.id && (
 				<CardDetail
 					poster={
 						selectMovie.image.posters[0] === "image/posters/default.jpg"
@@ -209,7 +208,7 @@ const IntroResultBox = () => {
 					movie={selectMovie}
 					closeMovieDetail={closeMovieDetail}
 				/>
-			) : null}
+			)}
 		</>
 	);
 };
