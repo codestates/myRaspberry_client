@@ -12,11 +12,12 @@ import useUser from "../../hooks/useUser";
 
 const Main = () => {
 	const { moviesState, getmovieData } = useMovies();
-	const { userState } = useUser();
+	const { userState, onCallUserStateOfLocalStorage } = useUser();
 	// console.log("잘 넘어왔니? 데이터야?", userState);
 
 	React.useEffect(() => {
 		getmovieData();
+		onCallUserStateOfLocalStorage();
 	}, []);
 
 	// console.log("main", moviesState);
