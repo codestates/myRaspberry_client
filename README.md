@@ -2,7 +2,7 @@
 <img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/raspberry_logo_B.png?raw=true" width="500px"/>
 </p>
 
-<h1 align="center">아마도 국내 최초?! 본격 비선호 기반 영화 추천 서비스 <br><a href="https://github.com/codestates/myRaspberry_client/wiki">MY RASPBERRY</a>입니다!</h1>
+<h1 align="center">아마도 국내 최초?! 본격 비선호 기반 영화 추천 서비스 <br><a href="https://myraspberry.shop">MY RASPBERRY</a>입니다!</h1>
 
 <p align="center">
 <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
