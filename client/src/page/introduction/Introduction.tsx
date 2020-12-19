@@ -151,10 +151,8 @@ const TitleText = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-
 	margin: 0;
 	padding: 0;
-
 	font-family: "Lato";
 	line-height: 1.5;
 	font-weight: 900;

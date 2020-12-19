@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
@@ -8,34 +8,26 @@ import Main from "./page/main/Main";
 import Mypage from "./page/mypage/Mypage";
 import Sign from "./page/sign/Sign";
 
-// import {
-// 	mainColor,
-// 	subColor,
-// 	inputColor,
-// 	buttonColor,
-// 	userColor,
-// } from "./common/colors";
-
 const App = (): JSX.Element => {
 	return (
-		// <BrowserRouter>
 		<div>
 			<HeaderContainer>
 				<Header />
 			</HeaderContainer>
-			<MainContainer>
-				<Switch>
+			<Switch>
+				<MainContainer>
 					<Route path={["/", "/intro"]} exact component={Introduction} />
 					<Route path="/main" component={Main} />
 					<Route path="/mypage" component={Mypage} />
-					<Route path="/user" component={Sign} />
-				</Switch>
-			</MainContainer>
+					<SignContainer>
+						<Route path="/user" component={Sign} />
+					</SignContainer>
+				</MainContainer>
+			</Switch>
 			<FooterContainer>
 				<Footer />
 			</FooterContainer>
 		</div>
-		// </BrowserRouter>
 	);
 };
 
@@ -55,6 +47,30 @@ const MainContainer = styled.div`
 	padding: 0px 0 0;
 `;
 
+const SignContainer = styled(MainContainer)`
+	background: url("https://c.wallhere.com/photos/59/70/movie_scenes_Joker_2019_Movie-1865461.jpg!d")
+		center center / cover no-repeat;
+	position: relative;
+	height: 100vh;
+	/* display: flex; */
+	z-index: 1;
+	/* flex-direction: column; */
+	-webkit-box-pack: center;
+	justify-content: center;
+	::after {
+		top: 0;
+		left: 0;
+		filter: alpha(opacity=50);
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		content: "";
+		z-index: -1;
+		background: rgb(0, 0, 0);
+		opacity: 0.63 !important;
+	}
+`;
+
 const FooterContainer = styled.footer`
 	overflow: auto;
 	width: 100%;
@@ -63,7 +79,6 @@ const FooterContainer = styled.footer`
 	position: relative;
 	background-color: #28323c;
 	box-sizing: border-box;
-	padding-top: 100px;
 	padding-bottom: 25px;
 `;
 
