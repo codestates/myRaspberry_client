@@ -13,16 +13,15 @@ import useUser from "../../hooks/useUser";
 const Main = () => {
 	const { moviesState, getmovieData } = useMovies();
 	const { userState } = useUser();
-	console.log("잘 넘어왔니? 데이터야?", userState);
+	// console.log("잘 넘어왔니? 데이터야?", userState);
 
 	React.useEffect(() => {
 		getmovieData();
 	}, []);
 
-	console.log("main", moviesState);
-
-	const { renew, kor, eng, long, short } = moviesState.movies;
-
+	// console.log("main", moviesState);
+	const titleText = ["신작영화 어때요?","자막없이 보는 한국영화 어때요?","외국영화 어때요?","킬링타임용 짧은 영화는 어때요?","여유있게 긴 영화는 어때요?"];
+	const tags = ["renew", "kor", "eng", "long", "short"];
 	return (
 		<>
 			<MainTop>
@@ -30,26 +29,16 @@ const Main = () => {
 					<MainBanner />
 				</SlideContainer>
 				<CardboxContainer>
-					<Title>
-						<TitleText>신작영화 어때요?</TitleText>
-					</Title>
-					<ResultBox renew={renew} />
-					<Title>
-						<TitleText>자막없이 보는 한국영화 어때요?</TitleText>
-					</Title>
-					<ResultBox kor={kor} />
-					<Title>
-						<TitleText>외국영화 어때요?</TitleText>
-					</Title>
-					<ResultBox eng={eng} />
-					<Title>
-						<TitleText>킬링타임용 짧은 영화는 어때요?</TitleText>
-					</Title>
-					<ResultBox long={long} />
-					<Title>
-						<TitleText>여유있게 긴 영화는 어때요?</TitleText>
-					</Title>
-					<ResultBox short={short} />
+					{tags.map((tag, i) => {
+						return (
+							<>
+						  	<Title>
+				  	  	  <TitleText>{titleText[i]}</TitleText>
+				      	</Title>
+			  	    	<ResultBox tag={tag} data={moviesState.movies[tag]} key={tag} />
+							</>
+						);
+					})}
 				</CardboxContainer>
 			</MainTop>
 		</>

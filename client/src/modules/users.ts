@@ -359,12 +359,12 @@ export const myImageUpdate = (formData?: any) => async (
 		})
 		.then(data => {
 			// 결과값  { username, isChanged: true }
-			console.log("AAAAAAAAAAAAAAAA");
+			// console.log("AAAAAAAAAAAAAAAA");
 			dispatch(userSignin({ ...data.data }));
-			console.log(
-				"여기는 마이페이지 수정 요청 후 나온 결과",
-				getState().userReducer
-			);
+			// console.log(
+			// 	"여기는 마이페이지 수정 요청 후 나온 결과",
+			// 	getState().userReducer
+			// );
 			// dispatch(goToIntro())
 		})
 		.catch(err => {
@@ -394,12 +394,12 @@ export const mypageUpdate = (
 		})
 		.then(data => {
 			// 결과값  { username, isChanged: true }
-			console.log("AAAAAAAAAAAAAAAA");
+			// console.log("AAAAAAAAAAAAAAAA");
 			dispatch(userSignin({ ...data.data }));
-			console.log(
-				"여기는 마이페이지 수정 요청 후 나온 결과",
-				getState().userReducer
-			);
+			// console.log(
+			// 	"여기는 마이페이지 수정 요청 후 나온 결과",
+			// 	getState().userReducer
+			// );
 			// dispatch(goToIntro())
 		})
 		.catch(err => {

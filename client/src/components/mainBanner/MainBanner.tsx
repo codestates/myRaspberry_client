@@ -9,8 +9,9 @@ type Settings = {
 
 function MainBanner(): any {
 	const { moviesState } = useMovies();
-	const { renew, eng, kor, long, short } = moviesState.movies;
-	const dataForBanner = [renew[0], eng[0], kor[0], short[2]];
+	const keys = Object.keys(moviesState.movies);
+	console.log("MainBanner MovieState", moviesState);
+	const dataForBanner = [moviesState.movies[keys[0]][0],moviesState.movies[keys[1]][0], moviesState.movies[keys[2]][0], moviesState.movies[keys[4]][2]];
 
 	const settings: Settings = {
 		dots: false,

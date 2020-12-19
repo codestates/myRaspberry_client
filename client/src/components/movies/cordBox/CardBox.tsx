@@ -6,8 +6,9 @@ import useMovies from "../../../hooks/useMovies";
 import LoadingAnimation from "../../../page/LoadingAnimation";
 
 const CardBox = () => {
+	// const { moviesState, onUpdateMovies } = useMovies();
+	// let introData;
 	// const { moviesState, getmovieData } = useMovies();
-
 	// useEffect(() => {
 	// 	getmovieData();
 	// }, []);

@@ -5,9 +5,11 @@ import { pointColor } from "../../../common/colors";
 import useUser from "../../../hooks/useUser";
 import ReactTooltip from "react-tooltip";
 import useIntroMovies from "../../../hooks/useIntroMovies";
+import useMovies from "../../../hooks/useMovies";
 
 const ThumbsDown = ({ fromMovieCard }) => {
 	const { introMovieState, onUpdateIntroMovies } = useIntroMovies();
+	const { moviesState, onUpdateMovies } = useMovies();
 	const [onMouse, setOnMouse] = useState(false);
 	const { userState, onTagUpdate } = useUser();
 
@@ -33,6 +35,7 @@ const ThumbsDown = ({ fromMovieCard }) => {
 					e.stopPropagation();
 					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag);
 					onUpdateIntroMovies();
+					onUpdateMovies();
 				}}
 			/>
 			<ReactTooltip
