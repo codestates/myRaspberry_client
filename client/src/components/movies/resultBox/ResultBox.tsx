@@ -209,7 +209,7 @@ const ResultBox: any = ({ tag, data }) => {
 					/>
 				))}
 			</Slider>
-			{selectMovie.id && (
+			{selectMovie.id ? (
 				<CardDetail
 					poster={
 						selectMovie.image.posters[0] === "image/posters/default.jpg"
@@ -219,7 +219,7 @@ const ResultBox: any = ({ tag, data }) => {
 					movie={selectMovie}
 					closeMovieDetail={closeMovieDetail}
 				/>
-			)}
+			) : null}
 		</>
 	);
 	const isArray = tag => Array.isArray(tag);

@@ -135,7 +135,7 @@ border : 1px solid black;  */
 	flex-direction: column;
 	/* justify-content: space-between; */
 	align-items: flex-start;
-	padding: 0 2vw 0 2vw;
+	padding: 0 2vw 2vw 2vw;
 	width: 70%;
 	height: 100%;
 	/* 
@@ -268,7 +268,7 @@ border : 1px solid black;  */
 }
 
 .detail_li {
-	height: 200px !important;
+	height: 150px !important;
 	width: auto !important;
 }
 .still_img {
