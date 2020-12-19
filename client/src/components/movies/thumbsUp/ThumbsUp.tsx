@@ -5,9 +5,11 @@ import { compColor } from "../../../common/colors";
 import useUser from "../../../hooks/useUser";
 import ReactTooltip from "react-tooltip";
 import useIntroMovies from "../../../hooks/useIntroMovies";
+import useMovies from "../../../hooks/useMovies";
 
 const ThumbsUp = ({ fromMovieCard }) => {
 	const { introMovieState, onUpdateIntroMovies } = useIntroMovies();
+	const { moviesState, onUpdateMovies } = useMovies();
 	const { userState, onTagUpdate } = useUser();
 	const [onMouse, setOnMouse] = useState(false);
 	const isSelected = () => userState.selectMovie && userState.selectMovie[fromMovieCard.docid] !== undefined && userState.selectMovie[fromMovieCard.docid] === 2;
@@ -33,6 +35,7 @@ const ThumbsUp = ({ fromMovieCard }) => {
 					e.stopPropagation();
 					onTagUpdate("up", fromMovieCard.docid, fromMovieCard.tag);
 					onUpdateIntroMovies();
+					onUpdateMovies();
 				}}
 				// onClick={() => alert("따봉!")}
 			/>
