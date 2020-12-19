@@ -1,18 +1,26 @@
 .videoContainer {
-	width: 33.3%;
+	width: 30%;
+	position: relative;
+	display: flex;
+	flex: 1;
 }
 
 .videos {
 	width: -webkit-fill-available;
+}
+
+.videos:hover {
 	cursor: pointer;
+	opacity: 0.63;
 }
 
 .videoPlayer {
 	margin-top: 2.5rem;
 	margin-bottom: 2.5rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
 	display: flex;
 	position: relative;
-	width: 45rem;
 	height: 25rem;
 }
 
