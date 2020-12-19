@@ -74,7 +74,9 @@ COMMING UP NEXT MONDAY
 ### 👉 [Wiki!](https://github.com/codestates/myRaspberry_client/wiki)
 
 <br />
-
+<br />
+<br />
+<hr>
 <p align="center">
 <img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/outtro.png?raw=true" width="500px"/>
 </p>
