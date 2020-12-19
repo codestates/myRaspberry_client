@@ -78,6 +78,6 @@ COMMING UP NEXT MONDAY
 <br />
 
 <p align="center">
-<img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/outtro.png?raw=true" width="500px"/>
+<img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/bodys/page_done.png?raw=true" width="500px"/>
 </p>
 <hr>
