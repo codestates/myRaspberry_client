@@ -149,7 +149,7 @@ function MainBanner(): any {
 							</div>
 						))}
 			</Slider>
-			{selectMovie.id && (
+			{selectMovie.id ? (
 				<CardDetail
 					poster={
 						selectMovie.image.posters[0] === "image/posters/default.jpg"
@@ -159,7 +159,7 @@ function MainBanner(): any {
 					movie={selectMovie}
 					closeMovieDetail={closeMovieDetail}
 				/>
-			)}
+			) : null}
 		</>
 	);
 }
