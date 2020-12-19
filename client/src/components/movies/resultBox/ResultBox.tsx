@@ -139,8 +139,8 @@ function useWindowSize() {
 	return size;
 }
 
-const ResultBox: any = ({tag, data}) => {
-	const {moviesState,onUpdateMovies} = useMovies();
+const ResultBox: any = ({ tag, data }) => {
+	const { moviesState, onUpdateMovies } = useMovies();
 	const [showDetail, setShowDetail] = useState(false);
 	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
 	const [per, setPer] = useState(5);
@@ -165,7 +165,7 @@ const ResultBox: any = ({tag, data}) => {
 		} else if (width > 600) {
 			setPer(2);
 		}
-	};
+	}
 
 	const closeMovieDetail = e => {
 		e.preventDefault();
@@ -184,45 +184,45 @@ const ResultBox: any = ({tag, data}) => {
 		swipeToSlide: true,
 	};
 
-	useEffect(()=>{
+	useEffect(() => {
 		onUpdateMovies();
-	}, [])
+	}, []);
 
 	useEffect(() => {
 		calWith(width);
 	}, [width]);
 
 	const setSlider = (data: any) => (
-			<>
-				<Slider {...slideSettings}>
-					{data.map(movie => (
-						<MovieCard
-							key={movie.id}
-							movie={movie}
-							poster={
-								movie.image.posters[0] === "image/posters/default.jpg"
-									? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-									: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
-							}
-							setShowDetail={setShowDetail}
-							setSelectMovie={setSelectMovie}
-						/>
-					))}
-				</Slider>
-				{selectMovie.id && (
-					<CardDetail
+		<>
+			<Slider {...slideSettings}>
+				{data.map(movie => (
+					<MovieCard
+						key={movie.id}
+						movie={movie}
 						poster={
-							selectMovie.image.posters[0] === "image/posters/default.jpg"
+							movie.image.posters[0] === "image/posters/default.jpg"
 								? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
-								: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
+								: `https://imgraspberry.s3-accelerate.amazonaws.com/${movie.image.posters[0]}`
 						}
-						movie={selectMovie}
-						closeMovieDetail={closeMovieDetail}
+						setShowDetail={setShowDetail}
+						setSelectMovie={setSelectMovie}
 					/>
-				)}
-			</>
-		);
-	const isArray = (tag) => Array.isArray(tag);
+				))}
+			</Slider>
+			{selectMovie.id && (
+				<CardDetail
+					poster={
+						selectMovie.image.posters[0] === "image/posters/default.jpg"
+							? "https://i.ibb.co/HnNxZyh/default-poster.jpg"
+							: `https://imgraspberry.s3-accelerate.amazonaws.com/${selectMovie.image.posters[0]}`
+					}
+					movie={selectMovie}
+					closeMovieDetail={closeMovieDetail}
+				/>
+			)}
+		</>
+	);
+	const isArray = tag => Array.isArray(tag);
 	if (isArray(movies[tag])) {
 		return setSlider(movies[tag]);
 	} else {
