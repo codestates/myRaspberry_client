@@ -1,5 +1,5 @@
 <p align="center">
-<img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/raspberry_logo_B.png?raw=true" width="500px"/>
+<img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/logos/prod_logo_b.png?raw=true" width="500px"/>
 </p>
 
 <h1 align="center">아마도 국내 최초?! 본격 비선호 기반 영화 추천 서비스 <br><a href="https://myraspberry.shop">MY RASPBERRY</a>입니다!</h1>
@@ -21,7 +21,7 @@
 
 # Raspberry? <a id="index01"></a>
 <p align="center">
-<img alt="intro01" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/intro_01.gif?raw=true" width="600px"/>
+<img alt="intro01" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/gifs/introduce.gif?raw=true" width="600px"/>
 </p>
 
 ```sh
@@ -42,7 +42,7 @@
 ## Tech Stacks <a id="index02"></a>
 
 <p align="center">
-<img alt="techStacks" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/intro_03.png?raw=true" width="800px"/>
+<img alt="techStacks" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/bodys/stacks.png?raw=true" width="800px"/>
 </p>
 
 
@@ -78,6 +78,6 @@ COMMING UP NEXT MONDAY
 <br />
 
 <p align="center">
-<img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/outtro.png?raw=true" width="500px"/>
+<img alt="logo" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/bodys/page_done.png?raw=true" width="500px"/>
 </p>
 <hr>
