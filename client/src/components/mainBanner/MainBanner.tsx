@@ -51,22 +51,32 @@ type Settings = {
 const getImage = (title: string) => {
 	const src = "https://imgraspberry.s3-accelerate.amazonaws.com";
 	switch (title) {
-		case "조제":
-			return src + "/image/banner/joje.jpg";
-		case "명량":
-			return src + "/image/banner/mr.jpg";
-		case "테넷":
-			return src + "/image/banner/tn.jpg";
-		case "뮤직 앤 리얼리티":
-			return src + "/image/banner/mar.jpg";
+		case "작은 아씨들":
+			return src + "/image/banner/little_ladies.jpg";
+		case "극한직업":
+			return src + "/image/banner/3d_job.jpg";
+		case "캐롤":
+			return src + "/image/banner/carol.jpg";
+		case "서울역":
+			return src + "/image/banner/seoul_station.jpg";
 		default:
 			return src + "/image/banner/joje.jpg";
 	}
 };
 
+const fixRuntime = runtime => {
+	let time = 0;
+	while (runtime > 60) {
+		runtime = runtime - 60;
+		time++;
+	}
+	return time === 0 ? `${runtime}분` : `${time}시간 ${runtime}분`;
+};
+
 const modifyData = (movies: any[]) => {
 	const result: any[] = [];
 	for (let movie of movies) {
+		console.log(movie.title);
 		const src = getImage(movie.title);
 		result.push({
 			title: movie.title,
@@ -74,8 +84,11 @@ const modifyData = (movies: any[]) => {
 				"https://imgraspberry.s3-accelerate.amazonaws.com" +
 				movie.image.posters[0],
 			year: movie.date.slice(0, 4),
-			description: movie.plotKr.slice(0, 200),
 			src: src,
+			director: movie.director,
+			actor: movie.actor.split(",").slice(0, 6),
+			runtime: fixRuntime(movie.runtime),
+			genre: movie.genre,
 		});
 	}
 	return result;
@@ -91,7 +104,7 @@ function MainBanner(): any {
 		moviesState.movies[keys[0]][0],
 		moviesState.movies[keys[1]][0],
 		moviesState.movies[keys[2]][0],
-		moviesState.movies[keys[4]][2],
+		moviesState.movies[keys[4]][0],
 	];
 	const dataForBanner = modifyData(data);
 	const [onMouse, setOnMouse] = useState(false);
@@ -120,45 +133,52 @@ function MainBanner(): any {
 		setSelectMovie(MOVIE);
 	};
 	const more = onMouse
-		? { color: "#54BBFF", fontWeight: 600 }
+		? { cursor: "pointer", color: "#54BBFF", fontWeight: 600 }
 		: { color: "whitesmoke" };
 	return (
 		<>
 			<Slider {...settings}>
 				{dataForBanner &&
 					dataForBanner.map((movie, i) => (
-						<div
-							className="pages"
-							onMouseOver={handleOver}
-							onMouseLeave={handleLeave}
-							onClick={() => {
-								// getScrollTop();
-								// setModalOpen(true);
-								console.log(movie.title);
-								setShowDetail(true);
-								setSelectMovie({ ...data[i] });
-							}}>
+						<div className="pages">
 							<div className="page_whole">
 								<div className="box1">
 									<img
 										src={`${movie.src}`}
 										alt="img"
-										style={{ maxWidth: "100%", maxHeight: "40rem" }}
+										style={{
+											maxWidth: "100%",
+											maxHeight: "40rem",
+											paddingLeft: "1rem",
+										}}
 									/>
 								</div>
 								<div className="box2">
-									{/* <span style={{fontSize: "2rem"}}>영화소개</span> */}
-									<span style={{ fontSize: "2rem" }}>{movie.title}</span>
-									{/* <span>{movie.year}년 라즈베리 수상작</span> */}
-									<span
-										style={{
-											paddingRight: "1rem",
-											fontSize: "inherit",
-											lineHeight: "1.5",
-										}}>
-										{movie.description}
+									<span style={{ fontSize: "2rem", marginBottom: "0px" }}>
+										{movie.title}({movie.year})
 									</span>
-									<span className="banner-more" style={more}>
+									<span className="banner_info" style={{ marginTop: "-2rem" }}>
+										{movie.genre} | {movie.runtime}
+									</span>
+									<span
+										className="banner_info"
+										style={{ marginBottom: "-2rem" }}>
+										<b>감독 </b>
+										{movie.director}
+									</span>
+									<span className="banner_info">
+										<b>출연 </b>
+										{movie.actor.join(",")}
+									</span>
+									<span
+										className="banner-more"
+										style={more}
+										onMouseOver={handleOver}
+										onMouseLeave={handleLeave}
+										onClick={() => {
+											setShowDetail(true);
+											setSelectMovie({ ...data[i] });
+										}}>
 										상세정보
 									</span>
 								</div>
