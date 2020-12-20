@@ -53,6 +53,13 @@ span.banner-description {
 	padding-right: 1rem;
 }
 
+.banner_info {
+	padding-right: 1rem;
+	font-size: inherit;
+	line-height: 1.5;
+	font-weight: 500;
+}
+
 div.stlls {
 	display: flex;
 	flex-direction: row;

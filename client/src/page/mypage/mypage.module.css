@@ -143,6 +143,7 @@ a {
 	cursor: pointer;
 	border: 0px none transparent;
 	outline: none 0px;
+	white-space: nowrap;
 }
 
 .submit_button:hover {
