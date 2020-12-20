@@ -374,7 +374,7 @@ export const myImageUpdate = (formData?: any) => async (
 		console.log(value);
 		// }
 		await axios
-			.patch("https://myraspberry.shop/mypage/changeimage", {
+			.put("https://myraspberry.shop/mypage/changeimage", {
 				formData,
 				header: {
 					"content-type": "multipart/form-data",
