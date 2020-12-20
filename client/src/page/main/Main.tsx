@@ -30,7 +30,7 @@ const Main = () => {
 	];
 	const tags = ["renew", "kor", "eng", "short", "long"];
 	return (
-		<>
+		<MainBackground>
 			<MainTop>
 				<SlideContainer>
 					<MainBanner />
@@ -48,14 +48,18 @@ const Main = () => {
 					})}
 				</CardboxContainer>
 			</MainTop>
-		</>
+		</MainBackground>
 	);
 };
+
+const MainBackground = styled.div`
+	background-color: rgb(30, 30, 30);
+`;
 
 const MainTop = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 7.5rem;
+	margin-top: 4rem;
 `;
 
 const SlideContainer = styled.div`
@@ -65,7 +69,7 @@ const SlideContainer = styled.div`
 	flex-direction: row;
 	-webkit-box-pack: justify;
 	justify-content: space-around;
-	margin-bottom: 1rem;
+	margin-bottom: -4rem;
 	h1 {
 		margin-top: 8rem;
 		margin-bottom: 8rem;

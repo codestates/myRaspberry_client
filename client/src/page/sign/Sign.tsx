@@ -29,7 +29,13 @@ const Sign = () => {
 	const passwordChange = e => setPassword(e.target.value);
 	const confirmPassChange = e => setConfirmPass(e.target.value);
 
-	const onClick = () => {
+	const handlePressEnter = e => {
+		if (e.key === "Enter") {
+			handleClick();
+		}
+	};
+
+	const handleClick = () => {
 		if (isSignUp) {
 			//회원가입
 			onUserFail("");
@@ -148,7 +154,8 @@ const Sign = () => {
 								placeholder="비밀번호를 입력해주세요"
 								onFocus={e => (e.target.placeholder = "")}
 								onBlur={e => (e.target.placeholder = "비밀번호를 입력해주세요")}
-								onChange={passwordChange}></input>
+								onChange={passwordChange}
+								onKeyPress={handlePressEnter}></input>
 						</li>
 						<li className={isSignUp ? styles.inputList_li : styles.invisible}>
 							<input
@@ -158,14 +165,15 @@ const Sign = () => {
 								placeholder="비밀번호 확인"
 								onChange={confirmPassChange}
 								onFocus={e => (e.target.placeholder = "")}
-								onBlur={e => (e.target.placeholder = "비밀번호 확인")}></input>
+								onBlur={e => (e.target.placeholder = "비밀번호 확인")}
+								onKeyPress={handlePressEnter}></input>
 						</li>
 					</ul>
 					<div className={errMessage ? styles.errMessage : styles.noErrMessage}>
 						{err ? err : errMessage}
 					</div>
 					<div className={styles.submitDiv}>
-						<button className={styles.submitBtn} onClick={() => onClick()}>
+						<button className={styles.submitBtn} onClick={() => handleClick()}>
 							{isSignUp ? "회원가입" : "로그인"}
 						</button>
 					</div>
