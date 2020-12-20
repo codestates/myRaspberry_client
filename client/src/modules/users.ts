@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import axios from "axios";
 import { Data } from "../api/moveis";
 import { StringDecoder } from "string_decoder";
+import { RiContactsBookLine } from "react-icons/ri";
 // import { bcrypt } from "bcrypt";
 const saltRounds = 10;
 
@@ -193,12 +194,12 @@ export const callUserStateOfLocalStorage = () => async (
 // 토큰 없다. - 로컬에 유저 정보가 없다. --> 그냥 둔다. (로그인 전에도 체험 가능)
 //      		- 로컬에 유저 정보가 있다. --> 로컬 유저 정보를 지운다. (로그인 전에도 체험 가능)
 
-export const goToSignPage = () => (
+export const goToMyPage = () => (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
 	{ history }
 ) => {
-	history.push("/user");
+	history.push("/mypage");
 };
 
 export const goToIntro = () => (
@@ -374,13 +375,13 @@ export const signUp = (email: string, password: string) => async (
 		});
 };
 
-export const myImageUpdate = (testvar: string, fd?: any) => async (
+export const myImageUpdate = (fd?: any) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any
 ) => {
 	// fd = formData = 특수한 객체 형태라 콘솔에 fd로만 호출하면 {}로만 나옴 아래와 같이 확인해야 함.
 	for (let value of fd.values()) {
-		console.log(testvar, value);
+		console.log(value);
 	}
 
 	await axios
@@ -391,8 +392,10 @@ export const myImageUpdate = (testvar: string, fd?: any) => async (
 		.then(data => {
 			// 결과값  { username, isChanged: true }
 			// console.log("AAAAAAAAAAAAAAAA");
-			dispatch(userSignin({ ...data.data }));
+			const userState = getState().userReducer;
+			dispatch(userSignin({ ...userState, ...data.data }));
 			dispatch(saveLocalStorage);
+			dispatch(goToMyPage());
 		})
 		.catch(err => {
 			const { message } = err.response.data;
@@ -423,6 +426,7 @@ export const mypageUpdate = (
 			const userState = getState().userReducer;
 			dispatch(userSignin({ ...userState, ...data.data }));
 			dispatch(saveLocalStorage());
+			dispatch(goToMyPage());
 		})
 		.catch(err => {
 			const { message } = err.response.data;
