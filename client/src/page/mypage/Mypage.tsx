@@ -17,7 +17,7 @@ const Mypage = () => {
 	const [password, setPassword] = useState("");
 	console.log("유저상태 확인용", userState);
 	const [errMessage, setErrorMessage] = useState("");
-
+	console.log("유저네임 변경인데, 생기려나?", newUserName);
 	React.useEffect(() => {
 		onCallUserStateOfLocalStorage();
 	}, []);
@@ -28,7 +28,7 @@ const Mypage = () => {
 		if (e.target.files !== null) {
 			const fd = new FormData();
 			fd.append("profileImg", e.target.files[0]);
-			onMyImageUpdate("이거 넘어가니?", fd);
+			onMyImageUpdate(fd);
 		}
 	};
 
@@ -118,36 +118,40 @@ const formDataMaker = (photo, body) => {
 	return (
 		<div className={styles.outBox}>
 			<div className={styles.mypageBox}>
-				<h1 className={styles.mypage_title}>마이페이지 입니다.</h1>
+				<div className={styles.titleBox}>
+					<h1 className={styles.mypage_title}>마이페이지</h1>
+				</div>
 				<div className={styles.mypage_upper}>
-					<div className={styles.change_img_box}>
-						<div className={styles.img_box}>
-							<img
-								className={styles.img}
-								src={
-									!profileImg || profileImg === "noPath"
-										? "https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png"
-										: profileImg
-								}
-								alt="userProfileImg"></img>
-							<div className={styles.img_submit}>
-								<input
-									name="img"
-									type="file"
-									id="img"
-									onChange={onChange}
-									accept="image/png, image/jpeg, image/jpg"
-									hidden
-								/>
-								<label className={styles.submitBtn} htmlFor="img">
-									변경
-								</label>
+					<div className={styles.manage_profile}>
+						<div className={styles.change_img_box}>
+							<div className={styles.img_box}>
+								<img
+									className={styles.img}
+									src={
+										!profileImg || profileImg === "noPath"
+											? "https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png"
+											: profileImg
+									}
+									alt="userProfileImg"></img>
 							</div>
+						</div>
+						<div className={styles.img_submit}>
+							<input
+								name="img"
+								type="file"
+								id="img"
+								onChange={onChange}
+								accept="image/png, image/jpeg, image/jpg"
+								hidden
+							/>
+							<label className={styles.submitBtn} htmlFor="img">
+								이미지 변경
+							</label>
 						</div>
 					</div>
 					<div className={styles.change_info_box}>
-						<div className={styles.mypage_title}>
-							안녕하세요 {userState.username} 유저님!
+						<div className={styles.mypage_subtitle}>
+							안녕하세요 {userState.username}!
 						</div>
 						<ul className={styles.chage_info_ul}>
 							<li className={styles.chage_info_li}>
@@ -155,10 +159,15 @@ const formDataMaker = (photo, body) => {
 									type="text"
 									className={styles.change_info_li_item}
 									value={newUserName}
-									placeholder="변경하실 유저네임을 입력해주세요(선택)"
+									placeholder={userState.username}
 									onChange={userNameChange}></input>
 							</li>
-							<li className={styles.chage_info_li}>
+							<li
+								className={
+									newUserName && confirmChange
+										? styles.invisible
+										: styles.chage_info_li
+								}>
 								<input
 									type="password"
 									className={styles.change_info_li_item}
@@ -166,15 +175,34 @@ const formDataMaker = (photo, body) => {
 									placeholder="변경하실 비밀번호를 입력해주세요(선택)"
 									onChange={passwordChange}></input>
 							</li>
+							<li
+								className={
+									confirmChange ? styles.chage_info_li : styles.invisible
+								}>
+								<input
+									type="password"
+									className={styles.change_info_li_item}
+									value={password}
+									placeholder="현재 비밀번호를 입력해주세요"
+									onChange={checkPassword}></input>
+							</li>
 						</ul>
 						<div className={styles.errMessage}>{errMessage}</div>
 					</div>
-					<button className={styles.submitBtn} onClick={() => onClick()}>
-						정보 변경
+					<button
+						className={confirmChange ? styles.invisible : styles.submit_button}
+						onClick={() => onClick()}>
+						변경
+					</button>
+
+					<button
+						className={confirmChange ? styles.submit_button : styles.invisible}
+						onClick={() => onClick()}>
+						제출
 					</button>
 				</div>
 
-				<div className={confirmChange ? styles.mypage_lower : styles.invisible}>
+				{/* <div className={confirmChange ? styles.mypage_lower : styles.invisible}>
 					<div className={styles.checkPass}>
 						<input
 							type="password"
@@ -183,12 +211,14 @@ const formDataMaker = (photo, body) => {
 							placeholder="현재 비밀번호를 입력해주세요"
 							onChange={checkPassword}></input>
 						<div className={styles.checkPass_btnBox}>
-							<button className={styles.submitBtn} onClick={() => onClick()}>
+							<button
+								className={styles.submit_button}
+								onClick={() => onClick()}>
 								제출
 							</button>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

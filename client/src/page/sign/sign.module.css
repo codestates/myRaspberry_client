@@ -35,7 +35,6 @@ a {
 	-webkit-box-pack: center;
 	background: url("https://c.wallhere.com/photos/59/70/movie_scenes_Joker_2019_Movie-1865461.jpg!d")
 		center center / cover no-repeat;
-	position: relative;
 	height: 100vh;
 	/* display: flex; */
 	z-index: 1;
