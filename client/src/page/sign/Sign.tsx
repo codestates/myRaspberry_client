@@ -173,9 +173,11 @@ const Sign = () => {
 				<div className={styles.sign_down}>
 					<ul className={styles.social_ul}>
 						<li className={styles.social_kakao}>
-							<button
-								className={styles.kakaoIcon}
-								onClick={() => onSocialLogin("kakao")}></button>
+							<a href="/auth/kakao">
+								<button
+									className={styles.kakaoIcon}
+									onClick={() => onSocialLogin("kakao")}></button>
+							</a>
 						</li>
 						<li className={styles.social_google}>
 							<a href="/auth/google">
