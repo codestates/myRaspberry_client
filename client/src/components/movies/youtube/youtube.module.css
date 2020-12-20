@@ -1,24 +1,25 @@
 .videoContainer {
-	width: 30%;
 	position: relative;
+	margin: 4px;
+	width: 30%;
+	color: #ffffff;
+	text-align: left;
+	background-color: #000000;
 	display: flex;
 	flex: 1;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 .videos {
 	width: -webkit-fill-available;
 }
 
-.videos:hover {
-	cursor: pointer;
-	opacity: 0.63;
-}
-
 .videoPlayer {
 	margin-top: 2.5rem;
 	margin-bottom: 2.5rem;
-	margin-left: 1rem;
-	margin-right: 1rem;
+	margin-left: 1.6rem;
+	margin-right: 1.6rem;
 	display: flex;
 	position: relative;
 	height: 25rem;
@@ -26,4 +27,109 @@
 
 .youtube {
 	width: -webkit-fill-available;
+}
+
+/*hover 했을 때 효과*/
+.videoContainer * {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.4s ease-in;
+	transition: all 0.4s ease-in;
+}
+.videoContainer img {
+	position: relative;
+	max-width: 100%;
+	vertical-align: top;
+}
+.videoContainer figcaption {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	padding: 20px 30px;
+}
+.videoContainer figcaption:before,
+.videoContainer figcaption:after {
+	width: 1px;
+	height: 0;
+}
+.videoContainer figcaption:before {
+	right: 0;
+	top: 0;
+}
+.videoContainer figcaption:after {
+	left: 0;
+	bottom: 0;
+}
+.videoContainer h3,
+.videoContainer p {
+	line-height: 1.5em;
+}
+.videoContainer h3 {
+	margin: 0 0 5px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+.videoContainer p {
+	font-size: 0.8em;
+	font-weight: 500;
+	margin: 0 0 15px;
+}
+.videoContainer:before,
+.videoContainer:after,
+.videoContainer figcaption:before,
+.videoContainer figcaption:after {
+	position: absolute;
+	content: "";
+	background-color: #ffffff;
+	z-index: 1;
+	-webkit-transition: all 0.4s ease-in;
+	transition: all 0.4s ease-in;
+	opacity: 0.8;
+}
+.videoContainer:before,
+.videoContainer:after {
+	height: 1px;
+	width: 0%;
+}
+.videoContainer:before {
+	top: 0;
+	left: 0;
+}
+.videoContainer:after {
+	bottom: 0;
+	right: 0;
+}
+.videoContainer:hover img,
+.videoContainer.hover img {
+	opacity: 0.4;
+}
+.videoContainer:hover figcaption,
+.videoContainer.hover figcaption {
+	opacity: 1;
+}
+.videoContainer:hover figcaption:before,
+.videoContainer.hover figcaption:before,
+.videoContainer:hover figcaption:after,
+.videoContainer.hover figcaption:after {
+	height: 100%;
+}
+.videoContainer:hover:before,
+.videoContainer.hover:before,
+.videoContainer:hover:after,
+.videoContainer.hover:after {
+	width: 100%;
+}
+.videoContainer:hover:before,
+.videoContainer.hover:before,
+.videoContainer:hover:after,
+.videoContainer.hover:after,
+.videoContainer:hover figcaption:before,
+.videoContainer.hover figcaption:before,
+.videoContainer:hover figcaption:after,
+.videoContainer.hover figcaption:after {
+	opacity: 0.1;
 }

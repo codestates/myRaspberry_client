@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import styles from "./sign.module.css";
-import { ImGoogle } from "react-icons/im";
-import { SiKaios } from "react-icons/si";
-import { IoIosLogIn } from "react-icons/io";
 import useUser from "../../hooks/useUser";
 import { goToIntro } from "../../modules/users";
 
@@ -28,9 +25,9 @@ const Sign = () => {
 		goToIntro();
 	}, [isLogin]);
 
-	const emailChange = (e) => setEmail(e.target.value);
-	const passwordChange = (e) => setPassword(e.target.value);
-	const confirmPassChange = (e) => setConfirmPass(e.target.value);
+	const emailChange = e => setEmail(e.target.value);
+	const passwordChange = e => setPassword(e.target.value);
+	const confirmPassChange = e => setConfirmPass(e.target.value);
 
 	const onClick = () => {
 		if (isSignUp) {
@@ -80,26 +77,15 @@ const Sign = () => {
 			} else if (checkPassword(password)) {
 				//로그인 통신
 				onSignIn(email, password);
-				// 	console.log("hi");
-				// });
-				// console.log(
-				// 	"요청 직후 리디렉트를 위한 상태 변하냐?",
-				// 	userState.isLogin,
-				// );
-
-				// result ? setIsUser(true) : null;
-				// onGoToIntro();
-				//만약 유저가 없다면?
-
 				return;
 			}
 		}
 	};
 
-	const ValidateEmail = (mail) => {
+	const ValidateEmail = email => {
 		if (
 			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-				email,
+				email
 			)
 		) {
 			return true;
@@ -107,10 +93,10 @@ const Sign = () => {
 		return false;
 	};
 
-	const checkPassword = (upw) => {
+	const checkPassword = upw => {
 		if (!/^[a-zA-Z0-9]{8,20}$/.test(upw)) {
 			setErrorMessage(
-				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.",
+				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다."
 			);
 			return false;
 		}
@@ -125,6 +111,7 @@ const Sign = () => {
 			return false;
 		} else return true;
 	};
+	const newlineText = `아직 회원이 아니신가요?\n회원이 아니시면 원하는 이메일과 비밀번호를 눌러주세요`;
 
 	return (
 		<div className={styles.outBox}>
@@ -132,52 +119,68 @@ const Sign = () => {
 				<div className={styles.sign_upper}>
 					<h1 className={styles.sign_text}>
 						{isSignUp
-							? "마이 라즈베리 가족이 되어주세요"
+							? "마이 라즈베리 가족이 되어주세요!"
 							: "안녕하세요 회원님!"}
 					</h1>
-
+					<h5 className={styles.sign_subText}>
+						{isSignUp ? `비밀번호를 한번 더 입력해주세요.` : newlineText}
+					</h5>
 					<ul className={styles.inputList_ul}>
 						<li className={styles.inputList_li}>
 							<input
 								type="text"
-								className={styles.input_item}
+								className={`${styles.input_item} ${styles.email}`}
 								value={email}
 								placeholder="이메일을 입력해주세요"
+								onFocus={e => (e.target.placeholder = "")}
+								onBlur={e => (e.target.placeholder = "이메일을 입력해주세요")}
 								onChange={emailChange}></input>
 						</li>
 						<li className={styles.inputList_li}>
 							<input
 								type="password"
-								className={styles.input_item}
+								className={
+									isSignUp
+										? `${styles.input_item} ${styles.pass1}`
+										: `${styles.input_item} ${styles.pass2}`
+								}
 								value={password}
 								placeholder="비밀번호를 입력해주세요"
+								onFocus={e => (e.target.placeholder = "")}
+								onBlur={e => (e.target.placeholder = "비밀번호를 입력해주세요")}
 								onChange={passwordChange}></input>
 						</li>
 						<li className={isSignUp ? styles.inputList_li : styles.invisible}>
 							<input
 								type="password"
-								className={styles.input_item}
+								className={`${styles.input_item} ${styles.pass2}`}
 								value={confirmPass}
-								placeholder="비밀번호를 다시 입력해주세요"
-								onChange={confirmPassChange}></input>
+								placeholder="비밀번호 확인"
+								onChange={confirmPassChange}
+								onFocus={e => (e.target.placeholder = "")}
+								onBlur={e => (e.target.placeholder = "비밀번호 확인")}></input>
 						</li>
 					</ul>
-					<div className={styles.errMessage}>{err ? err : errMessage}</div>
-					<button className={styles.submitBtn} onClick={() => onClick()}>
-						<IoIosLogIn />
-					</button>
+					<div className={errMessage ? styles.errMessage : styles.noErrMessage}>
+						{err ? err : errMessage}
+					</div>
+					<div className={styles.submitDiv}>
+						<button className={styles.submitBtn} onClick={() => onClick()}>
+							{isSignUp ? "회원가입" : "로그인"}
+						</button>
+					</div>
 				</div>
 				<div className={styles.sign_down}>
 					<ul className={styles.social_ul}>
 						<li className={styles.social_kakao}>
-							<button onClick={() => onSocialLogin("kakao")}>
-								<SiKaios />
-							</button>
+							<button
+								className={styles.kakaoIcon}
+								onClick={() => onSocialLogin("kakao")}></button>
 						</li>
 						<li className={styles.social_google}>
-							<button onClick={() => onSocialLogin("google")}>
-								<ImGoogle />
-							</button>
+							<button
+								className={styles.googleIcon}
+								onClick={() => onSocialLogin("google")}></button>
 						</li>
 					</ul>
 				</div>
