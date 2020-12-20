@@ -50,10 +50,10 @@ const Introduction = (): JSX.Element => {
 				<CardBoxContainer>
 					<CardBox />
 				</CardBoxContainer>
-				<Title>
-					<TitleText>오늘 이 영화 어때요?</TitleText>
-				</Title>
 				<ResultBoxContainer>
+					<Title>
+						<TitleText>오늘 이 영화 어때요?</TitleText>
+					</Title>
 					<IntroResultBox />
 				</ResultBoxContainer>
 			</MainTop>
@@ -132,7 +132,7 @@ const CardBoxContainer = styled.div`
 	flex-direction: row;
 	-webkit-box-pack: justify;
 	justify-content: space-around;
-	margin-bottom: 1rem;
+	margin-bottom: 2.2rem;
 	@media (max-width: 425px) {
 		overflow: hidden;
 	}

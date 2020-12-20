@@ -196,7 +196,7 @@ const IntroResultBox = () => {
 				))}
 			</Slider>
 
-			{selectMovie.id && (
+			{selectMovie.id ? (
 				<CardDetail
 					poster={
 						selectMovie.image.posters[0] === "image/posters/default.jpg"
@@ -206,7 +206,7 @@ const IntroResultBox = () => {
 					movie={selectMovie}
 					closeMovieDetail={closeMovieDetail}
 				/>
-			)}
+			) : null}
 		</>
 	);
 };
