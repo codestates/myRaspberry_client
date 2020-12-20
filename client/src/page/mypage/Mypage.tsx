@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./mypage.module.css";
 import axios from "axios";
 import useUser from "../../hooks/useUser";
+import { formatDiagnosticsWithColorAndContext } from "typescript";
 
 const Mypage = () => {
 	const {
@@ -24,12 +25,23 @@ const Mypage = () => {
 
 	// 새로 작성 이미지 변경
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files !== null) {
-			const fd = new FormData();
-			fd.append("profileImg", e.target.files[0]);
-			onMyImageUpdate(fd);
-		}
+	// const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	// 	if (e.target.files !== null) {
+	// 		const fd = new FormData();
+	// 		fd.append("profileImg", e.target.files[0]);
+	// 		onMyImageUpdate(fd);
+	// 	}
+	// };
+
+	const photoChange = (e) => {
+		e.target.nextSibling.click();
+	};
+
+	const PhotoSubmit = (e) => {
+		e.preventDefault();
+		const formData = new FormData();
+		formData.append("profileImg", e.target.childNodes[0].files[0]);
+		onMyImageUpdate(formData);
 	};
 
 	const userNameChange = (e) => setNewUserName(e.target.value);
@@ -135,19 +147,26 @@ const formDataMaker = (photo, body) => {
 									alt="userProfileImg"></img>
 							</div>
 						</div>
-						<div className={styles.img_submit}>
+						<form
+							encType="multipart/from-data"
+							style={{ position: "relative" }}
+							onSubmit={PhotoSubmit}
+							className={styles.img_submit}>
 							<input
 								name="img"
 								type="file"
 								id="img"
-								onChange={onChange}
-								accept="image/png, image/jpeg, image/jpg"
+								// onChange={onChange}
+								onChange={photoChange}
+								accept="image/*"
+								required
 								hidden
 							/>
+							<input type="submit" style={{ display: "none" }}></input>
 							<label className={styles.submitBtn} htmlFor="img">
 								이미지 변경
 							</label>
-						</div>
+						</form>
 					</div>
 					<div className={styles.change_info_box}>
 						<div className={styles.mypage_subtitle}>
