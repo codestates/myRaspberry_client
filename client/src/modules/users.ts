@@ -16,8 +16,9 @@ const USER_SIGNOUT = "users/USER_SIGNOUT" as const;
 const USER_FAIL = "users/USER_FAIL" as const;
 const UPDATE_USER_INFO = "users/UPDATE_USER_INFO" as const;
 // 액션 생성 함수
-export const userRequest = () => ({
+export const userRequest = (isLogin: UserInfoType) => ({
 	type: USER_REQUEST,
+	payload: isLogin,
 });
 export const userSignin = (data: UserInfoType): any => ({
 	type: USER_SIGNIN,
@@ -89,23 +90,24 @@ const defaultState: UserInfoType = {
 };
 export function userReducer(
 	state: UserInfoType = defaultState,
-	action: UsersAction
+	action: UsersAction,
 ): UserInfoType {
 	switch (action.type) {
 		case USER_REQUEST:
 			return {
 				...state,
-				isLogin: true,
+				...action.payload,
 			};
 		case USER_SIGNIN:
 			return {
 				...state,
-				isLogin: action.payload.isLogin,
-				username: action.payload.username,
-				profileImg: action.payload.profileImg,
-				tag: action.payload.tag,
-				isSignUp: action.payload.isSignUp,
-				err: action.payload.err,
+				...action.payload,
+				// isLogin: action.payload.isLogin,
+				// username: action.payload.username,
+				// profileImg: action.payload.profileImg,
+				// tag: action.payload.tag,
+				// isSignUp: action.payload.isSignUp,
+				// err: action.payload.err,
 			};
 		case USER_SIGNUP:
 			return {
@@ -148,15 +150,36 @@ export function userReducer(
 			return state;
 	}
 }
+
+// 로컬스토리지에 유저의 상태를 저장한다.
+// 업데이트를 할 때마다 구 데이터를 지우고 새로운 데이터를 저장한다.
+export const saveLocalStorage = () => (
+	dispatch: Dispatch<UsersAction>,
+	getState: any,
+) => {
+	localStorage.removeItem("userState");
+	const userState = getState().userReducer;
+	localStorage.setItem("userState", JSON.stringify(userState));
+};
+
+export const callUserStateOfLocalStorage = () => (
+	dispatch: Dispatch<UsersAction>,
+	getState: any,
+) => {
+	const stateOfUser: any = localStorage.getItem("userState");
+	const result = JSON.parse(stateOfUser);
+	dispatch(userSignin(result));
+};
+
 export const goToIntro = () => (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
-	{ history }
+	{ history },
 ) => {
 	history.push("/main");
 };
 const setTag = (like: object, tag: number[], cancel: boolean): object => {
-	tag.forEach(x => {
+	tag.forEach((x) => {
 		if (like[x] === undefined) {
 			like[x] = 0;
 		}
@@ -171,7 +194,7 @@ const setIsLike = (
 	prevStatus: number,
 	userTag: UserTag,
 	tag: number[],
-	isLike: boolean
+	isLike: boolean,
 ) => {
 	interface NEWTAG {
 		like: object;
@@ -213,7 +236,7 @@ const setIsLike = (
 };
 export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any
+	getState: any,
 ) => {
 	const user = getState().userReducer;
 	let status: number = 1;
@@ -229,50 +252,41 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 			user.selectMovie[docid],
 			user.tag,
 			tag,
-			isLike
+			isLike,
 		);
 		user.selectMovie[docid] = tmpStatus;
-		// console.log(tmpStatus);
+
 		user.tag = tmpTag;
 	} else {
 		const [tmpStatus, tmpTag] = setIsLike(
 			user.selectMovie[docid],
 			user.tag,
 			tag,
-			isLike
+			isLike,
 		);
 		user.selectMovie[docid] = tmpStatus;
-		// console.log(tmpStatus);
+
 		user.tag = tmpTag;
 	}
 	dispatch(updateUserInfo({ ...user }));
-	// dispatch(
-	// 	userSelectMovieUpdate({
-	// 		...user.selectMovie,
-	// 		selectMovie: user.selectMovie,
-	// 	}),
-	// );
-	// dispatch(userTagUpdate({ ...user.tag.like, tag: user.tag.like }));
+	dispatch(saveLocalStorage());
 };
 export const signIn = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any
+	getState: any,
 ) => {
-	// try {
-	dispatch(userRequest());
 	// const { data, status } =
 	await axios
 		.post("https://myraspberry.shop/auth/signin", {
 			email,
 			password,
 		})
-		.then(data => {
+		.then((data) => {
 			dispatch(userSignin({ ...data.data, isLogin: true }));
-			const isLogin = getState().userReducer.isLogin;
-			localStorage.setItem("isLogin", isLogin);
+			dispatch(saveLocalStorage());
 			dispatch(goToIntro());
 		})
-		.catch(err => {
+		.catch((err) => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
 			if (message === "일치하는 정보가 존재하지 않습니다.") {
@@ -284,7 +298,7 @@ export const signIn = (email: string, password: string) => async (
 };
 export const socialLogin = (social: string) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any
+	getState: any,
 ) => {
 	// 소셜로그인 응답 데이터를 어떻게 받아오나? Sign페이지에서 a태그 href로 요청을 보내니까....
 	// dispatch(userSignin({ ...data.data, isLogin: true }));
@@ -307,7 +321,7 @@ export const socialLogin = (social: string) => async (
 };
 export const signUp = (email: string, password: string) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any
+	getState: any,
 ) => {
 	// const cryptPassword = await bcrypt.genSalt(
 	// 	saltRounds,
@@ -324,35 +338,36 @@ export const signUp = (email: string, password: string) => async (
 			email,
 			password,
 		})
-		.then(data => {
+		.then((data) => {
 			dispatch(userSignin({ ...data.data, isSignUp: false }));
+			dispatch(saveLocalStorage());
 		})
-		.catch(err => {
-			const { message } = err.response.data;
-			const data = getState().userReducer;
-			dispatch(userSignin({ ...data, err: message }));
-			console.log("fail and 400", message);
+		.catch((err) => {
+			dispatch(userFail(err));
 		});
 };
 
-export const myImageUpdate = (testvar: string, formData?: any) => async (
+export const myImageUpdate = (testvar: string, fd?: any) => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any
+	getState: any,
 ) => {
-	console.log(testvar, formData);
+	// fd = formData = 특수한 객체 형태라 콘솔에 fd로만 호출하면 {}로만 나옴 아래와 같이 확인해야 함.
+	for (let value of fd.values()) {
+		console.log(testvar, value);
+	}
 
-	dispatch(userRequest());
 	await axios
 		// .patch('http://localhost:8080/mypage/changeimage', {
 		.patch("https://myraspberry.shop/mypage/changeimage", {
-			formData,
+			fd,
 		})
-		.then(data => {
+		.then((data) => {
 			// 결과값  { username, isChanged: true }
 			// console.log("AAAAAAAAAAAAAAAA");
 			dispatch(userSignin({ ...data.data }));
+			dispatch(saveLocalStorage);
 		})
-		.catch(err => {
+		.catch((err) => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
 			if (message === "일치하는 정보가 존재하지 않습니다.") {
@@ -366,10 +381,8 @@ export const myImageUpdate = (testvar: string, formData?: any) => async (
 export const mypageUpdate = (
 	password?: string,
 	newPass?: string,
-	newUserName?: string
+	newUserName?: string,
 ) => async (dispatch: Dispatch<UsersAction>, getState: any) => {
-	dispatch(userRequest());
-
 	await axios
 		// .patch('http://localhost:8080/mypage/changeinfo', {
 		.patch("https://myraspberry.shop/mypage/changeinfo", {
@@ -377,12 +390,14 @@ export const mypageUpdate = (
 			newPass,
 			newUserName,
 		})
-		.then(data => {
+		.then((data) => {
 			// 결과값  { username, isChanged: true }
 			// console.log("AAAAAAAAAAAAAAAA");
-			dispatch(userSignin({ ...data.data }));
+			const userState = getState().userReducer;
+			dispatch(userSignin({ ...userState, ...data.data }));
+			dispatch(saveLocalStorage());
 		})
-		.catch(err => {
+		.catch((err) => {
 			const { message } = err.response.data;
 			const data = getState().userReducer;
 			if (message === "일치하는 정보가 존재하지 않습니다.") {
@@ -395,11 +410,11 @@ export const mypageUpdate = (
 
 export const Signout = () => async (
 	dispatch: Dispatch<UsersAction>,
-	getState: any
+	getState: any,
 ) => {
 	dispatch(userSignout());
-	localStorage.removeItem("isLogin");
-	goToIntro();
+	localStorage.removeItem("userState");
+	dispatch(goToIntro());
 };
 
 export default userReducer;
