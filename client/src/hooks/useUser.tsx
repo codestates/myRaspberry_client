@@ -10,6 +10,7 @@ import {
 	mypageUpdate,
 	myImageUpdate,
 	Signout,
+	callUserStateOfLocalStorage,
 } from "../modules/users";
 
 export default function useUser() {
@@ -29,9 +30,11 @@ export default function useUser() {
 		newPass?: string,
 		newUserName?: string,
 	) => dispatch(mypageUpdate(password, newPass, newUserName));
-	const onMyImageUpdate = (testvar: string, formData: any) =>
-		dispatch(myImageUpdate(testvar, formData));
+	const onMyImageUpdate = (testvar: string, fd: any) =>
+		dispatch(myImageUpdate(testvar, fd));
 	const onSignout = () => dispatch(Signout());
+	const onCallUserStateOfLocalStorage = () =>
+		dispatch(callUserStateOfLocalStorage());
 	return {
 		onSignIn,
 		onSignUp,
@@ -44,5 +47,6 @@ export default function useUser() {
 		onMypageUpdate,
 		onMyImageUpdate,
 		onSignout,
+		onCallUserStateOfLocalStorage,
 	};
 }

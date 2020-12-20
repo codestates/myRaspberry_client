@@ -4,7 +4,12 @@ import axios from "axios";
 import useUser from "../../hooks/useUser";
 
 const Mypage = () => {
-	const { userState, onMypageUpdate, onMyImageUpdate } = useUser();
+	const {
+		userState,
+		onMypageUpdate,
+		onMyImageUpdate,
+		onCallUserStateOfLocalStorage,
+	} = useUser();
 	const { profileImg } = userState;
 	const [confirmChange, setConfirmChange] = useState(false);
 	const [newUserName, setNewUserName] = useState("");
@@ -13,19 +18,19 @@ const Mypage = () => {
 	console.log("유저상태 확인용", userState);
 	const [errMessage, setErrorMessage] = useState("");
 
-	// 새로 작성 이미지 변경
-	const [img, setImage] = useState<any>(null);
-	const onChange = (e) => {
-		setImage(e.target.files[0]);
-	};
+	React.useEffect(() => {
+		onCallUserStateOfLocalStorage();
+	}, []);
 
-	const onSubmit = async () => {
-		const formData = new FormData();
-		formData.append("img", img);
-		const testvar = "dddd";
-		onMyImageUpdate(testvar, formData);
+	// 새로 작성 이미지 변경
+
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files !== null) {
+			const fd = new FormData();
+			fd.append("profileImg", e.target.files[0]);
+			onMyImageUpdate("이거 넘어가니?", fd);
+		}
 	};
-	//
 
 	const userNameChange = (e) => setNewUserName(e.target.value);
 	const passwordChange = (e) => setNewPass(e.target.value);
@@ -137,7 +142,6 @@ const formDataMaker = (photo, body) => {
 								<label className={styles.submitBtn} htmlFor="img">
 									변경
 								</label>
-								<button onClick={onSubmit}>변경요청</button>
 							</div>
 						</div>
 					</div>
