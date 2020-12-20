@@ -178,9 +178,11 @@ const Sign = () => {
 								onClick={() => onSocialLogin("kakao")}></button>
 						</li>
 						<li className={styles.social_google}>
-							<button
-								className={styles.googleIcon}
-								onClick={() => onSocialLogin("google")}></button>
+							<a href="/auth/google">
+								<button
+									className={styles.googleIcon}
+									onClick={() => onSocialLogin("google")}></button>
+							</a>
 						</li>
 					</ul>
 				</div>
