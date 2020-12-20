@@ -5,7 +5,6 @@ import { StringDecoder } from "string_decoder";
 import { RiContactsBookLine } from "react-icons/ri";
 // import { bcrypt } from "bcrypt";
 const saltRounds = 10;
-
 // 액션 type
 const USER_REQUEST = "users/USER_REQUEST" as const;
 const USER_SIGNIN = "users/USER_SIGNIN" as const;
@@ -151,7 +150,6 @@ export function userReducer(
 			return state;
 	}
 }
-
 // 로컬스토리지에 유저의 상태를 저장한다.
 // 업데이트를 할 때마다 구 데이터를 지우고 새로운 데이터를 저장한다.
 export const saveLocalStorage = () => (
@@ -162,7 +160,6 @@ export const saveLocalStorage = () => (
 	const userState = getState().userReducer;
 	localStorage.setItem("userState", JSON.stringify(userState));
 };
-
 export const callUserStateOfLocalStorage = () => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any
@@ -170,7 +167,6 @@ export const callUserStateOfLocalStorage = () => async (
 	const stateOfUser: any = localStorage.getItem("userState");
 	// const result = JSON.parse(stateOfUser);
 	const userState = getState().userReducer;
-
 	const token = document.cookie.split("=")[0];
 	if (token) {
 		await axios
@@ -193,7 +189,6 @@ export const callUserStateOfLocalStorage = () => async (
 //																		 --> 요청 결과가 err면 로컬 정보를 지운다.
 // 토큰 없다. - 로컬에 유저 정보가 없다. --> 그냥 둔다. (로그인 전에도 체험 가능)
 //      		- 로컬에 유저 정보가 있다. --> 로컬 유저 정보를 지운다. (로그인 전에도 체험 가능)
-
 export const goToMyPage = () => (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
@@ -201,7 +196,6 @@ export const goToMyPage = () => (
 ) => {
 	history.push("/mypage");
 };
-
 export const goToIntro = () => (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
@@ -286,7 +280,6 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 			isLike
 		);
 		user.selectMovie[docid] = tmpStatus;
-
 		user.tag = tmpTag;
 	} else {
 		const [tmpStatus, tmpTag] = setIsLike(
@@ -296,7 +289,6 @@ export const tagUpdate = (isUp: string, docid: string, tag: number[]) => async (
 			isLike
 		);
 		user.selectMovie[docid] = tmpStatus;
-
 		user.tag = tmpTag;
 	}
 	dispatch(updateUserInfo({ ...user }));
@@ -333,7 +325,6 @@ export const socialLogin = (social: string) => async (
 ) => {
 	// 소셜로그인 응답 데이터를 어떻게 받아오나? Sign페이지에서 a태그 href로 요청을 보내니까....
 	// dispatch(userSignin({ ...data.data, isLogin: true }));
-
 	const url = `https://myraspberry.shop/auth/${social}`;
 	await axios.get(url);
 	// 	.then((data) => {
@@ -360,7 +351,6 @@ export const signUp = (email: string, password: string) => async (
 	// 		});
 	// 	},
 	// );
-
 	await axios
 		.post("https://myraspberry.shop/auth/signup", {
 			email,
@@ -374,7 +364,6 @@ export const signUp = (email: string, password: string) => async (
 			dispatch(userFail(err));
 		});
 };
-
 export const myImageUpdate = (fd?: any) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any
@@ -383,7 +372,6 @@ export const myImageUpdate = (fd?: any) => async (
 	for (let value of fd.values()) {
 		console.log(value);
 	}
-
 	await axios
 		// .patch('http://localhost:8080/mypage/changeimage', {
 		.patch("https://myraspberry.shop/mypage/changeimage", {
@@ -407,7 +395,6 @@ export const myImageUpdate = (fd?: any) => async (
 			}
 		});
 };
-
 export const mypageUpdate = (
 	password?: string,
 	newPass?: string,
