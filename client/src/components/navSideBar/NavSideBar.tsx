@@ -31,12 +31,12 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 		2: false,
 		3: false,
 	});
-	const handleOver = (key) => {
+	const handleOver = key => {
 		const newState = { ...onMouse };
 		newState[key] = true;
 		setOnMouse(newState);
 	};
-	const handleLeave = (key) => {
+	const handleLeave = key => {
 		const newState = { ...onMouse };
 		newState[key] = false;
 		setOnMouse(newState);
@@ -45,9 +45,9 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 	const setPTag = (
 		listOfClass: string[],
 		listOfText: string[],
-		key: number,
+		key: number
 	) => {
-		listOfText = listOfText.map((x) => x.toUpperCase());
+		listOfText = listOfText.map(x => x.toUpperCase());
 		const nameOfClass = listOfClass.join(" ");
 		const text = onMouse[key] ? listOfText[1] : listOfText[0];
 		const color = { color: onMouse[key] ? "#cf3535" : "whitesmoke" };
@@ -55,11 +55,11 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 			<p
 				style={color}
 				className={nameOfClass}
-				onMouseOver={(e) => {
+				onMouseOver={e => {
 					e.preventDefault();
 					handleOver(key);
 				}}
-				onMouseLeave={(e) => {
+				onMouseLeave={e => {
 					e.preventDefault();
 					handleLeave(key);
 				}}>
@@ -94,7 +94,7 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 							{setPTag(
 								[linkText, "intro"],
 								["introduction", "라즈베리 서비스란?"],
-								0,
+								0
 							)}
 						</Link>
 						<Link to="/main" onClick={handleClose}>
@@ -106,13 +106,13 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 									{setPTag(
 										[linkText, "mypage"],
 										["mypage", "내 정보 보러가기"],
-										2,
+										2
 									)}
 								</Link>
 							</>
 						)}
 						<Link
-							to={isLogin ? "/signout" : "/user"}
+							to={isLogin ? "/" : "/user"}
 							onClick={() => {
 								onSignout();
 								handleClose();
