@@ -76,7 +76,6 @@ const fixRuntime = runtime => {
 const modifyData = (movies: any[]) => {
 	const result: any[] = [];
 	for (let movie of movies) {
-		console.log(movie.title);
 		const src = getImage(movie.title);
 		result.push({
 			title: movie.title,
@@ -140,7 +139,7 @@ function MainBanner(): any {
 			<Slider {...settings}>
 				{dataForBanner &&
 					dataForBanner.map((movie, i) => (
-						<div className="pages">
+						<div className="pages" key={i}>
 							<div className="page_whole">
 								<div className="box1">
 									<img
