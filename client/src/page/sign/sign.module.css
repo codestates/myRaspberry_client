@@ -33,6 +33,27 @@ a {
 	display: flex;
 	justify-content: center;
 	-webkit-box-pack: center;
+	background: url("https://c.wallhere.com/photos/59/70/movie_scenes_Joker_2019_Movie-1865461.jpg!d")
+		center center / cover no-repeat;
+	position: relative;
+	height: 100vh;
+	/* display: flex; */
+	z-index: 1;
+	/* flex-direction: column; */
+	-webkit-box-pack: center;
+	justify-content: center;
+}
+.outBox::after {
+	top: 0;
+	left: 0;
+	filter: alpha(opacity=50);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	content: "";
+	z-index: -1;
+	background: rgb(0, 0, 0);
+	opacity: 0.63 !important;
 }
 
 .signBox {
@@ -41,6 +62,7 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	width: 700px;
+	padding: 6.5rem 0px 0px 0px;
 }
 
 .sign_upper {

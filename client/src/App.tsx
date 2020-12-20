@@ -19,9 +19,7 @@ const App = (): JSX.Element => {
 					<Route path={["/", "/intro"]} exact component={Introduction} />
 					<Route path="/main" component={Main} />
 					<Route path="/mypage" component={Mypage} />
-					<SignContainer>
-						<Route path="/user" component={Sign} />
-					</SignContainer>
+					<Route path="/user" component={Sign} />
 				</MainContainer>
 			</Switch>
 			<FooterContainer>
@@ -45,30 +43,6 @@ const MainContainer = styled.div`
 	background-color: #111;
 	height: 100%; //100% 바꾸지 말 것
 	padding: 0px 0 0;
-`;
-
-const SignContainer = styled(MainContainer)`
-	background: url("https://c.wallhere.com/photos/59/70/movie_scenes_Joker_2019_Movie-1865461.jpg!d")
-		center center / cover no-repeat;
-	position: relative;
-	height: 100vh;
-	/* display: flex; */
-	z-index: 1;
-	/* flex-direction: column; */
-	-webkit-box-pack: center;
-	justify-content: center;
-	::after {
-		top: 0;
-		left: 0;
-		filter: alpha(opacity=50);
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		content: "";
-		z-index: -1;
-		background: rgb(0, 0, 0);
-		opacity: 0.63 !important;
-	}
 `;
 
 const FooterContainer = styled.footer`
