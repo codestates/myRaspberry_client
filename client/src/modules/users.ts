@@ -162,13 +162,43 @@ export const saveLocalStorage = () => (
 	localStorage.setItem("userState", JSON.stringify(userState));
 };
 
-export const callUserStateOfLocalStorage = () => (
+export const callUserStateOfLocalStorage = () => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
 ) => {
 	const stateOfUser: any = localStorage.getItem("userState");
-	const result = JSON.parse(stateOfUser);
-	dispatch(userSignin(result));
+	// const result = JSON.parse(stateOfUser);
+	const userState = getState().userReducer;
+
+	const token = document.cookie.split("=")[0];
+	if (token) {
+		await axios
+			.get("https://myraspberry.shop/auth/getinfo")
+			.then((res) => {
+				dispatch(userSignin({ ...userState, ...res.data, isLogin: true }));
+				const updatedUserState = getState().userReducer;
+				localStorage.setItem("userState", JSON.stringify(updatedUserState));
+			})
+			.catch((err) => localStorage.removeItem("userState"));
+	} else {
+		if (!stateOfUser) {
+			return;
+		} else {
+			localStorage.removeItem("userState");
+		}
+	}
+};
+// 토큰 있다. - 로컬에 유저 정보가 있거나 없거나 --> 서버에 유저 정보를 요청 보낸다. 그리고 받은 정보를 로컬과 유저 상태에 저장한다.
+//																		 --> 요청 결과가 err면 로컬 정보를 지운다.
+// 토큰 없다. - 로컬에 유저 정보가 없다. --> 그냥 둔다. (로그인 전에도 체험 가능)
+//      		- 로컬에 유저 정보가 있다. --> 로컬 유저 정보를 지운다. (로그인 전에도 체험 가능)
+
+export const goToSignPage = () => (
+	dispatch: Dispatch<UsersAction>,
+	getState: any,
+	{ history },
+) => {
+	history.push("/user");
 };
 
 export const goToIntro = () => (
@@ -302,12 +332,9 @@ export const socialLogin = (social: string) => async (
 ) => {
 	// 소셜로그인 응답 데이터를 어떻게 받아오나? Sign페이지에서 a태그 href로 요청을 보내니까....
 	// dispatch(userSignin({ ...data.data, isLogin: true }));
-	const isLogin = getState().userReducer.isLogin;
-	localStorage.setItem("isLogin", isLogin);
 
-	// const url = `https://myraspberry.shop/auth/${social}`;
-	// await axios
-	// 	.get(url)
+	const url = `https://myraspberry.shop/auth/${social}`;
+	await axios.get(url);
 	// 	.then((data) => {
 	// 		dispatch(userSignin({ ...data.data, isLogin: true }));
 	// 		const isLogin = getState().userReducer.isLogin;

@@ -28,7 +28,7 @@ const Main = () => {
 		"킬링타임용 짧은 영화는 어때요?",
 		"여유있게 긴 영화는 어때요?",
 	];
-	const tags = ["renew", "kor", "eng", "long", "short"];
+	const tags = ["renew", "kor", "eng", "short", "long"];
 	return (
 		<>
 			<MainTop>
