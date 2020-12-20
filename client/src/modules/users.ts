@@ -369,9 +369,9 @@ export const myImageUpdate = (fd?: any) => async (
 	getState: any
 ) => {
 	// fd = formData = 특수한 객체 형태라 콘솔에 fd로만 호출하면 {}로만 나옴 아래와 같이 확인해야 함.
-	for (let value of fd.values()) {
-		console.log(value);
-	}
+	// for (let value of fd.values()) {
+	// 	console.log(value);
+	// }
 	await axios
 		// .patch('http://localhost:8080/mypage/changeimage', {
 		.patch("https://myraspberry.shop/mypage/changeimage", {

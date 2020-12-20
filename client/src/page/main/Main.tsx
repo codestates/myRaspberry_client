@@ -38,12 +38,12 @@ const Main = () => {
 				<CardboxContainer>
 					{tags.map((tag, i) => {
 						return (
-							<>
+							<div key={tag}>
 								<Title>
 									<TitleText>{titleText[i]}</TitleText>
 								</Title>
-								<ResultBox tag={tag} data={moviesState.movies[tag]} key={tag} />
-							</>
+								<ResultBox tag={tag} data={moviesState.movies[tag]} />
+							</div>
 						);
 					})}
 				</CardboxContainer>

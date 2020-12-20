@@ -79,10 +79,14 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 						<p>WELCOME!</p>
 						{isLogin ? <p>{username} 님</p> : <p> 게스트 님!</p>}
 						{isLogin ? (
-							profileImg === "noPath" ? (
+							profileImg === "noPath" || profileImg === "none" ? (
 								<img src={raspberryUrl} alt="potter-raspberry" />
 							) : (
-								<img src={profileImg} alt="profileImg" />
+								<img
+									src={profileImg}
+									style={{ borderRadius: "50%" }}
+									alt="profileImg"
+								/>
 							)
 						) : (
 							<img src={raspberryUrl} alt="potter-raspberry" />
