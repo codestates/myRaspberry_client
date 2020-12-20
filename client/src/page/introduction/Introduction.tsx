@@ -11,11 +11,16 @@ import { RiMovie2Line } from "react-icons/ri";
 import { AiFillTags } from "react-icons/ai";
 import count from "./count";
 import { Link } from "react-router-dom";
-
+import useUser from "../../hooks/useUser";
 const Introduction = (): JSX.Element => {
+	const { onCallUserStateOfLocalStorage } = useUser();
 	const prevScrollY = useRef(0);
 	//스크롤 이벤트
 	const [scrollEvent, setScrollEvent] = useState(false);
+
+	React.useEffect(() => {
+		onCallUserStateOfLocalStorage();
+	}, []);
 
 	useEffect(() => {
 		const handleScroll = () => {

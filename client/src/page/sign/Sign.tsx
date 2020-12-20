@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import styles from "./sign.module.css";
-import { ImGoogle } from "react-icons/im";
-import { SiKaios } from "react-icons/si";
-import { IoIosLogIn } from "react-icons/io";
 import useUser from "../../hooks/useUser";
 import { goToIntro } from "../../modules/users";
-import styled from "styled-components";
 
 const Sign = () => {
 	const {
@@ -14,6 +10,7 @@ const Sign = () => {
 		userState,
 		onSocialLogin,
 		onUserFail,
+		onCallUserStateOfLocalStorage,
 	} = useUser();
 
 	const { isLogin, isSignUp, err } = userState;
@@ -23,20 +20,12 @@ const Sign = () => {
 	const [confirmPass, setConfirmPass] = useState("");
 	const [errMessage, setErrorMessage] = useState("");
 
-	console.log("나는 밖이다", isLogin);
-
 	React.useEffect(() => {
-		console.log("나는 안이다", isLogin);
+		onCallUserStateOfLocalStorage();
 		goToIntro();
 	}, [isLogin]);
 
-	const emailChange = e => {
-		if (e.currentTarget === null) {
-			return;
-		}
-		e.preventDefault();
-		setEmail(e.target.value);
-	};
+	const emailChange = e => setEmail(e.target.value);
 	const passwordChange = e => setPassword(e.target.value);
 	const confirmPassChange = e => setConfirmPass(e.target.value);
 
@@ -88,23 +77,12 @@ const Sign = () => {
 			} else if (checkPassword(password)) {
 				//로그인 통신
 				onSignIn(email, password);
-				// 	console.log("hi");
-				// });
-				// console.log(
-				// 	"요청 직후 리디렉트를 위한 상태 변하냐?",
-				// 	userState.isLogin,
-				// );
-
-				// result ? setIsUser(true) : null;
-				// onGoToIntro();
-				//만약 유저가 없다면?
-
 				return;
 			}
 		}
 	};
 
-	const ValidateEmail = mail => {
+	const ValidateEmail = email => {
 		if (
 			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
 				email
@@ -134,7 +112,7 @@ const Sign = () => {
 		} else return true;
 	};
 	const newlineText = `아직 회원이 아니신가요?\n회원이 아니시면 원하는 이메일과 비밀번호를 눌러주세요`;
-	console.log("isSignUp이 어쩔때 true??", newlineText);
+
 	return (
 		<div className={styles.outBox}>
 			<div className={styles.signBox}>
