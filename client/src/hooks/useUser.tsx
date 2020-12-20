@@ -30,8 +30,7 @@ export default function useUser() {
 		newPass?: string,
 		newUserName?: string,
 	) => dispatch(mypageUpdate(password, newPass, newUserName));
-	const onMyImageUpdate = (testvar: string, fd: any) =>
-		dispatch(myImageUpdate(testvar, fd));
+	const onMyImageUpdate = (fd: any) => dispatch(myImageUpdate(fd));
 	const onSignout = () => dispatch(Signout());
 	const onCallUserStateOfLocalStorage = () =>
 		dispatch(callUserStateOfLocalStorage());

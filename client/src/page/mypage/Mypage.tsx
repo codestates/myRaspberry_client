@@ -28,13 +28,13 @@ const Mypage = () => {
 		if (e.target.files !== null) {
 			const fd = new FormData();
 			fd.append("profileImg", e.target.files[0]);
-			onMyImageUpdate("이거 넘어가니?", fd);
+			onMyImageUpdate(fd);
 		}
 	};
 
-	const userNameChange = e => setNewUserName(e.target.value);
-	const passwordChange = e => setNewPass(e.target.value);
-	const checkPassword = e => setPassword(e.target.value);
+	const userNameChange = (e) => setNewUserName(e.target.value);
+	const passwordChange = (e) => setNewPass(e.target.value);
+	const checkPassword = (e) => setPassword(e.target.value);
 
 	const onClick = () => {
 		if (confirmChange) {
@@ -54,10 +54,10 @@ const Mypage = () => {
 		}
 	};
 
-	const passwordValidationCheck = upw => {
+	const passwordValidationCheck = (upw) => {
 		if (!/^[a-zA-Z0-9]{8,20}$/.test(upw)) {
 			setErrorMessage(
-				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다."
+				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.",
 			);
 			return false;
 		}
