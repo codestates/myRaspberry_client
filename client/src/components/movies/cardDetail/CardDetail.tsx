@@ -175,12 +175,8 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 								{playingVideo.id && <YoutubePlayer video={playingVideo.id} />}
 							</div>
 							<div className="youtube_box">
-								{videosArray.map(key => (
-									<Youtube
-										key={videos[key].id}
-										video={videos[key]}
-										videosKey={key}
-									/>
+								{videosArray.map((key, i) => (
+									<Youtube key={i} video={videos[key]} videosKey={key} />
 								))}
 							</div>
 						</div>
