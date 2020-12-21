@@ -16,7 +16,7 @@ const Header = (): JSX.Element => {
 
 	const handleNavBarClick = () => {
 		setNavBarOpen(!navBarOpen);
-		console.log(navBarOpen);
+		// console.log(navBarOpen);
 	};
 
 	return (

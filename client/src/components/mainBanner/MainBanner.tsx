@@ -97,15 +97,19 @@ function MainBanner(): any {
 	const { moviesState } = useMovies();
 	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
 	const [showDetail, setShowDetail] = useState(false);
-
+	
 	const keys = Object.keys(moviesState.movies);
+	
 	const data = [
 		moviesState.movies[keys[0]][0],
 		moviesState.movies[keys[1]][0],
 		moviesState.movies[keys[2]][0],
 		moviesState.movies[keys[4]][0],
 	];
-	const dataForBanner = modifyData(data);
+	const [bannerMovie, setBannerMovie] = useState(data);
+
+	// console.log(data)
+	const dataForBanner = modifyData(bannerMovie);
 	const [onMouse, setOnMouse] = useState(false);
 
 	const handleOver = e => {
