@@ -16,9 +16,9 @@ const Mypage = () => {
 	const [newUserName, setNewUserName] = useState("");
 	const [newPass, setNewPass] = useState("");
 	const [password, setPassword] = useState("");
-	console.log("유저상태 확인용", userState.isLogin);
+	// console.log("유저상태 확인용", userState.isLogin);
 	const [errMessage, setErrorMessage] = useState("");
-	console.log("유저네임 변경인데, 생기려나?", newUserName);
+	// console.log("유저네임 변경인데, 생기려나?", newUserName);
 	React.useEffect(() => {
 		onCallUserStateOfLocalStorage();
 	}, []);
