@@ -369,21 +369,19 @@ export const myImageUpdate = (formData?: any) => async (
 	dispatch: Dispatch<UsersAction>,
 	getState: any,
 ) => {
-	// fd = formData = 특수한 객체 형태라 콘솔에 fd로만 호출하면 {}로만 나옴 아래와 같이 확인해야 함.
-	// for (let value of formData.values()) {
-	// 	console.log(value);
-	// }
+	// await axios
+	// 	.post("https://httpbin.org/anything", formData, {
+	// 		headers: { "content-type": "multipart/form-data" },
+	// 	})
+	// 	.then((res) => console.log(res))
+	// 	.catch((err) => console.log(err));
 	await axios
-		.post("https://myraspberry.shop/mypage/changeimage", {
-			formData,
+		.post("https://myraspberry.shop/mypage/changeimage", formData, {
 			headers: {
 				"content-type": "multipart/form-data",
 			},
 		})
 		.then((data) => {
-			console.log(data);
-			// 결과값  { username, isChanged: true }
-			// console.log("AAAAAAAAAAAAAAAA");
 			const userState = getState().userReducer;
 			dispatch(userSignin({ ...userState, ...data.data }));
 			dispatch(saveLocalStorage);
