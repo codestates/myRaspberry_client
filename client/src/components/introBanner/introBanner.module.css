@@ -1,20 +1,22 @@
 .show {
 	position: absolute;
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	height: 100%;
 	color: whitesmoke;
 	background-color: rgba(1, 1, 1, 0.6);
 	z-index: 999;
 	cursor: pointer;
+	overflow-x: hidden;
 }
 
 .show_icon_box {
 	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	width: 43vw;
-	height: 100vh;
+	justify-content: center;
+	align-items: flex-end;
+	width: 100vw;
+	height: 50vh;
 }
 
 .show_icon {
@@ -22,11 +24,11 @@
 }
 
 .show_box {
-	width: 57vw;
-	height: 100vh;
+	width: 100vw;
+	height: 50vh;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+	flex-direction: row;
+	align-items: self-start;
 	justify-content: center;
 }
 
