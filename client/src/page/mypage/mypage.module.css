@@ -1,0 +1,239 @@
+@value mainColor from "../../common/colors.css";
+@value subColor from "../../common/colors.css";
+
+/* ul {
+	list-style-type: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+} */
+
+.outBox {
+	height: 100vh;
+	position: relative;
+	display: flex;
+	flex: 1;
+	background: #292929;
+	justify-content: center;
+}
+
+.mypageBox {
+	/* border: solid 2px whitesmoke; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	transform: scale(0.83);
+	opacity: 1;
+	animation: 200ms cubic-bezier(0.13, 0.29, 0.29, 0.86) 0s 1 normal forwards
+			running animation-cmelmz,
+		200ms ease-in-out 0s 1 normal forwards running animation-ox4vyo;
+	width: 59.5781vw;
+	padding: 0px 0px 2.26562vw;
+}
+
+.titleBox {
+	text-align: center;
+	margin: 0px 0px 3.04688vw;
+}
+
+.mypage_title {
+	color: rgb(255, 255, 255);
+	font-size: 3.125vw;
+	font-weight: 700;
+	letter-spacing: -0.0554687vw;
+	margin: 0px 0px 0.15625vw;
+}
+
+.mypage_upper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.manage_profile {
+	margin: 0px 1.875vw 0px 0px;
+}
+
+.chage_info_ul {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+	padding-left: 0px;
+}
+
+.chage_info_li {
+	width: 100%;
+	padding-top: 10px;
+	display: flex;
+}
+
+.change_info_li_item {
+	/* text-align: center;
+	font-size: 100%;
+	font-weight: bold;
+	width: 100%;
+	height: 40px;
+	border-radius: 20px;
+	border: none;
+	box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
+    0 -12px 36px -8px rgba(0, 0, 0, 0.025); */
+	display: block;
+	background: #292929;
+	color: rgb(255, 255, 255);
+	width: 29.5312vw;
+	padding: 0.78125vw 0.9375vw;
+	border: 0.078125vw solid rgba(255, 255, 255, 0.63);
+	margin: 0.703125vw 0px 0px;
+}
+
+.change_info_li_item:focus {
+	outline: none;
+}
+
+.change_info_li_item:placeholder {
+	text-align: center;
+}
+
+.invisible {
+	display: none;
+}
+
+.submitBtn {
+	/* color: white;
+	box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
+		0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+	border: none;
+	border-radius: 15px;
+	background-color: mainColor;
+	width: 100px;
+	font-size: 15px;
+	font-weight: bolder;
+  height: 40px; */
+	color: rgba(255, 255, 255, 0.63);
+	font-size: 1.09375vw;
+	font-weight: 400;
+	letter-spacing: -0.03125vw;
+	vertical-align: top;
+	white-space: nowrap;
+	padding: 0.3125vw 2.73438vw 0.46875vw;
+	border: 0.078125vw solid rgba(255, 255, 255, 0.63) !important;
+	cursor: pointer;
+}
+
+.submitBtn:focus {
+	outline: none;
+}
+
+.submitBtn:hover {
+	color: subColor;
+}
+
+.submit_button {
+	background: no-repeat rgb(34, 35, 36);
+	color: rgb(219, 219, 219);
+	font-size: 1.40625vw;
+	font-weight: 400;
+	letter-spacing: -0.0390625vw;
+	line-height: 2.10938vw;
+	padding: 0.625vw 1.875vw 0.703125vw;
+	cursor: pointer;
+	border: 0px none transparent;
+	outline: none 0px;
+	white-space: nowrap;
+}
+
+.submit_button:hover {
+	background: rgba(255, 255, 255, 0.63);
+	color: rgb(34, 35, 36);
+}
+
+.errMessage {
+	font-weight: bold;
+	height: 20px;
+	color: black;
+	margin: 5px;
+}
+
+.change_img_box {
+	/* width: 150px;
+	height: 150px;
+  background-color: green; */
+	position: relative;
+	width: 11.0938vw;
+	height: 11.0938vw;
+	border-radius: 50%;
+}
+
+.change_img_box::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	transform: translate(-50%, -50%);
+	box-sizing: content-box;
+	width: 100%;
+	height: 100%;
+	background: 0% 0% / 5vw 5vw transparent;
+	border-radius: 50%;
+	border-width: 0.46875vw !important;
+	border-style: solid !important;
+	border-color: subColor !important;
+	border-image: initial !important;
+}
+
+.img_box {
+	overflow: hidden;
+	border-radius: 50%;
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+}
+
+.img {
+	/* width: 100%;
+  height: 100%; */
+	vertical-align: top;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	object-fit: cover;
+	transition: opacity 420ms ease 0s;
+}
+
+.change_info_box {
+	margin-left: 100px;
+	width: 500px;
+}
+
+.mypage_subtitle {
+	color: whitesmoke;
+}
+
+.mypage_lower {
+	margin-top: 30px;
+}
+
+.checkPass {
+	display: flex;
+}
+
+.checkPass .change_info_li_item {
+	width: 250px;
+}
+
+.checkPass_btnBox {
+	margin-left: 50px;
+}
+
+.img_submit {
+	display: flex;
+	flex-direction: column;
+	padding: 1.5625vw 0px 0px 0.3125vw;
+}

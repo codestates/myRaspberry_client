@@ -5,9 +5,18 @@ body {
 		sans-serif, "Yellowtail", cursive;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-size: 62.5%;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
+}
+
+a,
+a:link,
+a:hover,
+a::before,
+a::after {
+	text-decoration: none;
 }

@@ -6,8 +6,9 @@ import useMovies from "../../../hooks/useMovies";
 import LoadingAnimation from "../../../page/LoadingAnimation";
 
 const CardBox = () => {
+	// const { moviesState, onUpdateMovies } = useMovies();
+	// let introData;
 	// const { moviesState, getmovieData } = useMovies();
-
 	// useEffect(() => {
 	// 	getmovieData();
 	// }, []);
@@ -42,7 +43,7 @@ const CardBox = () => {
 };
 const Container = styled.div`
 	display: flex;
-	max-width: 65%;
+	max-width: 100%;
 `;
 
 export default CardBox;

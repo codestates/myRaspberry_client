@@ -1,140 +1,219 @@
 @value mainColor from "../../common/colors.css";
 @value subColor from "../../common/colors.css";
 
-ul {
-  list-style-type: none;
+.inputList_ul {
+	list-style-type: none;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
-h1 {
-  color: white;
+.sign_text {
+	color: whitesmoke;
+	font-weight: 400;
+	letter-spacing: -0.4px;
+}
+
+.sign_subText {
+	color: rgb(255, 255, 255);
+	opacity: 0.63;
+	font-weight: 400;
+	margin: 0;
+	margin-top: 2rem;
+	white-space: pre;
+	text-align-last: center;
+	line-height: 1.6;
 }
 
 .outBox {
-  margin-top: 100px;
-  width: 100vw;
-  height: 600px;
-  display: flex;
-  justify-content: center;
+	position: relative;
+	margin-top: 59px;
+	display: flex;
+	justify-content: center;
+	-webkit-box-pack: center;
+	background: url("https://c.wallhere.com/photos/59/70/movie_scenes_Joker_2019_Movie-1865461.jpg!d")
+		center center / cover no-repeat;
+	height: 100vh;
+	/* display: flex; */
+	z-index: 1;
+	/* flex-direction: column; */
+	-webkit-box-pack: center;
+	justify-content: center;
+}
+.outBox::after {
+	top: 0;
+	left: 0;
+	filter: alpha(opacity=50);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	content: "";
+	z-index: -1;
+	background: rgb(0, 0, 0);
+	opacity: 0.63 !important;
 }
 
 .signBox {
-  background-color: subColor;
-  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
-    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-  border-radius: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 60%;
-  height: 500px;
+	border-radius: 25px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 700px;
+	padding: 6.5rem 0px 0px 0px;
 }
 
 .sign_upper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .inputList_ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  padding-left: 0px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+	padding-left: 0px;
 }
 
 .inputList_li {
-  width: 70%;
-  padding-top: 10px;
-  display: flex;
+	width: 70%;
+	display: flex;
 }
 
 .input_item {
-  text-align: center;
-  font-size: 100%;
-  font-weight: bold;
-  width: 100%;
-  height: 40px;
-  border-radius: 20px;
-  border: none;
-  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
-    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+	border: none;
+	outline: none;
+	border-top-width: 1px;
+	border-style: solid;
+	border-width: 0px 1px 1px;
+	border-color: rgba(154, 151, 161, 0.2);
+	font-size: 16px;
+	letter-spacing: -0.5px;
+	line-height: normal;
+	padding: 10px 10px 10px 14px;
+	width: 100%;
+	height: 40px;
 }
 
-.input_item:focus {
-  outline: none;
+.email {
+	border-radius: 4px 4px 0px 0px;
 }
 
-.input_item:placeholder {
-  text-align: center;
+.pass {
+	border-radius: 0px 0px 4px 4px;
+}
+
+.pass1 {
+	border-radius: 0px 0px 0px 0px;
+}
+
+.pass2 {
+	border-radius: 0px 0px 4px 4px;
+}
+
+.sign_down {
+	display: flex;
+	flex: 1;
+	align-self: center;
+	margin-top: 1rem;
 }
 
 .social_ul {
-  padding-left: 0px;
-  display: flex;
-  justify-content: space-around;
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+	margin-block: 0px;
+	margin-inline: 0px;
+	padding-inline-start: 0px;
 }
 
 .social_kakao {
-  background-color: #fee500;
-  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
-    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-  border-radius: 15px;
-  text-align: center;
-  padding-top: 15px;
-  width: 15%;
-  font-size: 100%;
-  font-weight: bolder;
-  height: 50px;
-  color: black;
+	margin-right: 13px;
+}
+
+.kakaoIcon {
+	background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzOCIgaGVpZ2h0PSIzOCIgdmlld0JveD0iMCAwIDM4IDM4Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGNpcmNsZSBjeD0iMTkiIGN5PSIxOSIgcj0iMTkiIGZpbGw9IiNGQUU0MDAiLz4KICAgICAgICA8Zz4KICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNyA3KSIvPgogICAgICAgICAgICA8cGF0aCBmaWxsPSIjM0MxRTFFIiBmaWxsLXJ1bGU9Im5vbnplcm8iIGQ9Ik0xMS45OTIgMy42OTJjNS4wOTMgMCA5LjIyMiAzLjMwMyA5LjIyMiA3LjM3N3MtNC4xMjkgNy4zNzYtOS4yMjIgNy4zNzZjLS41NTIgMC0xLjA5Mi0uMDM4LTEuNjE2LS4xMTNsLTMuNjQgMi41MTJjLS4xNzIuMTItLjM2OC0uMDIxLS4zNDMtLjE5My4wMTQtLjEwMi4yNy0xLjIwMi43NjUtMy4yOTktMi42MzMtMS4yOTgtNC4zODktMy42MjctNC4zODktNi4yODMgMC00LjA3NCA0LjEzLTcuMzc3IDkuMjIzLTcuMzc3eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNyA3KSIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==")
+		0% 0% / cover no-repeat;
+	vertical-align: top;
+	width: 38px;
+	height: 38px;
+	cursor: pointer;
+	border: 0px none transparent;
+	outline: none 0px;
+	padding: 0px;
 }
 
 .social_google {
-  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
-    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-  border-radius: 15px;
-  text-align: center;
-  padding-top: 15px;
-  width: 15%;
-  font-size: 100%;
-  font-weight: bolder;
-  height: 50px;
-  background-color: #4c8bf5;
-  color: white;
+	margin-left: 13px;
+}
+
+.googleIcon {
+	background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzOCIgaGVpZ2h0PSIzOCIgdmlld0JveD0iMCAwIDM4IDM4Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGNpcmNsZSBjeD0iMTkiIGN5PSIxOSIgcj0iMTkiIGZpbGw9IiNGRkYiLz4KICAgICAgICA8Zz4KICAgICAgICAgICAgPHBhdGggZD0iTTAgMEgyNFYyNEgweiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNyA3KSIvPgogICAgICAgICAgICA8ZyBmaWxsLXJ1bGU9Im5vbnplcm8iPgogICAgICAgICAgICAgICAgPHBhdGggZmlsbD0iIzQyODVGNCIgZD0iTTE2LjczNSA4LjczM2MwLS42MDYtLjA1NC0xLjE4OC0uMTU1LTEuNzQ3SDguNTM4djMuMzAzaDQuNTk2Yy0uMTk4IDEuMDY3LS44IDEuOTcxLTEuNzA0IDIuNTc3djIuMTQyaDIuNzZjMS42MTQtMS40ODYgMi41NDUtMy42NzUgMi41NDUtNi4yNzV6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3IDcpIHRyYW5zbGF0ZSgzLjQ2MiAzLjQ2MikiLz4KICAgICAgICAgICAgICAgIDxwYXRoIGZpbGw9IiMzNEE4NTMiIGQ9Ik04LjUzOCAxNy4wNzdjMi4zMDYgMCA0LjIzOS0uNzY1IDUuNjUxLTIuMDY5bC0yLjc2LTIuMTQyYy0uNzY0LjUxMi0xLjc0Mi44MTUtMi44OS44MTUtMi4yMjQgMC00LjEwNy0xLjUwMi00Ljc3OC0zLjUySC45MDh2Mi4yMTJjMS40MDUgMi43OSA0LjI5MyA0LjcwNCA3LjYzIDQuNzA0eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNyA3KSB0cmFuc2xhdGUoMy40NjIgMy40NjIpIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjRkJCQzA1IiBkPSJNMy43NiAxMC4xNmMtLjE3LS41MTItLjI2Ny0xLjA1OS0uMjY3LTEuNjIyIDAtLjU2Mi4wOTctMS4xMS4yNjgtMS42MjJWNC43MDRILjkwOEMuMzMgNS44NTcgMCA3LjE2IDAgOC41MzhjMCAxLjM3OC4zMyAyLjY4Mi45MDggMy44MzVsMi44NTMtMi4yMTJ6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3IDcpIHRyYW5zbGF0ZSgzLjQ2MiAzLjQ2MikiLz4KICAgICAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNFQTQzMzUiIGQ9Ik04LjUzOCAzLjM5NmMxLjI1NCAwIDIuMzguNDMgMy4yNjQgMS4yNzdsMi40NS0yLjQ1QzEyLjc3MS44NDcgMTAuODQgMCA4LjUzNyAwIDUuMjAxIDAgMi4zMTMgMS45MTMuOTA4IDQuNzA0bDIuODUzIDIuMjEyYy42NzEtMi4wMTggMi41NTQtMy41MiA0Ljc3Ny0zLjUyeiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNyA3KSB0cmFuc2xhdGUoMy40NjIgMy40NjIpIi8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=")
+		0% 0% / cover no-repeat;
+	vertical-align: top;
+	width: 38px;
+	height: 38px;
+	cursor: pointer;
+	border: 0px none transparent;
+	outline: none 0px;
+	padding: 0px;
 }
 
 .invisible {
-  display: none;
+	display: none;
+}
+
+.submitDiv {
+	width: 4rem;
+	padding: 0px 0px 21px;
+	border-bottom: 1px solid rgba(154, 151, 161, 0.2);
+	margin: 16px 0px 0px;
+	width: 18rem;
 }
 
 .submitBtn {
-  padding-left: 0px;
-  color: white;
-  box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.3),
-    0 -12px 36px -8px rgba(0, 0, 0, 0.025);
-  border: none;
-  border-radius: 15px;
-  background-color: mainColor;
-  width: 10%;
-  font-size: 150%;
-  font-weight: bolder;
-  height: 40px;
+	background-color: subColor;
+	opacity: 0.8;
+	color: rgb(255, 255, 255);
+	font-weight: 700;
+	letter-spacing: -0.1px;
+	text-align: center;
+	width: 100%;
+	border-radius: 40px;
+	font-size: 16px;
+	line-height: 46px;
+	height: 48px;
+	padding: 0px 0px 21px;
+	margin: 16px 0px 0px;
+	border: none;
+	margin-top: 1px;
 }
 
-.submitBtn:focus {
-  outline: none;
+.submitBtn:hover {
+	cursor: pointer;
 }
 
 .errMessage {
-  font-weight: bold;
-  height: 20px;
-  color: white;
-  margin: 5px;
+	font-weight: bold;
+	margin: 0px 0px 1rem 0px;
+	font-weight: 600;
+	letter-spacing: -0.4px;
+	color: subColor;
+}
+
+.noErrMessage {
+	font-weight: bold;
+	margin: 0px 0px 0rem 0px;
+	font-weight: 600;
+	letter-spacing: -0.4px;
+	color: subColor;
 }

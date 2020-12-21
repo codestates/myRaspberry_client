@@ -20,7 +20,7 @@ const Button: React.FC<fromGoBtnProps> = props => {
 			// 	setScrollEvent(false);
 			// }
 			prevScrollY.current = currentScrollY;
-			console.log(scrollEvent, currentScrollY);
+			//console.log(scrollEvent, currentScrollY);
 		};
 
 		window.addEventListener("scroll", handleScroll, { passive: true });

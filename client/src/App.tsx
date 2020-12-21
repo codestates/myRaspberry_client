@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
@@ -8,34 +8,24 @@ import Main from "./page/main/Main";
 import Mypage from "./page/mypage/Mypage";
 import Sign from "./page/sign/Sign";
 
-// import {
-// 	mainColor,
-// 	subColor,
-// 	inputColor,
-// 	buttonColor,
-// 	userColor,
-// } from "./common/colors";
-
 const App = (): JSX.Element => {
 	return (
-		<BrowserRouter>
-			<div>
-				<HeaderContainer>
-					<Header />
-				</HeaderContainer>
+		<div>
+			<HeaderContainer>
+				<Header />
+			</HeaderContainer>
+			<Switch>
 				<MainContainer>
-					<Switch>
-						<Route path={["/", "/intro"]} exact component={Introduction} />
-						<Route path="/main" component={Main} />
-						<Route path="/mypage" component={Mypage} />
-						<Route path="/user" component={Sign} />
-					</Switch>
+					<Route path={["/", "/intro"]} exact component={Introduction} />
+					<Route path="/main" component={Main} />
+					<Route path="/mypage" component={Mypage} />
+					<Route path="/user" component={Sign} />
 				</MainContainer>
-				<FooterContainer>
-					<Footer />
-				</FooterContainer>
-			</div>
-		</BrowserRouter>
+			</Switch>
+			<FooterContainer>
+				<Footer />
+			</FooterContainer>
+		</div>
 	);
 };
 
@@ -51,7 +41,8 @@ const MainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	background-color: #111;
-	width: 100%; //100% 바꾸지 말 것
+	height: 100%; //100% 바꾸지 말 것
+	padding: 0px 0 0;
 `;
 
 const FooterContainer = styled.footer`
@@ -62,7 +53,6 @@ const FooterContainer = styled.footer`
 	position: relative;
 	background-color: #28323c;
 	box-sizing: border-box;
-	padding-top: 100px;
 	padding-bottom: 25px;
 `;
 
