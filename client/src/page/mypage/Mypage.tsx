@@ -40,7 +40,7 @@ const Mypage = () => {
 	const PhotoSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		formData.append("profileImg", e.target.childNodes[0].files[0]);
+		formData.append("img", e.target.childNodes[0].files[0]);
 		onMyImageUpdate(formData);
 	};
 
@@ -148,7 +148,7 @@ const formDataMaker = (photo, body) => {
 							</div>
 						</div>
 						<form
-							encType="multipart/from-data"
+							encType="multipart/form-data"
 							style={{ position: "relative" }}
 							onSubmit={PhotoSubmit}
 							className={styles.img_submit}>

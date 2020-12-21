@@ -370,35 +370,34 @@ export const myImageUpdate = (formData?: any) => async (
 	getState: any,
 ) => {
 	// fd = formData = 특수한 객체 형태라 콘솔에 fd로만 호출하면 {}로만 나옴 아래와 같이 확인해야 함.
-	for (let value of formData.values()) {
-		console.log(value);
-		// }
-		await axios
-			.post("https://myraspberry.shop/mypage/changeimage", {
-				formData,
-				header: {
-					"content-type": "multipart/form-data",
-				},
-			})
-			.then((data) => {
-				console.log(data);
-				// 결과값  { username, isChanged: true }
-				// console.log("AAAAAAAAAAAAAAAA");
-				const userState = getState().userReducer;
-				dispatch(userSignin({ ...userState, ...data.data }));
-				dispatch(saveLocalStorage);
-				dispatch(goToMyPage());
-			})
-			.catch((err) => {
-				const { message } = err.response.data;
-				const data = getState().userReducer;
-				if (message === "일치하는 정보가 존재하지 않습니다.") {
-					dispatch(userSignin({ ...data, isSignUp: true }));
-				} else if (message === "비밀번호가 일치하지 않습니다.") {
-					dispatch(userSignin({ ...data, err: message }));
-				}
-			});
-	}
+	// for (let value of formData.values()) {
+	// 	console.log(value);
+	// }
+	await axios
+		.post("https://myraspberry.shop/mypage/changeimage", {
+			formData,
+			headers: {
+				"content-type": "multipart/form-data",
+			},
+		})
+		.then((data) => {
+			console.log(data);
+			// 결과값  { username, isChanged: true }
+			// console.log("AAAAAAAAAAAAAAAA");
+			const userState = getState().userReducer;
+			dispatch(userSignin({ ...userState, ...data.data }));
+			dispatch(saveLocalStorage);
+			dispatch(goToMyPage());
+		})
+		.catch((err) => {
+			const { message } = err.response.data;
+			const data = getState().userReducer;
+			if (message === "일치하는 정보가 존재하지 않습니다.") {
+				dispatch(userSignin({ ...data, isSignUp: true }));
+			} else if (message === "비밀번호가 일치하지 않습니다.") {
+				dispatch(userSignin({ ...data, err: message }));
+			}
+		});
 };
 
 export const mypageUpdate = (
