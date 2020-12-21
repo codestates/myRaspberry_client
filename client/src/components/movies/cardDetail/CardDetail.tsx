@@ -146,7 +146,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 							<FaRegWindowClose />
 						</div>
 						<div className="detail_bottom">
-							{image && (
+							{image.stlls[0] !== "image/stlls/default.jpg" && (
 								<div className="detail_still_container">
 									<Swiper
 										tag="section"
