@@ -370,18 +370,15 @@ export const myImageUpdate = (formData?: any) => async (
 	getState: any
 ) => {
 	// fd = formData = 특수한 객체 형태라 콘솔에 fd로만 호출하면 {}로만 나옴 아래와 같이 확인해야 함.
-
 	await axios
 		.post("https://myraspberry.shop/mypage/changeimage", {
 			formData,
-			header: {
+			headers: {
 				"content-type": "multipart/form-data",
 			},
 		})
-		.then(data => {
-			// console.log(data);
-			// 결과값  { username, isChanged: true }
-			// console.log("AAAAAAAAAAAAAAAA");
+		.then((data) => {
+			console.log(data);
 			const userState = getState().userReducer;
 			dispatch(userSignin({ ...userState, ...data.data }));
 			dispatch(saveLocalStorage);
