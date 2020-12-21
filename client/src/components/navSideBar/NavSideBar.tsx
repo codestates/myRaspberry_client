@@ -24,7 +24,7 @@ const raspberryUrl = "https://i.ibb.co/tYgpb6Z/rasbperry-potter-150.png";
 const NavSideBar = ({ navBarOpen, handleClose }) => {
 	const { userState, onSignout } = useUser();
 	const { isLogin, profileImg, username } = userState;
-	console.log("isLogin in nav Bar", isLogin);
+	// console.log("isLogin in nav Bar", isLogin);
 	const [onMouse, setOnMouse] = useState({
 		0: false,
 		1: false,

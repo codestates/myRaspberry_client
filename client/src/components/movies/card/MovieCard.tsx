@@ -24,7 +24,7 @@ const MovieCard = ({ poster, movie }) => {
 		e.preventDefault();
 		setShowDetail(false);
 	};
-	console.log(onMouse);
+	// console.log(onMouse);
 	return (
 		<>
 			<div className="moviecard_box">
