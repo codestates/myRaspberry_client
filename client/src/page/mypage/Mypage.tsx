@@ -33,20 +33,20 @@ const Mypage = () => {
 	// 	}
 	// };
 
-	const photoChange = (e) => {
+	const photoChange = e => {
 		e.target.nextSibling.click();
 	};
 
-	const PhotoSubmit = (e) => {
+	const PhotoSubmit = e => {
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append("profileImg", e.target.childNodes[0].files[0]);
 		onMyImageUpdate(formData);
 	};
 
-	const userNameChange = (e) => setNewUserName(e.target.value);
-	const passwordChange = (e) => setNewPass(e.target.value);
-	const checkPassword = (e) => setPassword(e.target.value);
+	const userNameChange = e => setNewUserName(e.target.value);
+	const passwordChange = e => setNewPass(e.target.value);
+	const checkPassword = e => setPassword(e.target.value);
 
 	const onClick = () => {
 		if (confirmChange) {
@@ -66,10 +66,10 @@ const Mypage = () => {
 		}
 	};
 
-	const passwordValidationCheck = (upw) => {
+	const passwordValidationCheck = upw => {
 		if (!/^[a-zA-Z0-9]{8,20}$/.test(upw)) {
 			setErrorMessage(
-				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.",
+				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다."
 			);
 			return false;
 		}
@@ -170,7 +170,7 @@ const formDataMaker = (photo, body) => {
 					</div>
 					<div className={styles.change_info_box}>
 						<div className={styles.mypage_subtitle}>
-							안녕하세요 {userState.username}!
+							안녕하세요 {userState.username}님!
 						</div>
 						<ul className={styles.chage_info_ul}>
 							<li className={styles.chage_info_li}>
