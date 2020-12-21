@@ -1,9 +1,9 @@
-.swiper-container {
-	width: 90%;
-	height: 105%;
-	background-color: #353535;
-	border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
-}
+/* /* .swiper-container {
+  width: 90%;
+  height: 105%;
+  background-color: #353535;
+  border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px;
+} */
 
 .swiper-wrapper {
 	padding-inline-start: 0;
@@ -24,7 +24,8 @@
 }
 
 .swiper-slide {
-	width: 13% !important;
+	/* width: 13% !important; 얘를 빼면 detail에 영향이 감*/
+	width: 13%;
 	margin-left: 2rem;
 	margin-right: 2rem;
 }

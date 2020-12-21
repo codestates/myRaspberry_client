@@ -1,21 +1,48 @@
 .moviecard_box {
 	position: relative;
 	margin-right: 1rem;
+	display: flex;
+	height: 100%;
+	flex-direction: row;
+	justify-content: space-around;
 }
 
-.moviecard {
+.black_box {
 	border-radius: 5%;
-	width: 100%;
-	max-width: 13rem;
-	max-height: 18rem;
-	box-shadow: 5px 3px 3px #292929;
+	width: 13rem;
+	height: 18rem;
+	display: none;
 }
 
-.moviecard:hover {
-	opacity: 0.7;
-	/* transform: scale(1.1); */
+.black_box.on {
+	display: block;
+	background: rgb(0, 0, 0);
+	opacity: 0.63 !important;
+}
+
+.thumbs_box {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.movie_image {
+	border-radius: 5%;
+	width: 13rem;
+	height: 18rem;
+	box-shadow: 5px 3px 3px #292929;
+	background-repeat: round;
+	background-size: cover;
+}
+.movie_image:hover {
 	cursor: pointer;
-	transition: 0.2s ease-in-out;
+	/* transition: 0.2s ease-in-out; */
+}
+
+.thumbs_container {
+	display: flex;
+	flex-direction: column;
 }
 
 .none {

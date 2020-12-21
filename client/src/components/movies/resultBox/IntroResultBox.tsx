@@ -1,14 +1,12 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
-import "./resultBox.css";
-import data from "../../../lib/introData.json";
-import { MoviesType } from "../../../modules/movies";
+import React, { useEffect, useState, useLayoutEffect } from "react";
+// import {Swiper, SwiperSlide} from 'swiper/react'
+// import SwiperCore, {Navigation} from 'swiper'
+// import 'swiper/swiper-bundle.css'
+import "./introResultBox.css";
 import Slider from "react-slick";
+import useIntroMovies from "../../../hooks/useIntroMovies";
 import CardDetail from "../cardDetail/CardDetail";
-import { FaLongArrowAltUp } from "react-icons/fa";
-import ThumbsUp from "../thumbsUp/ThumbsUp";
-import ThumbsDown from "../thumbsDown/ThumbsDown";
-import "swiper/swiper-bundle.css";
-import useMovies from "../../../hooks/useMovies";
+import { MoviesType } from "../../../modules/movies";
 
 const MOVIE: MoviesType = {
 	id: 0,
@@ -48,17 +46,8 @@ const getScrollTop = () => {
 	TOP = document.documentElement.scrollTop;
 };
 
-type Movie = {
-	renew: MoviesType[];
-	kor: MoviesType[];
-	eng: MoviesType[];
-	long: MoviesType[];
-	short: MoviesType[];
-};
-
 const MovieCard = ({ poster, movie, setShowDetail, setSelectMovie }) => {
 	const [onMouse, setOnMouse] = useState(false);
-	// -1 = hate / 0 = 보통 상태 / 1 = like
 
 	const handleOnMouse = e => {
 		e.preventDefault();
@@ -97,7 +86,14 @@ function MovieImage(props: any): JSX.Element {
 		setSelectMovie,
 	} = props;
 	const blackBox = onMouse ? "resultBlack_box on" : "resultBlack_box";
-
+	// const [defaultImage, setDefaultImage] = useState(false);
+	// if (poster === "https://i.ibb.co/HnNxZyh/default-poster.jpg") {
+	// 	console.log(movie.title);
+	// 	setDefaultImage(true);
+	// }
+	// const defaultPoster = defaultImage
+	// 	? "eachMovieCard defaultImage"
+	// 	: "eachMovieCard";
 	return (
 		<div
 			className="eachMovieCard"
@@ -116,16 +112,10 @@ function MovieImage(props: any): JSX.Element {
 				{poster === "https://i.ibb.co/HnNxZyh/default-poster.jpg" &&
 					movie.title}
 			</div>
-			<div className="thumbs_box">
-				{/* <div className="moviecard_box"> */}
-				{onMouse && <ThumbsDown fromMovieCard={movie} />}
-				{onMouse && <ThumbsUp fromMovieCard={movie} />}
-				{/* <ThumbsDown />
-				<ThumbsUp /> */}
-			</div>
 		</div>
 	);
 }
+
 function useWindowSize() {
 	const [size, setSize] = useState([0, 0]);
 	useLayoutEffect(() => {
@@ -139,12 +129,12 @@ function useWindowSize() {
 	return size;
 }
 
-const ResultBox: any = ({ tag, data }) => {
-	const { moviesState, onUpdateMovies } = useMovies();
+const IntroResultBox = () => {
+	const { introMovieState, getIntroMovieData } = useIntroMovies();
 	const [showDetail, setShowDetail] = useState(false);
 	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
 	const [per, setPer] = useState(5);
-	const { loading, movies } = moviesState;
+	const { loading, introMovies } = introMovieState;
 	const width = useWindowSize();
 	function calWith(args) {
 		const width = args[0];
@@ -179,23 +169,19 @@ const ResultBox: any = ({ tag, data }) => {
 		speed: 1000,
 		slidesToShow: per,
 		slidesToScroll: 3,
-		autoplay: true,
-		autoplaySpeed: 35000,
-		swipeToSlide: true,
+		autoplay: false,
 	};
-
 	useEffect(() => {
-		onUpdateMovies();
+		getIntroMovieData();
 	}, []);
-
 	useEffect(() => {
 		calWith(width);
 	}, [width]);
 
-	const setSlider = (data: any) => (
+	return (
 		<>
 			<Slider {...slideSettings}>
-				{data.map(movie => (
+				{introMovies.intro.map(movie => (
 					<MovieCard
 						key={movie.id}
 						movie={movie}
@@ -209,6 +195,7 @@ const ResultBox: any = ({ tag, data }) => {
 					/>
 				))}
 			</Slider>
+
 			{selectMovie.id ? (
 				<CardDetail
 					poster={
@@ -222,12 +209,6 @@ const ResultBox: any = ({ tag, data }) => {
 			) : null}
 		</>
 	);
-	const isArray = tag => Array.isArray(tag);
-	if (isArray(movies[tag])) {
-		return setSlider(movies[tag]);
-	} else {
-		return setSlider(data);
-	}
 };
 
-export default ResultBox;
+export default IntroResultBox;

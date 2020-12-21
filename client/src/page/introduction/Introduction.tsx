@@ -2,18 +2,25 @@ import React, { useEffect, useRef, useState } from "react";
 import IntroBanner from "../../components/introBanner/IntroBanner";
 import GoButton from "../../components/goButton/GoButton";
 import MovieCard from "../../components/movies/card/MovieCard";
+import IntroResultBox from "../../components/movies/resultBox/IntroResultBox";
 import styled from "styled-components";
 import { mainColor, pointColor, textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
 import ResultBox from "../../components/movies/resultBox/ResultBox";
 import { RiMovie2Line } from "react-icons/ri";
 import { AiFillTags } from "react-icons/ai";
-import test from "./count";
-
+import count from "./count";
+import { Link } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 const Introduction = (): JSX.Element => {
+	const { onCallUserStateOfLocalStorage } = useUser();
 	const prevScrollY = useRef(0);
 	//스크롤 이벤트
 	const [scrollEvent, setScrollEvent] = useState(false);
+
+	React.useEffect(() => {
+		onCallUserStateOfLocalStorage();
+	}, []);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -34,7 +41,7 @@ const Introduction = (): JSX.Element => {
 	}, [scrollEvent]);
 
 	useEffect(() => {
-		scrollEvent && test();
+		scrollEvent && count();
 	}, [scrollEvent]);
 
 	return (
@@ -43,11 +50,11 @@ const Introduction = (): JSX.Element => {
 				<CardBoxContainer>
 					<CardBox />
 				</CardBoxContainer>
-				<Title>
-					<TitleText>오늘 이 영화 어때요?</TitleText>
-				</Title>
 				<ResultBoxContainer>
-					<ResultBox />
+					<Title>
+						<TitleText>오늘 이 영화 어때요?</TitleText>
+					</Title>
+					<IntroResultBox />
 				</ResultBoxContainer>
 			</MainTop>
 			<MainBottom>
@@ -100,7 +107,9 @@ const Introduction = (): JSX.Element => {
 								지금 바로 라즈베리 서비스를 이용해보세요!
 							</InnerText2>
 						</BottomInner>
-						<GoButton />
+						<Link to="main">
+							<GoButton />
+						</Link>
 					</MainImage3>
 				</BottomContainer>
 			</MainBottom>
@@ -112,22 +121,26 @@ const Introduction = (): JSX.Element => {
 const MainTop = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: 6rem;
+	margin-top: 5.5rem;
 `;
 
 const CardBoxContainer = styled.div`
-	width: 100%;
+	/* NOTE 반응형 만들기,,*/
+	max-width: -webkit-fill-available;
 	display: flex;
 	-webkit-box-align: center;
 	flex-direction: row;
 	-webkit-box-pack: justify;
 	justify-content: space-around;
-	margin-bottom: 1rem;
+	margin-bottom: 2.2rem;
+	@media (max-width: 425px) {
+		overflow: hidden;
+	}
 `;
 
 const ResultBoxContainer = styled.div`
 	background-color: #353535;
-	margin-bottom: 4rem;
+	margin-bottom: 2.3rem;
 `;
 
 const Title = styled.div`
@@ -135,17 +148,16 @@ const Title = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	margin-left: 5%;
-	margin-top: 15px;
+	margin-top: 1rem;
+	margin-bottom: 0.8rem;
 `;
 
 const TitleText = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-
 	margin: 0;
 	padding: 0;
-
 	font-family: "Lato";
 	line-height: 1.5;
 	font-weight: 900;
@@ -155,7 +167,7 @@ const TitleText = styled.div`
 `;
 
 const MainBottom = styled.div`
-	display: flex;
+	flex: 1;
 	background-color: white;
 `;
 
@@ -166,13 +178,15 @@ const BottomContainer = styled.div`
 
 const MainImage = styled.div`
 	position: relative;
-	height: 800px;
+	height: 100vh;
 	display: flex;
 	z-index: 1;
 	flex-direction: column;
 	-webkit-box-pack: center;
 	justify-content: center;
-	background-image: url("https://c.wallhere.com/photos/59/70/movie_scenes_Joker_2019_Movie-1865461.jpg!d");
+	background: url("https://cdn.onebauer.media/one/empire-tmdb/films/11216/images/tVi83ttAeyMJinYpy6xfgJSpzvP.jpg")
+		center center / cover no-repeat;
+
 	::after {
 		top: 0;
 		left: 0;
@@ -204,11 +218,8 @@ const MainImage2 = styled(MainImage)`
 `;
 
 const MainImage3 = styled(MainImage)`
-	height: 878px;
 	z-index: 0;
-	overflow: hidden;
 	background-image: url("https://wallpapercave.com/wp/i2JDlzW.jpg");
-	background-position-y: -322px;
 	::after {
 		z-index: -1;
 		background: rgb(0, 0, 0);
