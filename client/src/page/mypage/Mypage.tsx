@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styles from "./mypage.module.css";
-import axios from "axios";
 import useUser from "../../hooks/useUser";
-import { formatDiagnosticsWithColorAndContext } from "typescript";
 
 const Mypage = () => {
 	const {
@@ -16,37 +14,23 @@ const Mypage = () => {
 	const [newUserName, setNewUserName] = useState("");
 	const [newPass, setNewPass] = useState("");
 	const [password, setPassword] = useState("");
-	// console.log("유저상태 확인용", userState.isLogin);
+	console.log("유저상태 확인용", userState.isLogin);
 	const [errMessage, setErrorMessage] = useState("");
-	// console.log("유저네임 변경인데, 생기려나?", newUserName);
+	console.log("유저네임 변경인데, 생기려나?", newUserName);
 	React.useEffect(() => {
 		onCallUserStateOfLocalStorage();
 	}, []);
 
-	// 새로 작성 이미지 변경
-
-	// const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-	// 	if (e.target.files !== null) {
-	// 		const fd = new FormData();
-	// 		fd.append("profileImg", e.target.files[0]);
-	// 		onMyImageUpdate(fd);
-	// 	}
-	// };
-
-	const photoChange = e => {
-		e.target.nextSibling.click();
+	const send = (e) => {
+		const file = e.target.files[0];
+		const data = new FormData();
+		data.append("file", file);
+		onMyImageUpdate(data);
 	};
 
-	const PhotoSubmit = e => {
-		e.preventDefault();
-		const formData = new FormData();
-		formData.append("img", e.target.childNodes[0].files[0]);
-		onMyImageUpdate(formData);
-	};
-
-	const userNameChange = e => setNewUserName(e.target.value);
-	const passwordChange = e => setNewPass(e.target.value);
-	const checkPassword = e => setPassword(e.target.value);
+	const userNameChange = (e) => setNewUserName(e.target.value);
+	const passwordChange = (e) => setNewPass(e.target.value);
+	const checkPassword = (e) => setPassword(e.target.value);
 
 	const onClick = () => {
 		if (confirmChange) {
@@ -66,10 +50,10 @@ const Mypage = () => {
 		}
 	};
 
-	const passwordValidationCheck = upw => {
+	const passwordValidationCheck = (upw) => {
 		if (!/^[a-zA-Z0-9]{8,20}$/.test(upw)) {
 			setErrorMessage(
-				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다."
+				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.",
 			);
 			return false;
 		}
@@ -84,48 +68,6 @@ const Mypage = () => {
 			return false;
 		} else return true;
 	};
-
-	/*
-editProfile: async (isImageDeleted, image, bodyData, headers) => {
-    const body = formDataMaker(image, bodyData);
-    try {
-      const response = axios.patch(
-        `${endpoint}?img-del=${isImageDeleted}`,
-        body,
-        headers,
-      );
-      return response;
-    } catch (error) {
-      console.log(error);
-      return error.message;
-    }
-  },
-
-const formDataMaker = (photo, body) => {
-  const data = new FormData();
-
-  if (typeof photo === 'object' && photo !== null) {
-    data.append('image', {
-      name: photo.fileName,
-      type: photo.type,
-      uri:
-        Platform.OS === 'android'
-          ? photo.uri
-          : photo.uri.replace('file://', ''),
-    });
-  }
-
-  Object.keys(body).forEach(key => {
-    if (key !== 'image') {
-      data.append(key, body[key]);
-    }
-  });
-
-  return data;
-};
-
-
-  */
 
 	return (
 		<div className={styles.outBox}>
@@ -147,30 +89,24 @@ const formDataMaker = (photo, body) => {
 									alt="userProfileImg"></img>
 							</div>
 						</div>
-						<form
-							encType="multipart/form-data"
-							style={{ position: "relative" }}
-							onSubmit={PhotoSubmit}
-							className={styles.img_submit}>
+						<form encType="multipart/form-data" className={styles.img_submit}>
 							<input
 								name="img"
 								type="file"
-								id="img"
-								// onChange={onChange}
-								onChange={photoChange}
+								id="file"
+								onChange={(event) => send(event)}
 								accept="image/*"
 								required
 								hidden
 							/>
-							<input type="submit" style={{ display: "none" }}></input>
-							<label className={styles.submitBtn} htmlFor="img">
+							<label className={styles.submitBtn} htmlFor="file">
 								이미지 변경
 							</label>
 						</form>
 					</div>
 					<div className={styles.change_info_box}>
 						<div className={styles.mypage_subtitle}>
-							안녕하세요 {userState.username}님!
+							안녕하세요 {userState.username}!
 						</div>
 						<ul className={styles.chage_info_ul}>
 							<li className={styles.chage_info_li}>
