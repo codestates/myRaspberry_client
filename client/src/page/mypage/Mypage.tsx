@@ -24,7 +24,7 @@ const Mypage = () => {
 	const send = (e) => {
 		const file = e.target.files[0];
 		const data = new FormData();
-		data.append("file", file);
+		data.append("img", file);
 		onMyImageUpdate(data);
 	};
 
@@ -93,20 +93,20 @@ const Mypage = () => {
 							<input
 								name="img"
 								type="file"
-								id="file"
+								id="img"
 								onChange={(event) => send(event)}
 								accept="image/*"
 								required
 								hidden
 							/>
-							<label className={styles.submitBtn} htmlFor="file">
+							<label className={styles.submitBtn} htmlFor="img">
 								이미지 변경
 							</label>
 						</form>
 					</div>
 					<div className={styles.change_info_box}>
 						<div className={styles.mypage_subtitle}>
-							안녕하세요 {userState.username}!
+							안녕하세요 {userState.username} 님!
 						</div>
 						<ul className={styles.chage_info_ul}>
 							<li className={styles.chage_info_li}>
