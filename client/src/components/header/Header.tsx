@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { BiMovie } from "react-icons/bi";
 
@@ -13,11 +13,31 @@ import { Link } from "react-router-dom";
 
 const Header = (): JSX.Element => {
 	const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
-
+	const [scrollEvent, setScrollEvent] = useState<boolean>(false);
+	const prevScrollY = useRef(0);
 	const handleNavBarClick = () => {
 		setNavBarOpen(!navBarOpen);
 		// console.log(navBarOpen);
 	};
+
+	// useEffect(() => {
+	// 	const handleScroll = () => {
+	// 		const currentScrollY = window.scrollY;
+	// 		if (currentScrollY > 100) {
+	// 			setScrollEvent(true);
+	// 		}
+
+	// 		if (currentScrollY < 100) {
+	// 			setScrollEvent(false);
+	// 		}
+	// 		prevScrollY.current = currentScrollY;
+	// 		console.log(scrollEvent, currentScrollY);
+	// 	};
+
+	// 	window.addEventListener("scroll", handleScroll, { passive: true });
+
+	// 	return () => window.removeEventListener("scroll", handleScroll);
+	// }, [scrollEvent]);
 
 	return (
 		<Container>
@@ -53,7 +73,7 @@ const Logo = styled.img`
 
 const HeaderTitle = styled.p`
 	position: absolute;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	font-weight: bolder;
 	left: 67px;
 	color: whitesmoke;

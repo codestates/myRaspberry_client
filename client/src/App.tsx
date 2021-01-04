@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./components/footer/Footer";
@@ -9,12 +9,35 @@ import Mypage from "./page/mypage/Mypage";
 import Sign from "./page/sign/Sign";
 import { GlobalStyle } from "./styles/global-styles";
 import { headerColor } from "./common/colors";
+import "./App.css";
 
 const App = (): JSX.Element => {
+	const [scrollEvent, setScrollEvent] = useState<boolean>(false);
+	const prevScrollY = useRef(0);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const currentScrollY = window.scrollY;
+			if (currentScrollY > 100) {
+				setScrollEvent(true);
+			}
+
+			if (currentScrollY < 100) {
+				setScrollEvent(false);
+			}
+			prevScrollY.current = currentScrollY;
+			console.log(scrollEvent, currentScrollY);
+		};
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [scrollEvent]);
+
 	return (
 		<div>
 			<GlobalStyle />
-			<HeaderContainer>
+			<HeaderContainer className={scrollEvent ? "act smooth" : ""}>
 				<Header />
 			</HeaderContainer>
 			<Switch>
@@ -36,8 +59,7 @@ const HeaderContainer = styled.header`
 	position: fixed;
 	width: 100%;
 	height: 60px;
-	z-index: 100;
-	background-color: ${headerColor};
+	z-index: 2;
 	top: 0;
 `;
 

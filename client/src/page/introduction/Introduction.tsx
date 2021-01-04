@@ -259,15 +259,15 @@ const Description = styled.div`
 `;
 
 const MovieCount = styled.div`
-	font-size: 50px;
+	font-size: 2.2rem;
 	font-weight: bold;
 	letter-spacing: 5px;
 	color: #fff;
-	margin-right: 5rem;
+	margin-right: 12.5rem;
 `;
 
 const TagCount = styled.div`
-	font-size: 50px;
+	font-size: 2.2rem;
 	font-weight: bold;
 	letter-spacing: 5px;
 	color: #fff;

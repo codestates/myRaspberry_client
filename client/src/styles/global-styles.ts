@@ -10,19 +10,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Nanum Gothic', sans-serif;
     overflow-x: hidden;
     /* 영문 'Montserrat', sans-serif; 국문 'Nanum Gothic', sans-serif; */
-    /* width: 100%;
-    letter-spacing: -0.015em;
-    box-sizing: border-box;
-    -webkit-text-size-adjust: none;
-    text-rendering: optimizeLegibility;
-    overflow: auto;
-    font-size: 13pt;
-    color: #374553;
-    word-break: keep-all;
-    background:transparent;
-    border:0;
-    vertical-align:baseline;
-    line-height:1; */
   };
 
   * {

@@ -77,20 +77,22 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 				<div className="sidebar">
 					<SideTop>
 						<p>WELCOME!</p>
-						{isLogin ? <p>{username} 님</p> : <p> 게스트 님!</p>}
-						{isLogin ? (
-							profileImg === "noPath" || profileImg === "none" ? (
-								<img src={raspberryUrl} alt="potter-raspberry" />
+						{isLogin ? <p>{username}님</p> : <p> 게스트님</p>}
+						<div className="img_box">
+							{isLogin ? (
+								profileImg === "noPath" || profileImg === "none" ? (
+									<img src={raspberryUrl} alt="potter-raspberry" />
+								) : (
+									<img
+										src={profileImg}
+										style={{ borderRadius: "50%" }}
+										alt="profileImg"
+									/>
+								)
 							) : (
-								<img
-									src={profileImg}
-									style={{ borderRadius: "50%" }}
-									alt="profileImg"
-								/>
-							)
-						) : (
-							<img src={raspberryUrl} alt="potter-raspberry" />
-						)}
+								<img src={raspberryUrl} alt="potter-raspberry" />
+							)}
+						</div>
 						{/* <img src={raspberryUrl} alt="potter-raspberry" /> */}
 					</SideTop>
 					<SideBottom>
@@ -135,14 +137,19 @@ const NavSideBar = ({ navBarOpen, handleClose }) => {
 const SideTop = styled.div`
 	grid-area: SideTop;
 	text-align: center;
+	margin-top: 1rem;
 	p {
 		font-size: 1.5rem;
-		font-family: "Times New Roman", Times, serif;
 		font-weight: bolder;
+		margin-top: 12px;
 	}
 	img {
-		margin-top: 0.5rem;
-		max-width: 7rem;
+		margin-top: 1rem;
+		border-radius: 50%;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		margin-left: 5rem;
 	}
 `;
 

@@ -14,6 +14,7 @@ a {
 	color: whitesmoke;
 	font-weight: 400;
 	letter-spacing: -0.4px;
+	font-size: 2rem;
 }
 
 .sign_subText {
@@ -29,7 +30,6 @@ a {
 
 .outBox {
 	position: relative;
-	margin-top: 59px;
 	display: flex;
 	justify-content: center;
 	-webkit-box-pack: center;
@@ -61,7 +61,8 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	width: 700px;
-	padding: 6.5rem 0px 0px 0px;
+	padding: 12.5rem 0px 0px 0px;
+	line-height: 1.8;
 }
 
 .sign_upper {
@@ -76,8 +77,9 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 70%;
+	width: 490px;
 	padding-left: 0px;
+	margin-top: 1rem;
 }
 
 .inputList_li {

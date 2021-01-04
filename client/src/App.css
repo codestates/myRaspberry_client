@@ -1,0 +1,8 @@
+.act {
+	background-color: rgba(41, 41, 41, 0.96);
+	border-bottom: 1px solid rgb(41, 41, 41);
+}
+
+.smooth {
+	-webkit-transition: all 250ms ease-in-out;
+}
