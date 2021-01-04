@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BiMovie } from "react-icons/bi";
 
-import { headerColor, textColor, userColor } from "../../common/colors";
+import { textColor, userColor } from "../../common/colors";
 import NavSideBar from "../navSideBar/NavSideBar";
 import { Link } from "react-router-dom";
 
@@ -38,29 +38,28 @@ const Container = styled.div`
 	height: 100%;
 	left: 50%;
 	box-sizing: border-box;
-	background-color: ${headerColor};
 	transform: translate(-50%, 0%);
 `;
 
 const Logo = styled.img`
 	position: absolute;
-	top: 5%;
+	top: 9%;
 	z-index: 90;
 	left: 11px;
-	width: 56px;
+	width: 50px;
 	/* object-fit: contain;
 	margin: 0rem 0 1rem 1.3rem; */
 `;
 
 const HeaderTitle = styled.p`
 	position: absolute;
-	font-size: 1.2rem;
+	font-size: 1.5rem;
 	font-weight: bolder;
 	left: 67px;
 	color: whitesmoke;
 	font-family: "Montserrat", sans-serif;
 	letter-spacing: 3px;
-	align-self: center;
+	top: 18px;
 `;
 
 const MovieIcon = styled(BiMovie)`
