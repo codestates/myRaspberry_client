@@ -7,10 +7,12 @@ import Introduction from "./page/introduction/Introduction";
 import Main from "./page/main/Main";
 import Mypage from "./page/mypage/Mypage";
 import Sign from "./page/sign/Sign";
+import { GlobalStyle } from "./styles/global-styles";
 
 const App = (): JSX.Element => {
 	return (
 		<div>
+			<GlobalStyle />
 			<HeaderContainer>
 				<Header />
 			</HeaderContainer>
