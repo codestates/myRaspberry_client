@@ -82,8 +82,8 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	} else {
 		return (
 			<>
-				<div className="nav_showoff" onClick={closeMovieDetail}></div>
 				<div className="nav_backgroud">
+					<div className="nav_showoff" onClick={closeMovieDetail}></div>
 					<div
 						role="dialog"
 						className="nav_detailbar"
