@@ -26,7 +26,6 @@ const store = createStore(
 
 ReactDOM.render(
 	<React.StrictMode>
-		<GlobalStyle />
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
 				<Provider store={store}>
