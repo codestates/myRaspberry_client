@@ -209,7 +209,7 @@ const BottomInner = styled.div`
 `;
 
 const MainImage2 = styled(MainImage)`
-	z-index: 5;
+	z-index: 1;
 	background-image: url("https://www.evanerichards.com/wp-content/uploads/2009/10/DarkKnight283.jpeg");
 	::after {
 		z-index: 1;
@@ -263,7 +263,7 @@ const MovieCount = styled.div`
 	font-weight: bold;
 	letter-spacing: 5px;
 	color: #fff;
-	margin-right: 12.5rem;
+	margin-right: 10.5rem;
 `;
 
 const TagCount = styled.div`
@@ -275,7 +275,7 @@ const TagCount = styled.div`
 
 const CountIcon1 = styled(RiMovie2Line)`
 	color: #fff;
-	margin-right: 12.5rem;
+	margin-right: 14.5rem;
 `;
 
 const CountIcon2 = styled(AiFillTags)`

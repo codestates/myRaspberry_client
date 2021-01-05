@@ -198,7 +198,6 @@ export const getVideos = title => async (
 				title: item.snippet.title,
 				url: item.snippet.thumbnails.medium.url,
 			};
-			console.log(video);
 			videos.push(video);
 		});
 		const [nowRunning, ...others] = videos;

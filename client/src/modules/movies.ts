@@ -89,7 +89,8 @@ type MoviesActions =
 // 상태를 위한 타입 선언
 export type DefaultState = {
 	loading: boolean;
-	movies: Data
+	movies:
+		| Data
 		| { renew: MoviesType[] }
 		| { kor: MoviesType[] }
 		| { eng: MoviesType[] }
@@ -107,18 +108,18 @@ type Data = {
 	short?: MoviesType[];
 };
 
-const convertArr = (obj) => {
+const convertArr = obj => {
 	const keys = Object.keys(obj);
 	const result: any = [];
-	for ( let key of keys ) {
+	for (let key of keys) {
 		result.push(obj[key]);
 	}
 	return result;
-}
+};
 
-const getData = (obj) => {
+const getData = obj => {
 	const result: any = [];
-	for ( let index in obj ) {
+	for (let index in obj) {
 		const { image, tag } = obj[index];
 		const { posters, stlls } = image;
 		obj[index].tag = convertArr(tag);
@@ -127,7 +128,7 @@ const getData = (obj) => {
 		result.push(obj[index]);
 	}
 	return result;
-}
+};
 
 // 초깃값 설정
 const defaultState: DefaultState = {
@@ -182,8 +183,8 @@ export function moviesReducer(
 
 const getScore = (tag: object, movie: number[]): number => {
 	if (Object.keys(tag).length > 0 && movie) {
-		const userFav: number[] = Object.keys(tag).map((x) => Number(x));
-		const isUserLike: number[] = userFav.filter((x) => movie.includes(x));
+		const userFav: number[] = Object.keys(tag).map(x => Number(x));
+		const isUserLike: number[] = userFav.filter(x => movie.includes(x));
 
 		return isUserLike.reduce((a, c) => (tag[c] ? a + tag[c] : a), 0) * 10;
 	}
@@ -203,19 +204,19 @@ const updateMovieScore = (userTag: any, movies: MoviesType[]): MoviesType[] => {
 
 export const updateMovies = () => async (
 	dispatch: Dispatch<MoviesActions>,
-	getState: any,
+	getState: any
 ) => {
 	try {
 		const originState = getState().moviesReducer;
-		const moviesState = {...originState};
+		const moviesState = { ...originState };
 		const user = getState().userReducer;
 		const categories = Object.keys(moviesState.movies);
 
-		for ( let category of categories ) {
+		for (let category of categories) {
 			const likeMovies: MoviesType[] = [];
 			const dislikeMovies: MoviesType[] = [];
 			let neutralMovies: MoviesType[] = [];
-			for ( let movie of moviesState.movies[category] ) {
+			for (let movie of moviesState.movies[category]) {
 				switch (user.selectMovie[movie.docid]) {
 					case 0:
 						if (movie.score > 800) {
@@ -224,9 +225,9 @@ export const updateMovies = () => async (
 						dislikeMovies.push(movie);
 						break;
 					case 1:
-							movie.score = 1000;
-							neutralMovies.push(movie);
-							break;
+						movie.score = 1000;
+						neutralMovies.push(movie);
+						break;
 					case 2:
 						if (movie.score < 1300) {
 							movie.score += 100;
@@ -239,31 +240,37 @@ export const updateMovies = () => async (
 				}
 			}
 			neutralMovies = updateMovieScore(user.tag, neutralMovies);
-			moviesState.movies[category] = [...likeMovies, ...neutralMovies, ...dislikeMovies].sort((a, b) => b.score - a.score);
+			moviesState.movies[category] = [
+				...likeMovies,
+				...neutralMovies,
+				...dislikeMovies,
+			].sort((a, b) => b.score - a.score);
 		}
 
-		dispatch(moviesUpdate({...moviesState.movies}));
+		dispatch(moviesUpdate({ ...moviesState.movies }));
 	} catch (err) {
-		console.log(err);
+		//console.log(err);
 		dispatch(moviesFail(err));
 	}
 };
 
-
-export const searchMovies = (tag: string) => async (dispatch: Dispatch<MoviesActions>, getState: any ) => {
+export const searchMovies = (tag: string) => async (
+	dispatch: Dispatch<MoviesActions>,
+	getState: any
+) => {
 	try {
 		const moviesState = getState().moviesReducer;
 
 		const { data } = await axios.get(moviesGetUrl + tag);
 		moviesState.movies[tag] = data;
 
-		dispatch(moviesSearch({...moviesState}));
+		dispatch(moviesSearch({ ...moviesState }));
 	} catch (err) {
 		dispatch(moviesFail(err));
 	}
 };
 
-export const getMovies = () => async (dispatch: Dispatch<MoviesActions> ) => {
+export const getMovies = () => async (dispatch: Dispatch<MoviesActions>) => {
 	try {
 		dispatch(moviesLoading());
 

@@ -11,7 +11,7 @@ const IntroMovieContainer = () => {
 	}, []);
 
 	const { loading, introMovies } = introMovieState;
-	console.log("intromovies:", introMovies);
+	//console.log("intromovies:", introMovies);
 	if (loading === true) {
 		return <LoadingAnimation />;
 	} else {
