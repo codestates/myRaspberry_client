@@ -26,7 +26,6 @@ const App = (): JSX.Element => {
 				setScrollEvent(false);
 			}
 			prevScrollY.current = currentScrollY;
-			console.log(scrollEvent, currentScrollY);
 		};
 
 		window.addEventListener("scroll", handleScroll, { passive: true });

@@ -13,31 +13,10 @@ import { Link } from "react-router-dom";
 
 const Header = (): JSX.Element => {
 	const [navBarOpen, setNavBarOpen] = useState<boolean>(false);
-	const [scrollEvent, setScrollEvent] = useState<boolean>(false);
-	const prevScrollY = useRef(0);
+
 	const handleNavBarClick = () => {
 		setNavBarOpen(!navBarOpen);
-		// console.log(navBarOpen);
 	};
-
-	// useEffect(() => {
-	// 	const handleScroll = () => {
-	// 		const currentScrollY = window.scrollY;
-	// 		if (currentScrollY > 100) {
-	// 			setScrollEvent(true);
-	// 		}
-
-	// 		if (currentScrollY < 100) {
-	// 			setScrollEvent(false);
-	// 		}
-	// 		prevScrollY.current = currentScrollY;
-	// 		console.log(scrollEvent, currentScrollY);
-	// 	};
-
-	// 	window.addEventListener("scroll", handleScroll, { passive: true });
-
-	// 	return () => window.removeEventListener("scroll", handleScroll);
-	// }, [scrollEvent]);
 
 	return (
 		<Container>

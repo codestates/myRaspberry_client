@@ -14,23 +14,23 @@ const Mypage = () => {
 	const [newUserName, setNewUserName] = useState("");
 	const [newPass, setNewPass] = useState("");
 	const [password, setPassword] = useState("");
-	console.log("유저상태 확인용", userState.isLogin);
+	//console.log("유저상태 확인용", userState.isLogin);
 	const [errMessage, setErrorMessage] = useState("");
-	console.log("유저네임 변경인데, 생기려나?", newUserName);
+	//console.log("유저네임 변경인데, 생기려나?", newUserName);
 	React.useEffect(() => {
 		onCallUserStateOfLocalStorage();
 	}, []);
 
-	const send = (e) => {
+	const send = e => {
 		const file = e.target.files[0];
 		const data = new FormData();
 		data.append("img", file);
 		onMyImageUpdate(data);
 	};
 
-	const userNameChange = (e) => setNewUserName(e.target.value);
-	const passwordChange = (e) => setNewPass(e.target.value);
-	const checkPassword = (e) => setPassword(e.target.value);
+	const userNameChange = e => setNewUserName(e.target.value);
+	const passwordChange = e => setNewPass(e.target.value);
+	const checkPassword = e => setPassword(e.target.value);
 
 	const onClick = () => {
 		if (confirmChange) {
@@ -50,10 +50,10 @@ const Mypage = () => {
 		}
 	};
 
-	const passwordValidationCheck = (upw) => {
+	const passwordValidationCheck = upw => {
 		if (!/^[a-zA-Z0-9]{8,20}$/.test(upw)) {
 			setErrorMessage(
-				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다.",
+				"비밀번호는 숫자와 영문자 조합으로 8~20자리를 사용해야 합니다."
 			);
 			return false;
 		}
@@ -94,7 +94,7 @@ const Mypage = () => {
 								name="img"
 								type="file"
 								id="img"
-								onChange={(event) => send(event)}
+								onChange={event => send(event)}
 								accept="image/*"
 								required
 								hidden
