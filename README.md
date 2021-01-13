@@ -11,10 +11,13 @@
 <img alt="node-v12.19.0" src="https://img.shields.io/badge/node-v14.15.1 LTS-3f72af" />
 <img alt="npm-v6.14.8" src="https://img.shields.io/badge/npm-v6.14.8-aa96da" />
 
+
+
+<h3 align="center">Backend Repository는 👉🏻<a href="https://github.com/codestates/myRaspberry_server">여기를 눌러주세요</a>👈🏻 </h3>
+
 ## 👉🏻 Table of Contents 👈🏻
 - [Raspberry?](#index01)
 - [Tech Stacks](#index02)
-- [Demo Play](#index03)
 - [Crew info](#index04)
 - [More Detail](#index05)
 
@@ -45,15 +48,6 @@
 <img alt="techStacks" src="https://github.com/codestates/myRaspberry_client/blob/main/image_for_README/bodys/stacks.png?raw=true" width="800px"/>
 </p>
 
-
-
-
-<br />
-
-## DemoPlay <a id="index03"></a>
->
-COMMING UP NEXT MONDAY
->
 
 
 <br />
