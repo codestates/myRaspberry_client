@@ -32,6 +32,7 @@ const Button: React.FC<fromGoBtnProps> = props => {
 		return (
 			<div>
 				<button
+					data-tut="tutorial_4"
 					className={styles.GoBtn}
 					style={{ color: scrollEvent ? "black" : "white" }}>
 					나만의 라즈베리 고르러 가기

@@ -12,7 +12,25 @@ import { AiFillTags } from "react-icons/ai";
 import count from "./count";
 import { Link } from "react-router-dom";
 import useUser from "../../hooks/useUser";
+import Tour from "reactour";
+import "./introduction.css";
+
 const Introduction = (): JSX.Element => {
+	const [isTourOpen, setIsTourOpen] = useState<boolean>(false);
+	const [isShowingMore, setIsShowingMore] = useState<boolean>(false);
+
+	const toggleShowMore = () => {
+		setIsShowingMore(!isShowingMore);
+	};
+
+	const closeTour = () => {
+		setIsTourOpen(false);
+	};
+
+	const openTour = () => {
+		setIsTourOpen(true);
+	};
+
 	const { onCallUserStateOfLocalStorage } = useUser();
 	const prevScrollY = useRef(0);
 	//스크롤 이벤트
@@ -23,6 +41,7 @@ const Introduction = (): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
+		openTour();
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
 			if (currentScrollY > 2000) {
@@ -43,14 +62,23 @@ const Introduction = (): JSX.Element => {
 	useEffect(() => {
 		scrollEvent && count();
 	}, [scrollEvent]);
-
+	const accentColor = "#E89E9E";
 	return (
 		<>
+			<Tour
+				onRequestClose={closeTour}
+				steps={tourConfig}
+				isOpen={isTourOpen}
+				maskClassName="mask"
+				className="helper"
+				rounded={5}
+				accentColor={accentColor}
+			/>
 			<MainTop>
-				<CardBoxContainer>
+				<CardBoxContainer data-tut="tutorial_1">
 					<CardBox />
 				</CardBoxContainer>
-				<ResultBoxContainer>
+				<ResultBoxContainer data-tut="tutorial_2">
 					<Title>
 						<TitleText>오늘 이 영화 어때요?</TitleText>
 					</Title>
@@ -86,7 +114,7 @@ const Introduction = (): JSX.Element => {
 						</BottomInner>
 					</MainImage2>
 					<MainImage3>
-						<BottomInner>
+						<BottomInner data-tut="tutorial_3">
 							<InnerText>
 								<Description>
 									<CountIcon1 />
@@ -113,10 +141,29 @@ const Introduction = (): JSX.Element => {
 					</MainImage3>
 				</BottomContainer>
 			</MainBottom>
-			<IntroBanner />
+			{/* <IntroBanner /> */}
 		</>
 	);
 };
+
+const tourConfig = [
+	{
+		selector: "[data-tut='tutorial_1']",
+		content: `튜토리얼 입니다. 이 곳의 버튼을 누르시면 하단의 카드목록에 바로 반영됩니다.`,
+	},
+	{
+		selector: "[data-tut='tutorial_2']",
+		content: `위에서 선택했던 영화가 사라지지 않았나요?`,
+	},
+	{
+		selector: "[data-tut='tutorial_3']",
+		content: `아무리 좋아하지 않는 영화가 많다해도 줄어들지 않는 영화 데이터를 가지고 있습니다.`,
+	},
+	{
+		selector: "[data-tut='tutorial_4']",
+		content: `메인 페이지로 이동하셔서 더 많은 영화를 지금 바로 추천받으세요!`,
+	},
+];
 
 const MainTop = styled.div`
 	display: flex;
