@@ -1,26 +1,22 @@
 import React from "react";
-import CardBox from "../../components/movies/cordBox/CardBox";
 import ResultBox from "../../components/movies/resultBox/ResultBox";
-import LoadingAnimation from "../LoadingAnimation";
 import styled from "styled-components";
 import MainBanner from "../../components/mainBanner/MainBanner";
-import { mainColor, pointColor, textColor } from "../../common/colors";
-import IntroBanner from "../../components/introBanner/IntroBanner";
-import SlideMenu from "../../components/movies/slideMenu/SlideMenu";
+import { textColor } from "../../common/colors";
 import useMovies from "../..//hooks/useMovies";
 import useUser from "../../hooks/useUser";
+import { getScrollTop } from "../../components/mainBanner/MainBanner";
 
 const Main = () => {
 	const { moviesState, getmovieData } = useMovies();
 	const { userState, onCallUserStateOfLocalStorage } = useUser();
-	// console.log("잘 넘어왔니? 데이터야?", userState);
 
 	React.useEffect(() => {
+		getScrollTop();
 		getmovieData();
 		onCallUserStateOfLocalStorage();
 	}, []);
 
-	// console.log("main", moviesState);
 	const titleText = [
 		"신작영화 어때요?",
 		"자막없이 보는 한국영화 어때요?",

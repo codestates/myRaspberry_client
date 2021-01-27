@@ -24,15 +24,13 @@ const store = createStore(
 );
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<Provider store={store}>
-					<App />
-				</Provider>
-			</ThemeProvider>
-		</BrowserRouter>
-	</React.StrictMode>,
+	<BrowserRouter>
+		<ThemeProvider theme={theme}>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</ThemeProvider>
+	</BrowserRouter>,
 	document.getElementById("root")
 );
 

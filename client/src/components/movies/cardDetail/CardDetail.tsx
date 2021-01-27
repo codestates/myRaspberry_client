@@ -47,6 +47,7 @@ const CardDetail = ({ poster, movie, closeMovieDetail }: FromCard) => {
 	const { videoState, getVideoData } = useYoutube();
 	const { loading, playingVideo, videos } = videoState;
 	const videosArray = Object.keys(videos);
+
 	useEffect(() => {
 		getVideoData(title);
 	}, []);

@@ -1,7 +1,4 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
-// import {Swiper, SwiperSlide} from 'swiper/react'
-// import SwiperCore, {Navigation} from 'swiper'
-// import 'swiper/swiper-bundle.css'
 import "./introResultBox.css";
 import Slider from "react-slick";
 import useIntroMovies from "../../../hooks/useIntroMovies";
@@ -86,14 +83,7 @@ function MovieImage(props: any): JSX.Element {
 		setSelectMovie,
 	} = props;
 	const blackBox = onMouse ? "resultBlack_box on" : "resultBlack_box";
-	// const [defaultImage, setDefaultImage] = useState(false);
-	// if (poster === "https://i.ibb.co/HnNxZyh/default-poster.jpg") {
-	// 	console.log(movie.title);
-	// 	setDefaultImage(true);
-	// }
-	// const defaultPoster = defaultImage
-	// 	? "eachMovieCard defaultImage"
-	// 	: "eachMovieCard";
+
 	return (
 		<div
 			className="eachMovieCard"

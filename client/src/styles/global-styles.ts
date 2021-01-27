@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Nanum+Gothic:wght@700&display=swap');
   ${reset};
   body {
     margin: 0;

@@ -4,9 +4,8 @@ import GoButton from "../../components/goButton/GoButton";
 import MovieCard from "../../components/movies/card/MovieCard";
 import IntroResultBox from "../../components/movies/resultBox/IntroResultBox";
 import styled from "styled-components";
-import { mainColor, pointColor, textColor } from "../../common/colors";
+import { textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
-import ResultBox from "../../components/movies/resultBox/ResultBox";
 import { RiMovie2Line } from "react-icons/ri";
 import { AiFillTags } from "react-icons/ai";
 import count from "./count";
@@ -17,16 +16,9 @@ import "./introduction.css";
 
 const Introduction = (): JSX.Element => {
 	const [isTourOpen, setIsTourOpen] = useState<boolean>(false);
+	const [firstOpen, setFirstOpen] = useState<boolean>(true);
 	const { onCallUserStateOfLocalStorage } = useUser();
 	const [goRender, setGoRender] = useState<boolean>(false);
-
-	const closeTour = () => {
-		setIsTourOpen(false);
-	};
-
-	const openTour = () => {
-		setIsTourOpen(true);
-	};
 
 	const accentColor = "#363232";
 	const prevScrollY = useRef(0);
@@ -38,7 +30,10 @@ const Introduction = (): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
-		openTour();
+		setIsTourOpen(true);
+	}, []);
+
+	useEffect(() => {
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
 			if (currentScrollY > 2000) {
@@ -56,21 +51,8 @@ const Introduction = (): JSX.Element => {
 		scrollEvent && count();
 	}, [scrollEvent]);
 
-	console.log(goRender);
-
 	return (
 		<>
-			<Tour
-				steps={tourConfig}
-				isOpen={isTourOpen}
-				maskClassName="mask"
-				className="helper"
-				rounded={10}
-				accentColor={accentColor}
-				onAfterOpen={() => (document.body.style.overflowY = "hidden")}
-				onBeforeClose={() => (document.body.style.overflowY = "auto")}
-				onRequestClose={closeTour}
-			/>
 			<MainTop>
 				<CardBoxContainer data-tut="tutorial_1">
 					<CardBox />
@@ -138,6 +120,18 @@ const Introduction = (): JSX.Element => {
 					</MainImage3>
 				</BottomContainer>
 			</MainBottom>
+
+			<Tour
+				steps={tourConfig}
+				isOpen={isTourOpen}
+				maskClassName="mask"
+				className="helper"
+				rounded={10}
+				accentColor={accentColor}
+				onAfterOpen={() => (document.body.style.overflowY = "hidden")}
+				onBeforeClose={() => (document.body.style.overflowY = "auto")}
+				onRequestClose={() => setIsTourOpen(false)}
+			/>
 		</>
 	);
 };

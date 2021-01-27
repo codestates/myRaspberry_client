@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./MainBanner.css";
 import Slider from "react-slick";
 import useMovies from "../../hooks/useMovies";
-import ThumbsUp from "../movies/thumbsUp/ThumbsUp";
-import ThumbsDown from "../movies/thumbsDown/ThumbsDown";
 import CardDetail from "../movies/cardDetail/CardDetail";
 import { MoviesType } from "../../modules/movies";
 
@@ -28,9 +26,6 @@ const MOVIE: MoviesType = {
 };
 
 let TOP = 0;
-const gradient = `
-top: -${TOP};
-`;
 
 export const setModalOpen = (isSet: boolean) => {
 	if (isSet) {
@@ -41,9 +36,11 @@ export const setModalOpen = (isSet: boolean) => {
 	}
 };
 
-const getScrollTop = () => {
-	TOP = document.documentElement.scrollTop;
+export const getScrollTop = () => {
+	document.body.style.setProperty("overflow-y", "");
+	window.scrollTo({ top: 0, behavior: "auto" });
 };
+
 type Settings = {
 	[key: string]: number | boolean | string;
 };
@@ -108,7 +105,6 @@ function MainBanner(): any {
 	];
 	const [bannerMovie, setBannerMovie] = useState(data);
 
-	// console.log(data)
 	const dataForBanner = modifyData(bannerMovie);
 	const [onMouse, setOnMouse] = useState(false);
 

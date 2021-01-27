@@ -8,7 +8,6 @@ import Main from "./page/main/Main";
 import Mypage from "./page/mypage/Mypage";
 import Sign from "./page/sign/Sign";
 import { GlobalStyle } from "./styles/global-styles";
-import { headerColor } from "./common/colors";
 import "./App.css";
 
 const App = (): JSX.Element => {
@@ -66,7 +65,7 @@ const MainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	background-color: #111;
-	height: 100%; //100% 바꾸지 말 것
+	height: 100%;
 	padding: 0px 0 0;
 `;
 
