@@ -129,13 +129,15 @@ function useWindowSize() {
 	return size;
 }
 
-const IntroResultBox = () => {
+const IntroResultBox = ({ setGoRender }) => {
 	const { introMovieState, getIntroMovieData } = useIntroMovies();
 	const [showDetail, setShowDetail] = useState(false);
 	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
 	const [per, setPer] = useState(5);
 	const { loading, introMovies } = introMovieState;
+
 	const width = useWindowSize();
+
 	function calWith(args) {
 		const width = args[0];
 		if (width > 2200) {
@@ -171,13 +173,20 @@ const IntroResultBox = () => {
 		slidesToScroll: 3,
 		autoplay: false,
 	};
+
 	useEffect(() => {
 		getIntroMovieData();
 	}, []);
+
 	useEffect(() => {
 		calWith(width);
 	}, [width]);
 
+	useEffect(() => {
+		return () => {
+			setGoRender(true);
+		};
+	}, [introMovies]);
 	return (
 		<>
 			<Slider {...slideSettings}>

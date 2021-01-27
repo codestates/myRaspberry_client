@@ -12,8 +12,23 @@ import { AiFillTags } from "react-icons/ai";
 import count from "./count";
 import { Link } from "react-router-dom";
 import useUser from "../../hooks/useUser";
+import Tour from "reactour";
+import "./introduction.css";
+
 const Introduction = (): JSX.Element => {
+	const [isTourOpen, setIsTourOpen] = useState<boolean>(false);
 	const { onCallUserStateOfLocalStorage } = useUser();
+	const [goRender, setGoRender] = useState<boolean>(false);
+
+	const closeTour = () => {
+		setIsTourOpen(false);
+	};
+
+	const openTour = () => {
+		setIsTourOpen(true);
+	};
+
+	const accentColor = "#363232";
 	const prevScrollY = useRef(0);
 	//스크롤 이벤트
 	const [scrollEvent, setScrollEvent] = useState(false);
@@ -23,16 +38,13 @@ const Introduction = (): JSX.Element => {
 	}, []);
 
 	useEffect(() => {
+		openTour();
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
 			if (currentScrollY > 2000) {
 				setScrollEvent(true);
 			}
-			// if (currentScrollY < 850 && setScrollEvent) {
-			// 	setScrollEvent(false);
-			// }
 			prevScrollY.current = currentScrollY;
-			//console.log(scrollEvent, currentScrollY);
 		};
 
 		window.addEventListener("scroll", handleScroll, { passive: true });
@@ -44,17 +56,30 @@ const Introduction = (): JSX.Element => {
 		scrollEvent && count();
 	}, [scrollEvent]);
 
+	console.log(goRender);
+
 	return (
 		<>
+			<Tour
+				steps={tourConfig}
+				isOpen={isTourOpen}
+				maskClassName="mask"
+				className="helper"
+				rounded={10}
+				accentColor={accentColor}
+				onAfterOpen={() => (document.body.style.overflowY = "hidden")}
+				onBeforeClose={() => (document.body.style.overflowY = "auto")}
+				onRequestClose={closeTour}
+			/>
 			<MainTop>
-				<CardBoxContainer>
+				<CardBoxContainer data-tut="tutorial_1">
 					<CardBox />
 				</CardBoxContainer>
-				<ResultBoxContainer>
+				<ResultBoxContainer data-tut="tutorial_2">
 					<Title>
 						<TitleText>오늘 이 영화 어때요?</TitleText>
 					</Title>
-					<IntroResultBox />
+					<IntroResultBox setGoRender={setGoRender} />
 				</ResultBoxContainer>
 			</MainTop>
 			<MainBottom>
@@ -86,7 +111,7 @@ const Introduction = (): JSX.Element => {
 						</BottomInner>
 					</MainImage2>
 					<MainImage3>
-						<BottomInner>
+						<BottomInner data-tut="tutorial_3">
 							<InnerText>
 								<Description>
 									<CountIcon1 />
@@ -113,10 +138,136 @@ const Introduction = (): JSX.Element => {
 					</MainImage3>
 				</BottomContainer>
 			</MainBottom>
-			<IntroBanner />
 		</>
 	);
 };
+
+const tourConfig = [
+	{
+		selector: "[data-tut='tutorial_1']",
+		content: () => (
+			<>
+				<div style={{ fontWeight: "bolder", textAlign: "center" }}>
+					WELCOME! 🎥
+				</div>
+				<br />
+				<div>
+					혹시 이 중 좋아하지 않는 영화가 있나요? 영화 포스터에 마우스를 올려{" "}
+					<span
+						style={{
+							fontWeight: "bolder",
+							color: "rgb(207, 53,53)",
+							border: "1px solid #f7f7f7",
+							background: "none",
+							fontSize: "inherit",
+						}}>
+						내 취향이 아니에요!
+					</span>{" "}
+					를 클릭해보세요.
+				</div>
+			</>
+		),
+		position: "center",
+	},
+	{
+		selector: "[data-tut='tutorial_2']",
+		content: () => (
+			<>
+				<div style={{ fontWeight: "bolder", textAlign: "left" }}>
+					🕺선택한 영화가 목록에서 사라지죠!
+				</div>
+				<br />
+				<div>
+					<span
+						style={{
+							fontWeight: "bolder",
+							color: "rgb(207, 53,53)",
+							border: "1px solid #f7f7f7",
+							background: "none",
+							fontSize: "inherit",
+						}}>
+						마이 라즈베리
+					</span>
+					는 이렇게 당신의 선호를 즉시 반영하여 끊임없이 추천해 드릴 거예요!{" "}
+					<img
+						src="https://emoji.slack-edge.com/TR5603XSB/cool-doge/30e08c36f1f31db1.gif"
+						alt="emoji"
+						style={{ width: "16px" }}
+					/>
+				</div>
+			</>
+		),
+	},
+	{
+		//https://emoji.slack-edge.com/TR5603XSB/raspberry_saw/a195b7c1dd17c311.png
+		selector: "[data-tut='tutorial_3']",
+		content: () => (
+			<>
+				<div style={{ fontWeight: "bolder", textAlign: "left" }}>
+					좋아하지 않는 영화가 너무 많으신가요?
+				</div>
+				<br />
+				<div>
+					괜찮습니다!{" "}
+					<span
+						style={{
+							fontWeight: "bolder",
+							color: "rgb(207, 53,53)",
+							border: "1px solid #f7f7f7",
+							background: "none",
+							fontSize: "inherit",
+						}}>
+						마이 라즈베리
+					</span>
+					에게는 아무리 싫어해도 추천할 영화 데이터가 이렇게나 많답니다!{" "}
+					<img
+						src="https://emoji.slack-edge.com/TR5603XSB/raspberry_saw/a195b7c1dd17c311.png"
+						alt="emoji"
+						style={{ position: "absolute", width: "20px" }}
+					/>
+				</div>
+			</>
+		),
+		position: "left",
+	},
+	{
+		selector: "[data-tut='tutorial_4']",
+		content: ({ goTo }) => (
+			<>
+				<div style={{ fontWeight: "bolder", textAlign: "left" }}>
+					더 많은 영화를 지금 바로 경험하세요!
+				</div>
+				<br />
+				<div>
+					지금 바로 하단의 버튼을 눌러주세요!
+					<br />
+					튜토리얼 페이지에 더 머물고 싶다면...{" "}
+					<button
+						style={{
+							border: "1px solid #f7f7f7",
+							background: "none",
+							padding: ".3em .7em",
+							fontSize: "inherit",
+							display: "block",
+							cursor: "pointer",
+							margin: ".3em 1em 1em 2em",
+						}}
+						onClick={() => goTo(0)}>
+						튜토리얼 또 체험하기{" "}
+						<span aria-label="finger" role="img">
+							☝
+						</span>
+					</button>
+				</div>
+			</>
+		),
+		position: "top",
+		action: () =>
+			console.log(
+				` 🕺 마이 라즈베리에 방문해주셔서 감사합니다! 🕺\n\ 마이 라즈베리 서비스는 YGM 팀이 애정을 가지고 만들었습니다.\n\ 🖇 http://bit.ly/3pjNxYw`
+			),
+	},
+];
 
 const MainTop = styled.div`
 	display: flex;
@@ -249,7 +400,6 @@ const InnerText2 = styled.h4`
 	-ms-letter-spacing: -0.04861111111111111vw;
 	letter-spacing: -0.04861111111111111vw;
 	line-height: 2.2916666666666665vw;
-	margin-bottom: 3.75vw;
 `;
 
 const Description = styled.div`
