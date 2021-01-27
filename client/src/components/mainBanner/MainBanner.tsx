@@ -36,11 +36,6 @@ export const setModalOpen = (isSet: boolean) => {
 	}
 };
 
-export const getScrollTop = () => {
-	document.body.style.setProperty("overflow-y", "");
-	window.scrollTo({ top: 0, behavior: "auto" });
-};
-
 type Settings = {
 	[key: string]: number | boolean | string;
 };
