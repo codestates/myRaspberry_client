@@ -3,7 +3,7 @@ import Button from "../elements/button/Button";
 import styles from "./goButton.module.css";
 
 const GoButton: React.FC = () => {
-	const [goBtn, setIsIntroBtn] = useState(true);
+	const [goBtn, setIsIntroBtn] = useState<boolean>(true);
 
 	return (
 		<div className={styles.goBtnBox}>

@@ -9,6 +9,7 @@ import IntroBanner from "../../components/introBanner/IntroBanner";
 import SlideMenu from "../../components/movies/slideMenu/SlideMenu";
 import useMovies from "../..//hooks/useMovies";
 import useUser from "../../hooks/useUser";
+import { getScrollTop } from "../../components/mainBanner/MainBanner";
 
 const Main = () => {
 	const { moviesState, getmovieData } = useMovies();
@@ -16,6 +17,7 @@ const Main = () => {
 	// console.log("잘 넘어왔니? 데이터야?", userState);
 
 	React.useEffect(() => {
+		getScrollTop();
 		getmovieData();
 		onCallUserStateOfLocalStorage();
 	}, []);

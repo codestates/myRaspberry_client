@@ -20,25 +20,20 @@ const Introduction = (): JSX.Element => {
 	const { onCallUserStateOfLocalStorage } = useUser();
 	const [goRender, setGoRender] = useState<boolean>(false);
 
-	const closeTour = () => {
-		setIsTourOpen(false);
-	};
-
-	const openTour = () => {
-		setIsTourOpen(true);
-	};
-
 	const accentColor = "#363232";
 	const prevScrollY = useRef(0);
 	//스크롤 이벤트
 	const [scrollEvent, setScrollEvent] = useState(false);
+
+	useEffect(() => {
+		setIsTourOpen(true);
+	}, [isTourOpen]);
 
 	React.useEffect(() => {
 		onCallUserStateOfLocalStorage();
 	}, []);
 
 	useEffect(() => {
-		openTour();
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
 			if (currentScrollY > 2000) {
@@ -56,21 +51,8 @@ const Introduction = (): JSX.Element => {
 		scrollEvent && count();
 	}, [scrollEvent]);
 
-	console.log(goRender);
-
 	return (
 		<>
-			<Tour
-				steps={tourConfig}
-				isOpen={isTourOpen}
-				maskClassName="mask"
-				className="helper"
-				rounded={10}
-				accentColor={accentColor}
-				onAfterOpen={() => (document.body.style.overflowY = "hidden")}
-				onBeforeClose={() => (document.body.style.overflowY = "auto")}
-				onRequestClose={closeTour}
-			/>
 			<MainTop>
 				<CardBoxContainer data-tut="tutorial_1">
 					<CardBox />
@@ -138,6 +120,20 @@ const Introduction = (): JSX.Element => {
 					</MainImage3>
 				</BottomContainer>
 			</MainBottom>
+
+			{isTourOpen ? (
+				<Tour
+					steps={tourConfig}
+					isOpen={isTourOpen}
+					maskClassName="mask"
+					className="helper"
+					rounded={10}
+					accentColor={accentColor}
+					onAfterOpen={() => (document.body.style.overflowY = "hidden")}
+					onBeforeClose={() => (document.body.style.overflowY = "auto")}
+					onRequestClose={() => setIsTourOpen(false)}
+				/>
+			) : null}
 		</>
 	);
 };
