@@ -5,14 +5,14 @@ import MainBanner from "../../components/mainBanner/MainBanner";
 import { textColor } from "../../common/colors";
 import useMovies from "../..//hooks/useMovies";
 import useUser from "../../hooks/useUser";
-import { getScrollTop } from "../../components/mainBanner/MainBanner";
 
 const Main = () => {
 	const { moviesState, getmovieData } = useMovies();
 	const { userState, onCallUserStateOfLocalStorage } = useUser();
 
 	React.useEffect(() => {
-		getScrollTop();
+		document.body.style.setProperty("overflow-y", "");
+		window.scrollTo({ top: 0, behavior: "auto" });
 		getmovieData();
 		onCallUserStateOfLocalStorage();
 	}, []);
