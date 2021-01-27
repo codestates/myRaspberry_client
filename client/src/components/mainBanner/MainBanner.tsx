@@ -32,7 +32,7 @@ const gradient = `
 top: -${TOP};
 `;
 
-const setModalOpen = (isSet: boolean) => {
+export const setModalOpen = (isSet: boolean) => {
 	if (isSet) {
 		document.body.style.setProperty("overflow-y", "hidden");
 	} else {
@@ -97,9 +97,9 @@ function MainBanner(): any {
 	const { moviesState } = useMovies();
 	const [selectMovie, setSelectMovie] = useState<MoviesType>(MOVIE);
 	const [showDetail, setShowDetail] = useState(false);
-	
+
 	const keys = Object.keys(moviesState.movies);
-	
+
 	const data = [
 		moviesState.movies[keys[0]][0],
 		moviesState.movies[keys[1]][0],

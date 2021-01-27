@@ -2,6 +2,7 @@
 	--reactour-accent: #e89e9e;
 	line-height: 1.3;
 	color: #e42a2a52;
+	max-width: 332px !important;
 }
 
 .mask {

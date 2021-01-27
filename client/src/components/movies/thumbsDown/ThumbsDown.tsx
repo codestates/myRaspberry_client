@@ -13,7 +13,10 @@ const ThumbsDown = ({ fromMovieCard }) => {
 	const [onMouse, setOnMouse] = useState(false);
 	const { userState, onTagUpdate } = useUser();
 
-	const isSelected = () => userState.selectMovie && userState.selectMovie[fromMovieCard.docid] !== undefined && userState.selectMovie[fromMovieCard.docid] === 0;
+	const isSelected = () =>
+		userState.selectMovie &&
+		userState.selectMovie[fromMovieCard.docid] !== undefined &&
+		userState.selectMovie[fromMovieCard.docid] === 0;
 	const handleOver = e => {
 		e.preventDefault();
 		setOnMouse(true);
@@ -31,7 +34,8 @@ const ThumbsDown = ({ fromMovieCard }) => {
 			className={isSelected() || onMouse ? "changeThumbsColor" : ""}>
 			<RasupImg
 				className={isSelected() || onMouse ? "changeThumbsColor" : ""}
-				onClick={(e) => {
+				data-tut="pressThumbsDown"
+				onClick={e => {
 					e.stopPropagation();
 					onTagUpdate("down", fromMovieCard.docid, fromMovieCard.tag);
 					onUpdateIntroMovies();
