@@ -1,27 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MovieCard from "../card/MovieCard";
 import styled from "styled-components";
 import data from "../../../lib/introData.json";
-import useMovies from "../../../hooks/useMovies";
-import LoadingAnimation from "../../../page/LoadingAnimation";
 
 const CardBox = () => {
-	// const { moviesState, onUpdateMovies } = useMovies();
-	// let introData;
-	// const { moviesState, getmovieData } = useMovies();
-	// useEffect(() => {
-	// 	getmovieData();
-	// }, []);
-
-	// const { loading, movies } = moviesState;
-	// console.log(movies);
 	let introData;
 	if (data && data.length > 7) {
 		introData = data.slice(0, 6);
 	}
-	// if (loading === true) {
-	// 	return <LoadingAnimation />;
-	// }
 
 	return (
 		<Container>

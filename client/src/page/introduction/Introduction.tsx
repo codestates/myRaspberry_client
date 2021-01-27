@@ -4,9 +4,8 @@ import GoButton from "../../components/goButton/GoButton";
 import MovieCard from "../../components/movies/card/MovieCard";
 import IntroResultBox from "../../components/movies/resultBox/IntroResultBox";
 import styled from "styled-components";
-import { mainColor, pointColor, textColor } from "../../common/colors";
+import { textColor } from "../../common/colors";
 import CardBox from "../../components/movies/cordBox/CardBox";
-import ResultBox from "../../components/movies/resultBox/ResultBox";
 import { RiMovie2Line } from "react-icons/ri";
 import { AiFillTags } from "react-icons/ai";
 import count from "./count";
@@ -17,6 +16,7 @@ import "./introduction.css";
 
 const Introduction = (): JSX.Element => {
 	const [isTourOpen, setIsTourOpen] = useState<boolean>(false);
+	const [firstOpen, setFirstOpen] = useState<boolean>(true);
 	const { onCallUserStateOfLocalStorage } = useUser();
 	const [goRender, setGoRender] = useState<boolean>(false);
 
@@ -25,12 +25,12 @@ const Introduction = (): JSX.Element => {
 	//스크롤 이벤트
 	const [scrollEvent, setScrollEvent] = useState(false);
 
-	useEffect(() => {
-		setIsTourOpen(true);
-	}, [isTourOpen]);
-
 	React.useEffect(() => {
 		onCallUserStateOfLocalStorage();
+	}, []);
+
+	useEffect(() => {
+		setIsTourOpen(true);
 	}, []);
 
 	useEffect(() => {
@@ -121,19 +121,17 @@ const Introduction = (): JSX.Element => {
 				</BottomContainer>
 			</MainBottom>
 
-			{isTourOpen ? (
-				<Tour
-					steps={tourConfig}
-					isOpen={isTourOpen}
-					maskClassName="mask"
-					className="helper"
-					rounded={10}
-					accentColor={accentColor}
-					onAfterOpen={() => (document.body.style.overflowY = "hidden")}
-					onBeforeClose={() => (document.body.style.overflowY = "auto")}
-					onRequestClose={() => setIsTourOpen(false)}
-				/>
-			) : null}
+			<Tour
+				steps={tourConfig}
+				isOpen={isTourOpen}
+				maskClassName="mask"
+				className="helper"
+				rounded={10}
+				accentColor={accentColor}
+				onAfterOpen={() => (document.body.style.overflowY = "hidden")}
+				onBeforeClose={() => (document.body.style.overflowY = "auto")}
+				onRequestClose={() => setIsTourOpen(false)}
+			/>
 		</>
 	);
 };

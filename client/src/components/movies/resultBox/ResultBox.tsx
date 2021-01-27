@@ -1,10 +1,8 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
 import "./resultBox.css";
-import data from "../../../lib/introData.json";
 import { MoviesType } from "../../../modules/movies";
 import Slider from "react-slick";
 import CardDetail from "../cardDetail/CardDetail";
-import { FaLongArrowAltUp } from "react-icons/fa";
 import ThumbsUp from "../thumbsUp/ThumbsUp";
 import ThumbsDown from "../thumbsDown/ThumbsDown";
 import "swiper/swiper-bundle.css";
@@ -31,9 +29,6 @@ const MOVIE: MoviesType = {
 };
 
 let TOP = 0;
-const gradient = `
-top: -${TOP};
-`;
 
 const setModalOpen = (isSet: boolean) => {
 	if (isSet) {
@@ -117,11 +112,8 @@ function MovieImage(props: any): JSX.Element {
 					movie.title}
 			</div>
 			<div className="thumbs_box">
-				{/* <div className="moviecard_box"> */}
 				{onMouse && <ThumbsDown fromMovieCard={movie} />}
 				{onMouse && <ThumbsUp fromMovieCard={movie} />}
-				{/* <ThumbsDown />
-				<ThumbsUp /> */}
 			</div>
 		</div>
 	);
@@ -146,6 +138,7 @@ const ResultBox: any = ({ tag, data }) => {
 	const [per, setPer] = useState(5);
 	const { loading, movies } = moviesState;
 	const width = useWindowSize();
+
 	function calWith(args) {
 		const width = args[0];
 		if (width > 2200) {

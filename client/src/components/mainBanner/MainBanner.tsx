@@ -27,7 +27,7 @@ const MOVIE: MoviesType = {
 
 let TOP = 0;
 
-const setModalOpen = (isSet: boolean) => {
+export const setModalOpen = (isSet: boolean) => {
 	if (isSet) {
 		document.body.style.setProperty("overflow-y", "hidden");
 	} else {
@@ -105,7 +105,6 @@ function MainBanner(): any {
 	];
 	const [bannerMovie, setBannerMovie] = useState(data);
 
-	// console.log(data)
 	const dataForBanner = modifyData(bannerMovie);
 	const [onMouse, setOnMouse] = useState(false);
 
