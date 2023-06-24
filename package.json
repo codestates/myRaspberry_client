@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/codestates/myRaspberry_client#readme",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.0",
     "styled-components": "^5.2.1"
   }
 }
